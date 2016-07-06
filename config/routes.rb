@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'teacher_interface/index'
 
-  devise_for :teachers
   root 'landing#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
