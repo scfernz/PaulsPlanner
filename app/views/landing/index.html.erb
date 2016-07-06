@@ -1,9 +1,23 @@
-
-<div class="jumbotron">
-  <h1>Welcome to Paul's Planner</h1>
-</div>
-<h2>Mission Statement</h2>
-<h2 class="subtext">(Retire Paul's paper notebook)</h2>
-<p>We aim to facilitate effective collaboration between student and teacher by organizing meetings, and creating and monitoring tasks.</p>
-<p>Students: <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></p>
-<p>See <a href="#">Paul</a> about registering as a <a href="#">teacher</a></p>
+<div class="container-fluid">
+  <div class="jumbotron">
+    <h1>Welcome to Paul's Planner</h1>
+    <p>Task and meeting manager</p>
+  </div>
+  <div class="row"> <!-- Begin row -->
+    <div class="col-sm-12 text-center">
+      <h2>Mission Statement</h2>
+      <h3 class="subtext">(Retire Paul's paper notebook)</h3>
+      <p>We aim to facilitate effective collaboration between student and teacher by organizing meetings, and creating and monitoring tasks.</p>
+    </div>
+  </div> <!-- End row -->
+  <div class="row">
+    <div class="col-sm-6 text-center">
+      <h3>Students</h3>
+        <p><%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></p>
+    </div>
+    <div class="col-sm-6 text-center">
+      <h3>Teachers</h3>
+      <p><a href="users/sign_up">Register as a teacher</a></p>
+    </div>
+  </div> <!-- End row -->
+</div> <!-- End Container -->

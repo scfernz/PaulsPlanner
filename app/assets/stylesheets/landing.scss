@@ -1,3 +1,36 @@
 // Place all the styles related to the Landing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$primary-color: #77AAAD;
+$secondary-color: #D8E6E7;
+$highlight-color: #9DC3C1;
+$dark-color: #6E7783;
+
+$header-font: 'Nixie One', cursive;
+$main-font: 'Libre Baskerville', serif;
+
+body {
+  background-color: $secondary-color;
+  font-family: $main-font;
+}
+
+h1 {
+  font-family: $header-font;
+  font-size: 6em;
+}
+
+h2 {
+  font-size: 4em;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+.jumbotron {
+  background-color: $primary-color;
+  color: lighten($dark-color, 45%);
+  p {
+    font-size: 1.5em;
+  }
+}
