@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "StudentRegistrations", type: :feature do
-  context "Registering with Facebook" do
+  skip context "Registering with Facebook" do
     Steps "Registering with Facebook" do
       Given "I am on the landing page" do
         visit "/"
