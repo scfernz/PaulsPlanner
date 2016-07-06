@@ -10,10 +10,10 @@ RSpec.feature "StudentRegistrations", type: :feature do
         expect(page).to have_content "Students: Sign in with Facebook"
       end
       And "I click on that link" do
-        click_link('Sign in with Facebook')
+        pending
       end
-      Then "I see the success page" do
-        expect(page).to have_content "Success!"
+      Then "I see my profile" do
+        pending
       end
     end
   end
