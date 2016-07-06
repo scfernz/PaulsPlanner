@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   rolify
+  after_create :assign_role
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -14,6 +15,13 @@ class User < ActiveRecord::Base
    end
   end
 
+  def assign_role
+    if self.provider.nil?
+      add_role(:provisional)
+    else
+      add_role(:student)
+    end
+  end
 
 
 end
