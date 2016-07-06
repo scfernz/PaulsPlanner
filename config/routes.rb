@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'teacher_interface/index'
+
   devise_for :teachers
   root 'landing#index'
 
