@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :meetings
   devise_for :users
   get 'teacher_interface/index'
 
