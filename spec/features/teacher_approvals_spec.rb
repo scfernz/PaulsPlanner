@@ -22,7 +22,8 @@ RSpec.feature "TeacherApprovals", type: :feature do
         expect(page).to have_content "teacher@teacher.edu"
       end
       And "A teacher can convert a provisional account to a teacher account" do
-        click_link "Approve"
+        click_button "Approve"
+        expect(page).to_not have_content "teacher@teacher.edu"
       end
     end
   end
