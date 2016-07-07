@@ -1,3 +1,4 @@
+<h2>Provisional Accounts</h2>
 <% provisional_accounts = User.with_role :provisional %>
 <% provisional_accounts.each do |account| %>
   <form action="/teacher_interface/approve_account" method="post">
