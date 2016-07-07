@@ -1,15 +1,14 @@
 // Place all the styles related to the Landing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-$primary-color: #CE6D39;
-$secondary-color: rgba(248, 248, 248, 1);
+$primary-color: rgba(248, 248, 248, 1);
 $highlight-color: lighten(#9DC3C1, 20%);
 $dark-color: #6E7783;
 
 $main-font: 'Libre Baskerville', serif;
 
 body {
-  background-color: $secondary-color;
+  background-color: $primary-color;
   font-family: $main-font;
 }
 
@@ -60,7 +59,7 @@ hr.scissors:after {
   top: -12px;
   left: 40px;
   padding: 0 3px;
-  background: $secondary-color;
+  background: $primary-color;
   color: #8c8b8b;
   font-size: 18px;
 }
