@@ -5,4 +5,6 @@ class Task < ActiveRecord::Base
   def set_incomplete
     self.completed = false if self.completed.nil?
   end
+
+  resourcify # add this line
 end
