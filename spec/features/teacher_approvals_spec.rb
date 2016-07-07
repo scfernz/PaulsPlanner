@@ -26,5 +26,25 @@ RSpec.feature "TeacherApprovals", type: :feature do
         expect(page).to_not have_content "teacher@teacher.edu"
       end
     end
+
+    Steps "pendings accounts not visible to provisional or student accounts" do
+      When "Multiple teacher provisional accounts are registered" do
+        visit "/users/sign_up"
+        fill_in "user[email]", with: "teacher@teacher.edu"
+        fill_in "user[password]", with: "123456"
+        fill_in "user[password_confirmation]", with: "123456"
+        click_button "Sign up"
+        click_link "Logout"
+        visit "/users/sign_up"
+        fill_in "user[email]", with: "other@teacher.edu"
+        fill_in "user[password]", with: "123456"
+        fill_in "user[password_confirmation]", with: "123456"
+        click_button "Sign up"
+      end
+      Then "all provisional account should not be visible" do
+        expect(page).to_not have_content "teacher@teacher.edu"
+        expect(page).to_not have_content "Approve"
+      end
+    end
   end
 end
