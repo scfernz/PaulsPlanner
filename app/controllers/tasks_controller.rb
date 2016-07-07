@@ -15,10 +15,18 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    all_students = User.with_role :student
+    @students_for_select = all_students.map do |student|
+      [student.email, student.id]
+    end
   end
 
   # GET /tasks/1/edit
   def edit
+    all_students = User.with_role :student
+    @students_for_select = all_students.map do |student|
+      [student.email, student.id]
+    end
   end
 
   # POST /tasks
@@ -69,6 +77,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :description, :completed, :user_id, :created_by)
+      params.require(:task).permit(:title, :description, :completed, :user_id)
     end
 end
