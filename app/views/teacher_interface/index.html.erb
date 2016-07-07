@@ -1,7 +1,6 @@
 <h1>Profile (<%= current_user.roles.first.name %>)</h1>
 <p>Find me in app/views/teacher_interface/index.html.erb</p>
 <%= current_user.email %>
-<section>
-  <h2>Provisional Accounts</h2>
-  <%= render 'teacher_interface/pending_teachers' %>
-</section>
+<% if current_user.has_role?(:teacher) %>
+<%= render 'teacher_interface/pending_teachers' %>
+<% end %>
