@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "TeacherInterfaces", type: :feature do
+RSpec.feature "Users", type: :feature do
   context "Registering as a teacher" do
     Steps "Registering" do
       When "I visit the registration page" do
