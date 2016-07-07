@@ -12,14 +12,15 @@ RSpec.feature "Meetings", type: :feature do
         first_student.save!
         first_student.remove_role :provisional
         first_student.add_role :student
-        # click_link('Meetings')
+        visit '/meetings'
         expect(page).to have_content("Listing Meetings")
       end
       And "have created a meeting" do
-        #fill in location
-        #fill in description
-        #select in teacer
-        #click_button "Create Meeting"
+        click_link("New Meeting")
+        fill_in "Location", with: "here"
+        fill_in "Description", with: "there"
+        click_button "Create Meeting"
+        expect(page).to have_content("Meeting was successfully created")
       end
       Then "I can see all my meetings that includes the one I just created" do
         #see "meeting with <selected teacher>"
