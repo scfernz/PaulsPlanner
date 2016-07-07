@@ -1,12 +1,11 @@
 // Place all the styles related to the Landing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-$primary-color: #77AAAD;
-$secondary-color: #D8E6E7;
-$highlight-color: #9DC3C1;
+$primary-color: #CE6D39;
+$secondary-color: rgba(248, 248, 248, 1);
+$highlight-color: lighten(#9DC3C1, 20%);
 $dark-color: #6E7783;
 
-$header-font: 'Nixie One', cursive;
 $main-font: 'Libre Baskerville', serif;
 
 body {
@@ -14,23 +13,54 @@ body {
   font-family: $main-font;
 }
 
-h1 {
-  font-family: $header-font;
-  font-size: 6em;
-}
-
-h2 {
-  font-size: 4em;
-}
-
-h3 {
-  font-size: 2em;
-}
-
 .jumbotron {
-  background-color: $primary-color;
-  color: lighten($dark-color, 45%);
-  p {
-    font-size: 1.5em;
+  margin-top: -20px;
+  padding-left: 15px;
+  height: 500px;
+  background-image: url(bg2.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-color: $highlight-color;
+  h5, h1 {
+    text-shadow: 0 0 0.4em #000;
+    color: #FFF;
   }
+  .btn {
+    a {
+      font-size: 2em;
+      text-decoration: none;
+      color: black;
+      &:hover {
+        color: white;
+      }
+    }
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+  #teacher_btn {
+    margin-left: 30px;
+  }
+}
+
+  h4 {
+    color: grey;
+  }
+
+hr.scissors {
+  border-top: 1px dashed #8c8b8b;
+}
+hr.scissors:after {
+  content: '\002702';
+  display: inline-block;
+  position: relative;
+  top: -12px;
+  left: 40px;
+  padding: 0 3px;
+  background: $secondary-color;
+  color: #8c8b8b;
+  font-size: 18px;
 }
