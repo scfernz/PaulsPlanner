@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  resources :meetings
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"  }
 
   get 'teacher_interface/index'
