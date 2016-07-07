@@ -11,13 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20160706172013) do
-
+ActiveRecord::Schema.define(version: 20160707204004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
 
   create_table "meetings", force: :cascade do |t|
     t.datetime "date"
@@ -28,7 +25,15 @@ ActiveRecord::Schema.define(version: 20160706172013) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "meetings_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "meeting_id"
+  end
 
+  add_index "meetings_users", ["meeting_id"], name: "index_meetings_users_on_meeting_id", using: :btree
+  add_index "meetings_users", ["user_id"], name: "index_meetings_users_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -40,17 +45,6 @@ ActiveRecord::Schema.define(version: 20160706172013) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
-
-  create_table "user_meetings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "meeting_id"
-    t.boolean  "can_edit?"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "user_meetings", ["meeting_id"], name: "index_user_meetings_on_meeting_id", using: :btree
-  add_index "user_meetings", ["user_id"], name: "index_user_meetings_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -79,6 +73,4 @@ ActiveRecord::Schema.define(version: 20160706172013) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
-  add_foreign_key "user_meetings", "meetings"
-  add_foreign_key "user_meetings", "users"
 end
