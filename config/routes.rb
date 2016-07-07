@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+
+
+  resources :tasks
+  resources :meetings
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"  }
-  get 'teacher_interface/index'
+
+  get 'user/index'
+  post 'user/approve_account'
 
   root 'landing#index'
 

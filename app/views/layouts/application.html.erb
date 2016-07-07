@@ -10,8 +10,7 @@
 </head>
 <body>
   <%=render 'layouts/navbar'%>
-  <%= flash[:notice] %>
-  <%= flash[:warning] %>
+  <%= flash_messages %>
   <%= yield %>
 </body>
 </html>
