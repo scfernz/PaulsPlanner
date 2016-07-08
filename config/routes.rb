@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :tasks do
-    patch 'mark_complete'
+    post 'mark_complete'
   end
 
   resources :meetings

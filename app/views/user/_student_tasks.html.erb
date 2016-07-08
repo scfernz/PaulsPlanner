@@ -19,6 +19,11 @@
         <td><%= task.completed %></td>
         <td><%= task.user.email %></td>
         <td><%= link_to 'Show', task %></td>
+        <td>
+          <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
+            <%= f.submit 'Complete' %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
