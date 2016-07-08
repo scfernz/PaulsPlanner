@@ -61,6 +61,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def mark_complete
+    @task = Task.find(params[:task_id])
+    @task.completed = true
+    @task.save
+    redirect_to :back
+  end
+
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
