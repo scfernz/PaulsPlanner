@@ -3,3 +3,6 @@
 <% if current_user.has_role?(:teacher) %>
   <%= render 'user/pending_teachers' %>
 <% end %>
+<% if current_user.has_role?(:student) %>
+<%= render 'user/student_tasks' %>
+<% end %>
