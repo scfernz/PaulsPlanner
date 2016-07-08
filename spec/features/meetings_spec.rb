@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Meetings", type: :feature js: true do
+RSpec.feature "Meetings", type: :feature do
   context "Schedule a meeting with teacher" do
     Steps "Schedule a meeting with teacher" do
       Given "That I am a student and on the meeting page" do
