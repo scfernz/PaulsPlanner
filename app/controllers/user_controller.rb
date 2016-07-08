@@ -1,6 +1,7 @@
 class UserController < ApplicationController
 
   def index
+    @user = current_user
     if current_user.nil?
       redirect_to '/users/sign_in'
     else
@@ -15,4 +16,10 @@ class UserController < ApplicationController
     redirect_to '/'
   end
 
+  def update
+    @user = current_user
+    @user.update_attribute(:image, params[:image])
+    @user.save!
+    redirect_to '/user/index'
+  end
 end

@@ -4,5 +4,6 @@
   <%= render 'user/pending_teachers' %>
 <% end %>
 <% if current_user.has_role?(:student) %>
+<%= render 'user/profile_pic' %>
 <%= render 'user/student_tasks' %>
 <% end %>
