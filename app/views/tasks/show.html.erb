@@ -20,5 +20,11 @@
   <%= @task.user.email %>
 </p>
 
+<% if current_user.has_role? :student %>
+  <%= form_for @task, url: task_mark_complete_path(@task), html: { method: :post } do |f| %>
+    <%= f.submit 'Complete' %>
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Task List', tasks_path %>

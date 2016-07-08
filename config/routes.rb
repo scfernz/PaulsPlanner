@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :tasks do
+    post 'mark_complete'
+  end
 
-  resources :tasks
   resources :meetings
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"  }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get 'user/index'
   post 'user/approve_account'

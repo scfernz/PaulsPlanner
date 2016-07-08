@@ -6,7 +6,12 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    if !current_user.nil? && current_user.has_role?(:teacher)
+      @tasks = Task.all
+    else
+      flash[:alert] = 'You are not authorized to view this page'
+      redirect_to '/user/index'
+    end
   end
 
   # GET /tasks/1
@@ -16,18 +21,29 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
-    all_students = User.with_role :student
-    @students_for_select = all_students.map do |student|
-      [student.email, student.id]
+    if !current_user.nil? && current_user.has_role?(:teacher)
+      @task = Task.new
+      all_students = User.with_role :student
+      @students_for_select = all_students.map do |student|
+        [student.email, student.id]
+      end
+    else
+      flash[:alert] = 'You are not authorized to view this page'
+      redirect_to '/user/index'
     end
+
   end
 
   # GET /tasks/1/edit
   def edit
-    all_students = User.with_role :student
-    @students_for_select = all_students.map do |student|
-      [student.email, student.id]
+    if !current_user.nil? && current_user.has_role?(:teacher)
+      all_students = User.with_role :student
+      @students_for_select = all_students.map do |student|
+        [student.email, student.id]
+      end
+    else
+      flash[:alert] = 'You are not authorized to view this page'
+      redirect_to '/user/index'
     end
   end
 
@@ -59,6 +75,13 @@ class TasksController < ApplicationController
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def mark_complete
+    @task = Task.find(params[:task_id])
+    @task.completed = true
+    @task.save
+    redirect_to :back
   end
 
   # DELETE /tasks/1

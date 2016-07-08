@@ -1,3 +1,8 @@
+Before testing merge and seed the test environment with these terminal commands:
+
+rake db:migrate RAILS_ENV=TEST
+rake db:seed RAILS_ENV=TEST
+
 == README
 
 This README would normally document whatever steps are necessary to get the
