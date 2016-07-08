@@ -9,7 +9,7 @@ class Ability
     if user.has_role? :teacher
       can :manage, :all
     elsif user.has_role? :student
-      can :read, Task, user_id: user.id
+      can :manage, Task, user_id: user.id
     end
 
     # Define abilities for the passed in user here. For example:
