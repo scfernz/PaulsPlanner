@@ -6,9 +6,13 @@ RSpec.feature "Navbars", type: :feature do
       Given 'I am on the landing page' do
         visit '/'
       end
-      Then 'I can see a navbar' do
+      Then 'I can see a navbar and the links work' do
         click_link("Paul's Planner")
-        expect(page).to have_content("Mission Statement")
+        expect(page).to have_content("Welcome to Paul's Planner")
+        click_link("Login")
+        expect(page).to have_content("Log in")
+        click_link("Paul's Planner")
+        expect(page).to have_content("Welcome to Paul's Planner")
       end
     end
   end

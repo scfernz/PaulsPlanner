@@ -1,6 +1,5 @@
 class UserController < ApplicationController
-  def index
-  end
+
 
   def approve_account
     approved_user = User.find(params[:approved_id])
@@ -8,4 +7,5 @@ class UserController < ApplicationController
     approved_user.add_role :teacher
     redirect_to '/'
   end
+
 end
