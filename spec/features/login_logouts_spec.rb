@@ -4,7 +4,8 @@ RSpec.feature "LoginLogouts", type: :feature do
   context "Logging into and out of the website" do
     Steps "Logging in and out" do
       When "I register with an account" do
-        visit '/users/sign_up'
+        visit '/'
+        click_link('Teachers')
         fill_in "user[email]", with: "teacher@teacher.edu"
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
@@ -16,8 +17,7 @@ RSpec.feature "LoginLogouts", type: :feature do
         click_link "Logout"
         expect(page).to have_content "Signed out successfully."
         expect(page).to_not have_content "Logout"
-        # TODO: fix this
-        # expect(page).to have_content "Mission Statement"
+        expect(page).to have_content "Welcome to Paul's Planner"
       end
       And "I can log in" do
         click_link "Login"

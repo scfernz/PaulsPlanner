@@ -14,4 +14,5 @@ class UserController < ApplicationController
     approved_user.add_role :teacher
     redirect_to '/'
   end
+
 end
