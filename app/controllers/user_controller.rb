@@ -1,6 +1,7 @@
 class UserController < ApplicationController
 
   def index
+    @user = current_user
     if current_user.nil?
       redirect_to '/users/sign_in'
     else
@@ -15,5 +16,18 @@ class UserController < ApplicationController
     approved_user.add_role :teacher
     redirect_to '/'
   end
+
+  def update_picture
+    @user = current_user
+    @user.update(user_params)
+    @user.save
+    redirect_to '/' #page goes here
+ end
+
+private
+
+ def user_params
+   params.require(:user).permit(:image)
+ end
 
 end
