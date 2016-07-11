@@ -16,8 +16,15 @@
 </p>
 
 <p>
+  <strong>Members:</strong>
+  <% @meeting.users.each do |member| %>
+  <p><%= member.email %></p>
+  <% end %>
+</p>
+
+<p>
   <strong>Created by:</strong>
-  <%= @meeting.created_by %>
+  <%= User.find(@meeting.created_by).email %>
 </p>
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
