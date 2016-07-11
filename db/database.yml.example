@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: PaulsPlanner_development
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: PaulsPlanner_test
+  pool: 5
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: PaulsPlanner_production
+  password:
