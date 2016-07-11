@@ -6,6 +6,7 @@ class UserController < ApplicationController
       redirect_to '/users/sign_in'
     else
       @tasks = Task.where(user: current_user)
+      # @meetings = Meeting.where(user: current_user)
     end
   end
 

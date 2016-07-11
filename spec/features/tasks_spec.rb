@@ -32,6 +32,14 @@ RSpec.feature "Tasks", type: :feature do
         fill_in "task[title]", with: 'testtask'
         fill_in "task[description]", with: 'do this'
         select "test@student.com", :from => "task[user_id]"
+        click_button 'Create Task'
+      end
+      And 'I can delete a task that I have assigned' do
+        visit '/tasks'
+        expect(page).to have_content 'testtask'
+        click_link 'Delete'
+        visit '/tasks'
+        expect(page).to_not have_content 'testtask'
       end
     end
   end

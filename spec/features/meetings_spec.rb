@@ -21,7 +21,7 @@ RSpec.feature "Meetings", type: :feature do
         click_link('Meetings')
         expect(page).to have_content("Listing Meetings")
       end
-      And "have created a meeting" do
+      And "have created a meeting " do
         click_link("New Meeting")
         fill_in "meeting[location]", with: "here"
         fill_in "meeting[description]", with: "there"
