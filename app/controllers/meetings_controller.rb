@@ -15,10 +15,19 @@ class MeetingsController < ApplicationController
   # GET /meetings/new
   def new
     @meeting = Meeting.new
+    all_teachers = User.with_role :teacher
+    @teachers_for_select = all_teachers.map do |teacher|
+      [teacher.email, teacher.id]
+    end
   end
 
   # GET /meetings/1/edit
   def edit
+    all_teachers = User.with_role :teacher
+    @teachers_for_select = all_teachers.map do |teacher|
+      [teacher.email, teacher.id]
+    end
+
   end
 
   # POST /meetings
@@ -27,6 +36,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(meeting_params)
     @meeting.created_by = current_user.id
     @meeting.users << current_user
+    @meeting.users << User.find(params[:teacher_id])
 
     respond_to do |format|
       if @meeting.save
