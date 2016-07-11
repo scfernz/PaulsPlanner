@@ -22,6 +22,7 @@ class UserController < ApplicationController
     redirect_to '/'
   end
 
+
   def update_picture
     @user = current_user
     @user.update(user_params)
@@ -34,5 +35,6 @@ private
  def user_params
    params.require(:user).permit(:image)
  end
+
 
 end

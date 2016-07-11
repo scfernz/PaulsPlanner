@@ -10,10 +10,12 @@ RSpec.feature "Users", type: :feature do
         fill_in "user[email]", with: "teacher@teacher.edu"
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
+        fill_in "user[name]", with: "Mr. Teacher"
         click_button "Sign up"
       end
       And "I am taken to my profile" do
         expect(page).to have_content "teacher@teacher.edu"
+        expect(page).to have_content "Mr. Teacher"
       end
     end
   end
