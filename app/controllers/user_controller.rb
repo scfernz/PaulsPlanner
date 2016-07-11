@@ -4,8 +4,13 @@ class UserController < ApplicationController
     if current_user.nil?
       redirect_to '/users/sign_in'
     else
-      @tasks = Task.where(user: current_user)
-      @meetings = Meeting.where(created_by: current_user)
+      if current_user.has_role?(:student)
+        @tasks = Task.where(user: current_user)
+        @meetings = Meeting.where(created_by: current_user)
+      else
+        @tasks = Task.where(user: current_user)
+        @meetings = Meeting.all
+      end
     end
   end
 
