@@ -10,10 +10,12 @@
 
   <tbody>
     <% @meetings.each do |meeting| %>
+    <% if meeting.users.include?(current_user) %>
       <tr>
         <td><%= link_to meeting.date, meeting %></td>
         <td><%= meeting.location %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
