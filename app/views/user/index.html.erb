@@ -1,5 +1,5 @@
-<h1>Profile (<%= current_user.roles.first.name %>)</h1>
-<%= current_user.email %>
+<h1><%= current_user.name %>'s Profile (<%= current_user.roles.first.name %>)</h1>
+<p><%= current_user.email %></p>
 <% if current_user.has_role?(:teacher) %>
   <%= render 'user/pending_teachers' %>
 <% end %>

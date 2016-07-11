@@ -16,4 +16,6 @@ class UserController < ApplicationController
     redirect_to '/'
   end
 
+  # need a way for grabbing params :name, :email, :password 
+
 end
