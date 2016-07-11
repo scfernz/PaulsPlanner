@@ -9,8 +9,10 @@ class ApplicationController < ActionController::Base
 
   protected
   # Because Devise only takes strong params :email and :password, this is needed
-  # to allow :name as a strong param when a teacher is registering 
+  # to allow :name as a strong param when a teacher is registering
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+
     end
 end
