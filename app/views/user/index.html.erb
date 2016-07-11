@@ -5,5 +5,5 @@
 <% end %>
 <% if current_user.has_role?(:student) %>
 <%= render 'user/student_tasks' %>
-<!-- <%= render 'user/student_meetings' %> -->
+<%= render 'user/student_meetings' %>
 <% end %>
