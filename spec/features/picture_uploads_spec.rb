@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "PictureUploads", type: :feature do
   context 'seeing a student profile page' do
     Steps 'seeing a student profile page' do
-      Given 'that I am a student and I have tasks' do
+      Given 'that I am a student' do
         first_student = User.new
         first_student.email = 'studentone@student.com'
         first_student.password = '123456'
