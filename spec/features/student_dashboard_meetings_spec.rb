@@ -4,14 +4,12 @@ RSpec.feature "StudentDashboardMeetings", type: :feature do
   context 'Seeing meetings on the student profile page' do
     Steps 'seeing a student profile page' do
       Given 'I have logged in' do
-        visit '/users/sign_in'
-        fill_in "user[email]", with: 'student1@student.com'
-        fill_in "user[password]", with: "123456"
-        click_button "Log in"
+        generate_student('student3@student.com')
+        login_student('student3@student.com')
       end
       Then 'I can see my information' do
         visit '/'
-        expect(page).to have_content 'student1@student.com'
+        expect(page).to have_content 'student3@student.com'
       end
       And "have created a meeting " do
         click_link('Meetings')

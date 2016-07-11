@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :cohorts
   resources :tasks do
     post 'mark_complete'
   end
