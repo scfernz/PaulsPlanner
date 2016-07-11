@@ -28,7 +28,7 @@ RSpec.feature "TeacherApprovals", type: :feature do
       end
     end
 
-    Steps "pendings accounts not visible to provisional or student accounts" do
+    Steps "provisional accounts not visible to provisional or student accounts" do
       When "Multiple teacher provisional accounts are registered" do
         visit "/users/sign_up"
         fill_in "user[email]", with: "teacher@teacher.edu"

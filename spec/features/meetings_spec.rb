@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Meetings", type: :feature do
   context "Schedule a meeting with teacher" do
     Steps "Schedule a meeting with teacher" do
-      Given "That I am a student and on the meeting page" do
+      Given "That I am a student and on the meeting page and there is a teacher" do
         first_student = User.new
         first_student.email = 'studentone@student.com'
         first_student.password = '123456'
@@ -11,6 +11,14 @@ RSpec.feature "Meetings", type: :feature do
         first_student.save!
         first_student.remove_role :provisional
         first_student.add_role :student
+
+        first_teacher = User.new
+        first_teacher.email = 'teacher@teacher.com'
+        first_teacher.password = '123456'
+        first_teacher.password_confirmation = '123456'
+        first_teacher.save!
+        first_teacher.remove_role :provisional
+        first_teacher.add_role :teacher
 
         visit "/"
         click_link "Login"
@@ -21,15 +29,25 @@ RSpec.feature "Meetings", type: :feature do
         click_link('Meetings')
         expect(page).to have_content("Listing Meetings")
       end
-      And "have created a meeting " do
+      And "have created a meeting that includes a teacher" do
         click_link("New Meeting")
         fill_in "meeting[location]", with: "here"
         fill_in "meeting[description]", with: "there"
+        select('teacher@teacher.com', :from => 'teacher_id')
         click_button "Create Meeting"
-        expect(page).to have_content("Meeting was successfully created")
       end
-      Then "I can see all my meetings that includes the one I just created" do
-        #see "meeting with <selected teacher>"
+      Then "I can see a page with the details of the meeting that I just created" do
+        expect(page).to have_content("Location: here")
+        expect(page).to have_content("Description: there")
+        expect(page).to have_content("Members: teacher@teacher.com  studentone@student.com")
+        expect(page).to have_content("Created by: studentone@student.com")
+      end
+      And "I can see a list of all my meetings" do
+        visit '/meetings'
+        expect(page).to have_content("here")
+        expect(page).to have_content("there")
+        expect(page).to have_content("teacher@teacher.com  studentone@student.com")
+        expect(page).to have_content("studentone@student.com")
       end
     end
   end
