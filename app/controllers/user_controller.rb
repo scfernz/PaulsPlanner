@@ -17,10 +17,17 @@ class UserController < ApplicationController
     redirect_to '/'
   end
 
-  def update
+  def update_picture
     @user = current_user
-    @user.update_attribute(:image, params[:image])
-    @user.save!
-    redirect_to '/user/index'
-  end
+    @user.update(user_params)
+    @user.save
+    redirect_to '/' #page goes here
+ end
+
+private
+
+ def user_params
+   params.require(:user).permit(:id, :email, :password, :image, :provider, :uid)
+ end
+
 end

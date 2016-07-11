@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post 'user/approve_account'
 
   root 'landing#index'
-  post 'user/index' => 'user#update'
+  patch 'user/update_picture'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,5 +1,7 @@
 <%= image_tag(current_user.image.url(:large)) %>
-<%= form_for current_user.email, html: { multipart: true } do |f| %>
+
+<%= form_for @user, url: user_update_picture_path, html: { multipart: true } do |f| %>
 <%= f.file_field :image %>
 <%= f.submit %>
+
 <% end %>
