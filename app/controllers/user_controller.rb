@@ -6,7 +6,7 @@ class UserController < ApplicationController
       redirect_to '/users/sign_in'
     else
       if current_user.has_role?(:student)
-        @tasks = Task.where(user: current_user)
+        @tasks = Task.where(user: current_user).order(:created_at)
         @meetings = Meeting.where(created_by: current_user)
       else
         @tasks = Task.where(user: current_user)
