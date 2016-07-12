@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "PictureUploads", type: :feature, js: true do
+RSpec.feature "PictureUploads", type: :feature do
   context 'seeing a student profile page' do
     Steps 'seeing a student profile page' do
       Given 'I have logged in' do

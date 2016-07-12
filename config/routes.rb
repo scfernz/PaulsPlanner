@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :cohorts do
+    patch 'add_member'
+  end
   resources :tasks do
     post 'mark_complete'
   end
@@ -13,6 +16,8 @@ Rails.application.routes.draw do
 
   root 'landing#index'
   patch 'user/update_picture'
+
+  patch 'user/remove_from_cohort'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

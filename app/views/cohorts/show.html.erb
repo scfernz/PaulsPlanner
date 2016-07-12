@@ -1,0 +1,32 @@
+<p>
+  <strong>Name:</strong>
+  <%= @cohort.name %>
+  <p><strong>Members</strong></p>
+  <table>
+    <% @cohort.users.each do |member| %>
+      <tr>
+        <%= form_for(member, url: user_remove_from_cohort_path) do |f| %>
+        <%= f.hidden_field :id, :value => member.id  %>
+        <td><%= member.email %></td>
+        <td><%= f.submit "Remove" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</p>
+
+<%= form_for(@cohort, url: cohort_add_member_path(@cohort)) do |f| %>
+<div class="field">
+  <select name="member_id">
+    <% @members_for_select.each do |member| %>
+      <option value="<%= member[1] %>"><%= member[0] %></option>
+    <% end %>
+  </select>
+</div>
+<div class="actions">
+  <%= f.submit 'Add Member'%>
+</div>
+<% end %>
+
+<%= link_to 'Edit', edit_cohort_path(@cohort) %> |
+<%= link_to 'Back', cohorts_path %>
