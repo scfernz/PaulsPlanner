@@ -69,6 +69,7 @@ RSpec.feature "Tasks", type: :feature do
       end
       Then "I can complete that task by clicking on a button on my profile page" do
         click_button "Complete"
+        click_link "taskone"
         expect(page).to have_content "true"
       end
     end
@@ -95,7 +96,7 @@ RSpec.feature "Tasks", type: :feature do
         click_button "Log in"
       end
       Then "I can complete that task by clicking on a button on the task page" do
-        click_link "Show"
+        click_link "taskone"
         click_button "Complete"
         expect(page).to have_content "true"
       end
