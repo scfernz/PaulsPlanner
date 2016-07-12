@@ -20,6 +20,7 @@ RSpec.feature "Tasks", type: :feature do
       And "students exist in the database" do
         first_student = User.new
         first_student.email = 'test@student.com'
+        first_student.name = 'David'
         first_student.password = '123456'
         first_student.password_confirmation = '123456'
         first_student.save!
@@ -31,7 +32,7 @@ RSpec.feature "Tasks", type: :feature do
         click_link 'New Task'
         fill_in "task[title]", with: 'testtask'
         fill_in "task[description]", with: 'do this'
-        select "test@student.com", :from => "task[user_id]"
+        select "David", :from => "task[user_id]"
         click_button 'Create Task'
       end
       And 'I can delete a task that I have assigned' do
