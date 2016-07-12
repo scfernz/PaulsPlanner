@@ -84,6 +84,16 @@ class MeetingsController < ApplicationController
     end
   end
 
+  def map_markers
+    @meeting = Meeting.find(params[:meeting_id])
+    meeting_markers = Gmaps4rails.build_markers(@meeting) do |meeting, marker|
+      marker.lat meeting.latitude
+      marker.lng meeting.longitude
+      marker.infowindow meeting.address
+    end
+    render json: meeting_markers.to_json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_meeting
@@ -92,6 +102,6 @@ class MeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:date, :location, :description, :created_by)
+      params.require(:meeting).permit(:date, :location, :description, :created_by, :address)
     end
 end

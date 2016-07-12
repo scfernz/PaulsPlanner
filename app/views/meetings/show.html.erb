@@ -11,6 +11,11 @@
 </p>
 
 <p>
+  <strong>Address:</strong>
+  <%= @meeting.address %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @meeting.description %>
 </p>
@@ -23,6 +28,7 @@
   <% end %>
 </p>
 
+
 <p>
   <strong>Created by:</strong>
   <%= User.find(@meeting.created_by).email %>
@@ -30,3 +36,6 @@
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
 <%= link_to 'Back', meetings_path %>
+
+<%= hidden_field :meeting, :id %>
+<div id="googleMap" style="width:300px;height:300px;"></div>
