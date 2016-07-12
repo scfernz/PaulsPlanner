@@ -1,6 +1,5 @@
-<h1>Profile (<%= current_user.roles.first.name %>)</h1>
-<%= current_user.email %>
-<br>
+<h1><%= current_user.name %>'s Profile (<%= current_user.roles.first.name %>)</h1>
+<p><%= current_user.email %></p>
 <% if current_user.has_role?(:teacher) %>
   <%= render 'user/pending_teachers' %>
   <%= render 'user/teacher_meetings' %>
@@ -10,3 +9,5 @@
 <%= render 'user/student_tasks' %>
 <%= render 'user/student_meetings' %>
 <% end %>
+
+<p><%= link_to 'Edit Profile', edit_user_registration_path %></p>
