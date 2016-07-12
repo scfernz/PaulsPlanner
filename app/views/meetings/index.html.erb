@@ -15,21 +15,23 @@
 
   <tbody>
     <% @meetings.each do |meeting| %>
-      <tr>
-        <td><%= meeting.date %></td>
-        <td><%= meeting.location %></td>
-        <td><%= meeting.description %></td>
-        <td>
-          <table>
-            <% meeting.users.each do |member| %>
-            <tr><td><%= member.email %></td></tr>
-            <% end %>
-          </table>
-        </td>
-        <td><%= link_to 'Show', meeting %></td>
-        <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
-        <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% if meeting.users.include?(current_user) %>
+        <tr>
+          <td><%= meeting.date %></td>
+          <td><%= meeting.location %></td>
+          <td><%= meeting.description %></td>
+          <td>
+            <table>
+              <% meeting.users.each do |member| %>
+              <tr><td><%= member.email %></td></tr>
+              <% end %>
+            </table>
+          </td>
+          <td><%= link_to 'Show', meeting %></td>
+          <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
+          <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
