@@ -25,7 +25,7 @@ class TasksController < ApplicationController
       @task = Task.new
       all_students = User.with_role :student
       @students_for_select = all_students.map do |student|
-        [student.email, student.id]
+        [student.name, student.id]
       end
     else
       flash[:alert] = 'You are not authorized to view this page'
@@ -39,7 +39,7 @@ class TasksController < ApplicationController
     if !current_user.nil? && current_user.has_role?(:teacher)
       all_students = User.with_role :student
       @students_for_select = all_students.map do |student|
-        [student.email, student.id]
+        [student.name, student.id]
       end
     else
       flash[:alert] = 'You are not authorized to view this page'

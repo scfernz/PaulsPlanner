@@ -37,9 +37,10 @@ RSpec.feature "MeetingsPages", type: :feature do
         visit '/'
         expect(page).to have_content 'admin@admin.com'
       end
-      Then 'I can go view my meetings page'
+      Then 'I can go view my meetings page' do
         click_link('Meetings')
         expect(page).to have_content 'San Diego'
+      end
     end
   end
 end
