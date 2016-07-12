@@ -69,6 +69,11 @@ RSpec.feature "Tasks", type: :feature do
       end
       Then "I can complete that task by clicking on a button on my profile page" do
         click_button "Complete"
+      end
+      And "The complete button will have disappeared" do
+        expect{click_button "Complete"}.to raise_error('Unable to find button "Complete"')
+      end
+      And "The task page shows that the task has been completed" do
         click_link "taskone"
         expect(page).to have_content "true"
       end
