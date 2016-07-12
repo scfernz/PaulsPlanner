@@ -26,12 +26,16 @@ RSpec.feature "CohortCreations", type: :feature do
         cohort_id = generate_cohort('Alpha')
         generate_student('student3@student.com')
         visit "cohorts/#{cohort_id}"
-        expect(page).to have_content 'Students'
+        expect(page).to have_content 'Members'
       end
       And 'I can add students to the cohort' do
-        select('student3@student.com', :from => 'student_id')
-        click_button "Add Student"
-        expect(page).to have_content 'student3@student.com'
+        select('student3@student.com', :from => 'member_id')
+        click_button "Add Member"
+        expect(page).to have_content 'Members student3@student.com'
+      end
+      Then 'I can also remove that student from the cohort' do
+        click_button 'Remove'
+        expect(page).to_not have_content 'Members student3@student.com'
       end
     end
   end

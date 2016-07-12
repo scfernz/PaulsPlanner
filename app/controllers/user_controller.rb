@@ -22,6 +22,12 @@ class UserController < ApplicationController
     redirect_to '/'
   end
 
+  def remove_from_cohort
+    user_to_remove = User.find(params[:user][:id])
+    user_to_remove.cohort_id = nil
+    user_to_remove.save!
+    redirect_to :back
+  end
 
   def update_picture
     @user = current_user

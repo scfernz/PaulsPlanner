@@ -10,8 +10,8 @@ class CohortsController < ApplicationController
   # GET /cohorts/1
   # GET /cohorts/1.json
   def show
-    @students_for_select = User.all.map do |student|
-      [student.email, student.id]
+    @members_for_select = User.all.map do |member|
+      [member.email, member.id]
     end
   end
 
@@ -25,7 +25,7 @@ class CohortsController < ApplicationController
   end
 
   def add_member
-    member_to_add = User.find(params[:student_id])
+    member_to_add = User.find(params[:member_id])
     member_to_add.cohort_id = params[:cohort_id]
     member_to_add.save!
     redirect_to :back
