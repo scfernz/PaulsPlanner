@@ -28,6 +28,7 @@ class CohortsController < ApplicationController
     member_to_add = User.find(params[:member_id])
     member_to_add.cohort_id = params[:cohort_id]
     member_to_add.save!
+    flash[:success] = 'Member added.'
     redirect_to :back
   end
 

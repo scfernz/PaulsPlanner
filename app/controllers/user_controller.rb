@@ -26,6 +26,7 @@ class UserController < ApplicationController
     user_to_remove = User.find(params[:user][:id])
     user_to_remove.cohort_id = nil
     user_to_remove.save!
+    flash[:notice] = 'Member removed from cohort.'
     redirect_to :back
   end
 
