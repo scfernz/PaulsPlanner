@@ -35,9 +35,14 @@ RSpec.feature "Tasks", type: :feature do
         select "David", :from => "task[user_id]"
         click_button 'Create Task'
       end
-      And 'I can delete a task that I have assigned' do
+      And "I can visit the task's page and see 'Edit' and 'Task List' links" do
         visit '/tasks'
         expect(page).to have_content 'testtask'
+        click_link 'testtask'
+        expect{click_link 'Edit'}.not_to raise_error
+        expect{click_link 'Task List'}.not_to raise_error
+      end
+      And 'I can delete a task that I have assigned' do
         click_link 'Delete'
         visit '/tasks'
         expect(page).to_not have_content 'testtask'
@@ -69,8 +74,14 @@ RSpec.feature "Tasks", type: :feature do
       end
       Then "I can complete that task by clicking on a button on my profile page" do
         click_button "Complete"
+      end
+      And "The complete button will have disappeared" do
+        expect{click_button "Complete"}.to raise_error('Unable to find button "Complete"')
+      end
+      And "The task page shows that the task has been completed and will also not have a 'Complete' button" do
         click_link "taskone"
         expect(page).to have_content "true"
+        expect{click_button "Complete"}.to raise_error('Unable to find button "Complete"')
       end
     end
 

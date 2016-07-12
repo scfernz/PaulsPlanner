@@ -46,7 +46,7 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
     end
 
     Steps "interacting with my own tasks" do
-      When "I am a registered student and logged in" do
+      Given "I am a registered student and logged in and I have a task" do
         first_student = User.new
         first_student.email = 'test@student.com'
         first_student.password = '123456'
@@ -55,16 +55,26 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
         first_student.remove_role :provisional
         first_student.add_role :student
 
-        test_task = Task.new
-        test_task.id = 1
-        test_task.user_id = first_student.id
-        test_task.save!
-
         visit '/'
         click_link "Login"
         fill_in "user[email]", with: "test@student.com"
         fill_in "user[password]", with: "123456"
         click_button "Log in"
+
+        task = Task.new
+        task.title = "My task"
+        task.user = first_student
+        # We need to set task.id = 1 so that we can use the URL /tasks/1/edit below
+        task.id = 1
+        task.save!
+      end
+      When "I visit a task's page" do
+        visit '/'
+        click_link "My task"
+      end
+      Then "I do not see links to 'Edit' or 'Task List'" do
+        expect{click_link 'Edit'}.to raise_error('Unable to find link "Edit"')
+        expect{click_link 'Task List'}.to raise_error('Unable to find link "Task List"')
       end
       And "I try to visit the task creation url" do
         visit '/tasks/new'
