@@ -25,6 +25,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'cancancan'
 gem 'rolify'
+# gems for converting location strings to map locations and google maps gem
+gem 'geocoder'
+gem 'gmaps4rails'
 # Paperclip handles user avatars
 gem 'paperclip'
 # bundle exec rake doc:rails generates the API under doc/api.
