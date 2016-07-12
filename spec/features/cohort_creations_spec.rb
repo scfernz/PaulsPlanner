@@ -24,13 +24,14 @@ RSpec.feature "CohortCreations", type: :feature do
       end
       And 'I can see all students in a cohort' do
         cohort_id = generate_cohort('Alpha')
+        generate_student('student3@student.com')
         visit "cohorts/#{cohort_id}"
         expect(page).to have_content 'Students'
       end
       And 'I can add students to the cohort' do
-        generate_student('student3@student.com')
         select('student3@student.com', :from => 'student_id')
         click_button "Add Student"
+        expect(page).to have_content 'student3@student.com'
       end
     end
   end

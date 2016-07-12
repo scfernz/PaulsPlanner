@@ -10,6 +10,9 @@ class CohortsController < ApplicationController
   # GET /cohorts/1
   # GET /cohorts/1.json
   def show
+    @students_for_select = User.all.map do |student|
+      [student.email, student.id]
+    end
   end
 
   # GET /cohorts/new
@@ -19,6 +22,13 @@ class CohortsController < ApplicationController
 
   # GET /cohorts/1/edit
   def edit
+  end
+
+  def add_member
+    member_to_add = User.find(params[:student_id])
+    member_to_add.cohort_id = params[:cohort_id]
+    member_to_add.save!
+    redirect_to :back
   end
 
   # POST /cohorts

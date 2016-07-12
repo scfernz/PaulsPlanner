@@ -3,7 +3,26 @@
 <p>
   <strong>Name:</strong>
   <%= @cohort.name %>
+  <p><strong>Students</strong></p>
+  <table>
+    <% @cohort.users.each do |student| %>
+      <tr><td><%= student.email %></td></tr>
+    <% end %>
+  </table>
 </p>
+
+<%= form_for(@cohort, url: cohort_add_member_path(@cohort)) do |f| %>
+<div class="field">
+  <select name="student_id">
+    <% @students_for_select.each do |student| %>
+      <option value="<%= student[1] %>"><%= student[0] %></option>
+    <% end %>
+  </select>
+</div>
+<div class="actions">
+  <%= f.submit 'Add Student'%>
+</div>
+<% end %>
 
 <%= link_to 'Edit', edit_cohort_path(@cohort) %> |
 <%= link_to 'Back', cohorts_path %>

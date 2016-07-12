@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :cohorts
+  resources :cohorts do
+    patch 'add_member'
+  end
   resources :tasks do
     post 'mark_complete'
   end
