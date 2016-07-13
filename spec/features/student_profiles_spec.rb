@@ -4,21 +4,8 @@ RSpec.feature "StudentProfiles", type: :feature do
   context 'seeing a student profile page' do
     Steps 'seeing a student profile page' do
       Given 'that I am a student and I have tasks' do
-        first_student = User.new
-        first_student.email = 'studentone@student.com'
-        first_student.password = '123456'
-        first_student.password_confirmation = '123456'
-        first_student.save!
-        first_student.remove_role :provisional
-        first_student.add_role :student
-
-        second_student = User.new
-        second_student.email = 'studenttwo@student.com'
-        second_student.password = '123456'
-        second_student.password_confirmation = '123456'
-        second_student.save!
-        second_student.remove_role :provisional
-        second_student.add_role :student
+        generate_student('studentone@student.com')
+        generate_student('studenttwo@student.com')
 
         student1_task = Task.new
         student1_task.user_id = first_student.id
@@ -52,6 +39,7 @@ RSpec.feature "StudentProfiles", type: :feature do
         first_student = User.new
         first_student.email = 'studentone@student.com'
         first_student.password = '123456'
+        first_student.name = 'Studentone'
         first_student.password_confirmation = '123456'
         first_student.save!
         first_student.remove_role :provisional

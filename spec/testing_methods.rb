@@ -28,6 +28,7 @@ module TestingMethods
   def generate_student(email)
     new_student = User.new
     new_student.email = email
+    new_student.name = email
     new_student.password = '123456'
     new_student.password_confirmation = '123456'
     new_student.save!
@@ -47,6 +48,7 @@ module TestingMethods
   def generate_teacher(email)
     newteacher = User.new
     newteacher.email = email
+    newteacher.name = email
     newteacher.password = '123456'
     newteacher.password_confirmation = '123456'
     newteacher.save!

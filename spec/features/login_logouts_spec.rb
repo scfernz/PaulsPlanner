@@ -6,6 +6,7 @@ RSpec.feature "LoginLogouts", type: :feature do
       When "I register with an account" do
         visit '/'
         click_link('Teachers')
+        fill_in "user[name]", with: "Teacher"
         fill_in "user[email]", with: "teacher@teacher.edu"
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
