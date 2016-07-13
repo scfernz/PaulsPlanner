@@ -5,23 +5,12 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
   context "interacting with tasks as a student" do
     Steps "trying to access other student's tasks" do
       When "I am a registered student and logged in" do
-        first_student = User.new
-        first_student.email = 'test@student.com'
-        first_student.password = '123456'
-        first_student.password_confirmation = '123456'
-        first_student.save!
-        first_student.remove_role :provisional
-        first_student.add_role :student
 
-        second_student = User.new
-        second_student.email = 'test2@student.com'
-        second_student.password = '123456'
-        second_student.password_confirmation = '123456'
-        second_student.save!
-        second_student.remove_role :provisional
-        second_student.add_role :student
+        generate_student('test@student.com')
+        second_student_id = generate_student('test2@student.com')
+        teacher_id = generate_teacher('teacher@test.com')
 
-        generate_task('test', 2, second_student.id)
+        generate_task('test', 2, second_student_id, teacher_id)
 
         visit '/'
         click_link "Login"
@@ -45,15 +34,10 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
 
     Steps "interacting with my own tasks" do
       Given "I am a registered student and logged in and I have a task" do
-        first_student = User.new
-        first_student.email = 'test@student.com'
-        first_student.password = '123456'
-        first_student.password_confirmation = '123456'
-        first_student.save!
-        first_student.remove_role :provisional
-        first_student.add_role :student
+        first_student_id = generate_student('test@student.com')
+        teacher_id = generate_teacher('teacher@test.com')
 
-        generate_task('test', 1, first_student.id)
+        generate_task('test', 1, first_student_id, teacher_id)
 
         visit '/'
         click_link "Login"
@@ -79,6 +63,23 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
       end
       Then "I am returned to my profile page with a security warning" do
         expect(page).to have_content 'You are not authorized'
+      end
+    end
+
+    Steps 'as a student, I can see a task' do
+      When 'I am a student with tasks assigned by a teacher' do
+        generate_teacher('teacher@test.com')
+        generate_student('student@test.com')
+        login_teacher('teacher@test.com')
+        create_task_through_ui('taskone', 'stuff', 'student@test.com')
+        click_link 'Logout'
+        login_student('student@test.com')
+      end
+      Then 'I can see the details of that task and who assigned it' do
+        visit '/'
+        click_link 'taskone'
+        expect(page).to have_content 'Assigned By: teacher@test.com'
+
       end
     end
   end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'cohort_task/index'
+  get 'cohort_task' => 'cohort_task#index'
   post 'tasks/create_for_cohort'
 
   resources :cohorts do
