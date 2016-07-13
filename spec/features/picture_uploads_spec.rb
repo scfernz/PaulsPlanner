@@ -17,7 +17,6 @@ RSpec.feature "PictureUploads", type: :feature do
         fill_in "user[current_password]", with: "123456"
         attach_file('user[image]', Rails.root + 'public/apple-icon.png')
         click_button 'Update'
-        save_and_open_page
       end
       And 'I can see the image on my profile' do
         visit '/'

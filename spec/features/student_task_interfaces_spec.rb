@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'testing_methods'
 
 RSpec.feature "StudentTaskInterfaces", type: :feature do
   context "interacting with tasks as a student" do
@@ -20,10 +21,7 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
         second_student.remove_role :provisional
         second_student.add_role :student
 
-        test_task = Task.new
-        test_task.id = 1
-        test_task.user_id = second_student.id
-        test_task.save!
+        generate_task('test', 1, second_student.id)
 
         visit '/'
         click_link "Login"
@@ -55,10 +53,7 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
         first_student.remove_role :provisional
         first_student.add_role :student
 
-        test_task = Task.new
-        test_task.id = 1
-        test_task.user_id = first_student.id
-        test_task.save!
+        generate_task('test', 1, first_student.id)
 
         visit '/'
         click_link "Login"
