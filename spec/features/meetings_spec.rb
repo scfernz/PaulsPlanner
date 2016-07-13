@@ -17,7 +17,6 @@ RSpec.feature "Meetings", type: :feature do
         first_teacher.email = 'teacher@teacher.com'
         first_teacher.password = '123456'
         first_teacher.password_confirmation = '123456'
-        first_teacher.name = 'Paul'
         first_teacher.save!
         first_teacher.remove_role :provisional
         first_teacher.add_role :teacher

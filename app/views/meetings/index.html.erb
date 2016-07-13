@@ -18,7 +18,7 @@
     <% @meetings.each do |meeting| %>
       <% if meeting.users.include?(current_user) %>
         <tr>
-          <td><%= meeting.title %></td>
+          <td><%= link_to meeting.title, meeting %></td>
           <td><%= meeting.date %></td>
           <td><%= meeting.location %></td>
           <td><%= meeting.description %></td>
@@ -29,7 +29,6 @@
               <% end %>
             </table>
           </td>
-          <td><%= link_to 'Show', meeting %></td>
           <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
           <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
