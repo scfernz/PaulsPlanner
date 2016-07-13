@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'testing_methods'
 
 RSpec.feature "Tasks", type: :feature do
   context "creating a task" do
@@ -28,12 +29,14 @@ RSpec.feature "Tasks", type: :feature do
         first_student.add_role :student
       end
       Then "I can create a task and assign it to a student" do
-        click_link 'Tasks'
-        click_link 'New Task'
-        fill_in "task[title]", with: 'testtask'
-        fill_in "task[description]", with: 'do this'
-        select "David", :from => "task[user_id]"
-        click_button 'Create Task'
+        create_task_through_ui('testtask', 'do this', 'David')
+      end
+      And "I can see the task I have assigned and name of the person I have assigned it to" do
+        expect(page).to have_content "David"
+      end
+      And "I can view a list of all the tasks that I have assigned and names of students I have assigned them to" do
+        click_link 'Task List'
+        expect(page).to have_content "David"
       end
       And "I can visit the task's page and see 'Edit' and 'Task List' links" do
         visit '/tasks'
@@ -46,6 +49,10 @@ RSpec.feature "Tasks", type: :feature do
         click_link 'Delete'
         visit '/tasks'
         expect(page).to_not have_content 'testtask'
+      end
+      And 'I cannot create a task without a title' do
+        create_task_through_ui('', 'do this', 'David')
+        expect(page).to have_content "Title can't be blank"
       end
     end
   end

@@ -16,8 +16,8 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @task.user.email %>
+  <strong>Assigned To:</strong>
+  <%= @task.user.name %>
 </p>
 
 <% if (current_user.has_role? :student)  && (!@task.completed) %>

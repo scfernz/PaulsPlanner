@@ -28,7 +28,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new
     all_teachers = User.with_role :teacher
     @teachers_for_select = all_teachers.map do |teacher|
-      [teacher.email, teacher.id]
+      [teacher.name, teacher.id]
     end
   end
 
@@ -102,6 +102,6 @@ class MeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:date, :location, :description, :created_by, :address)
+      params.require(:meeting).permit(:title, :date, :location, :description, :created_by, :address)
     end
 end

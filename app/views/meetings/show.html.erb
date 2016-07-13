@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Date:</strong>
-  <%= @meeting.date %>
+  <strong>Title:</strong>
+  <%= @meeting.title %>
 </p>
 
 <p>
-  <strong>Location:</strong>
-  <%= @meeting.location %>
+  <strong>Date:</strong>
+  <%= @meeting.date %>
 </p>
 
 <p>
@@ -24,14 +24,14 @@
 <p>
   <strong>Members:</strong>
   <% @meeting.users.each do |member| %>
-  <p><%= member.email %></p>
+  <p><%= member.name %></p>
   <% end %>
 </p>
 
 
 <p>
   <strong>Created by:</strong>
-  <%= User.find(@meeting.created_by).email %>
+  <%= User.find(@meeting.created_by).name %>
 </p>
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |

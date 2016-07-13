@@ -15,7 +15,6 @@ RSpec.feature "MeetingsPages", type: :feature do
       end
       And "have created a meeting " do
         click_link("New Meeting")
-        fill_in "meeting[location]", with: "San Diego"
         fill_in "meeting[description]", with: "there"
         click_button "Create Meeting"
         expect(page).to have_content("Meeting was successfully created")
@@ -37,7 +36,6 @@ RSpec.feature "MeetingsPages", type: :feature do
       end
       Then 'I can go view my meetings page' do
         click_link('Meetings')
-        expect(page).to have_content 'San Diego'
       end
     end
   end

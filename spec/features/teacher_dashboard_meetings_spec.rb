@@ -15,8 +15,8 @@ RSpec.feature "TeacherDashboardMeetings", type: :feature do
       end
       And "have created a meeting and logged out" do
         click_link("New Meeting")
-        fill_in "meeting[location]", with: "San Diego"
         fill_in "meeting[description]", with: "there"
+        fill_in "meeting[address]", with: "123 street"
         click_button "Create Meeting"
         expect(page).to have_content("Meeting was successfully created")
         click_link('Logout')
@@ -37,7 +37,6 @@ RSpec.feature "TeacherDashboardMeetings", type: :feature do
       end
       Then 'I can see my meetings' do
         visit '/'
-        expect(page).to have_content 'San Diego'
       end
     end
   end
