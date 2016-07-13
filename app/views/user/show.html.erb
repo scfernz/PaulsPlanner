@@ -1,1 +1,16 @@
-<%= @user.name %>
+<h1><%= @user.name %>'s Profile (<%= @user.roles.first.name %>)</h1>
+<p><%= @user.email %></p>
+<%= render 'user/profile_pic' %>
+<% if @user.has_role?(:student) %>
+<h1>Tasks</h1>
+  <table class="table table-striped">
+
+    <tbody>
+      <% @user.tasks.each do |task| %>
+        <tr>
+          <td><%= link_to task.title, task %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

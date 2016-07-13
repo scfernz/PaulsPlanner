@@ -19,7 +19,7 @@ class UserController < ApplicationController
   # GET /user/1.json
   def show
     @user = User.find(params[:id])
-
+    @tasks = Task.where(user: @user)
   end
 
   def approve_account
