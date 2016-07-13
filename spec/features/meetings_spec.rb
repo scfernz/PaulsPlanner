@@ -32,13 +32,11 @@ RSpec.feature "Meetings", type: :feature do
       end
       And "have created a meeting that includes a teacher" do
         click_link("New Meeting")
-        fill_in "meeting[location]", with: "here"
         fill_in "meeting[description]", with: "there"
         select('Paul', :from => 'teacher_id')
         click_button "Create Meeting"
       end
       Then "I can see a page with the details of the meeting that I just created" do
-        expect(page).to have_content("Location: here")
         expect(page).to have_content("Description: there")
         expect(page).to have_content("Paul")
         expect(page).to have_content("Arnold")
@@ -46,7 +44,6 @@ RSpec.feature "Meetings", type: :feature do
       end
       And "I can see a list of all my meetings" do
         visit '/meetings'
-        expect(page).to have_content("here")
         expect(page).to have_content("there")
         expect(page).to have_content("Paul")
         expect(page).to have_content("Arnold")
