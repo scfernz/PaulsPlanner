@@ -27,7 +27,6 @@ class TasksController < ApplicationController
       flash[:alert] = 'You are not authorized to view this page'
       redirect_to '/user/index'
     end
-
   end
 
   # GET /tasks/1/edit
@@ -82,6 +81,23 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def create_for_cohort
+    if !params[:title].empty?
+      cohort = Cohort.find(params[:cohort_id])
+      cohort.users.each do |student|
+        new_task = Task.new
+        new_task.title = params[:title]
+        new_task.description = params[:description]
+        new_task.user = student
+        new_task.save
+      end
+      redirect_to '/tasks'
+    else
+      flash[:alert] = 'Tasks must have a title'
+      redirect_to :back
     end
   end
 
