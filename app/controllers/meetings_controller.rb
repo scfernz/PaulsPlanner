@@ -28,7 +28,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new
     all_teachers = User.with_role :teacher
     @teachers_for_select = all_teachers.map do |teacher|
-      [teacher.email, teacher.id]
+      [teacher.name, teacher.id]
     end
   end
 
