@@ -8,6 +8,15 @@ module TestingMethods
     test_task.save!
   end
 
+  def create_task_through_ui(title, description, student_name)
+    click_link 'Tasks'
+    click_link 'New Task'
+    fill_in "task[title]", with: title
+    fill_in "task[description]", with: description
+    select student_name, :from => "task[user_id]"
+    click_button 'Create Task'
+  end
+
   def generate_student(email)
     new_student = User.new
     new_student.email = email
