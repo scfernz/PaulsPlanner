@@ -20,6 +20,7 @@ RSpec.feature "TeacherApprovals", type: :feature do
         fill_in "user[email]", with: "admin@admin.com"
         fill_in "user[password]", with: "admin1"
         click_button "Log in"
+        click_link('Provisional Accounts (1)')
         expect(page).to have_content "teacher@teacher.edu"
       end
       And "A teacher can convert a provisional account to a teacher account" do

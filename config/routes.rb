@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'cohort_task/index'
+  get 'cohort_task' => 'cohort_task#index'
   post 'tasks/create_for_cohort'
 
   resources :cohorts do
@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   patch 'user/update_picture'
 
   patch 'user/remove_from_cohort'
+
+  get 'provisional/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
