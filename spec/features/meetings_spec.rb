@@ -27,11 +27,25 @@ RSpec.feature "Meetings", type: :feature do
         fill_in "user[password]", with: "123456"
         click_button "Log in"
       end
-      And "have created a meeting that includes a teacher" do
+      And "have created meetings that include teacher(s)" do
         click_link("New Meeting")
         fill_in "meeting[description]", with: "there"
+        fill_in "meeting[title]", with: "First Meeting"
         select('Paul', :from => 'teacher_id')
+        select('2016', :from => 'meeting[date(1i)]')
+        select('January', :from => 'meeting[date(2i)]')
+        select('13', :from => 'meeting[date(3i)]')
         click_button "Create Meeting"
+        click_link 'Back'
+        click_link("navbar_meeting")
+        fill_in "meeting[description]", with: "there"
+        fill_in "meeting[title]", with: "Second Meeting"
+        select('Paul', :from => 'teacher_id')
+        select('2016', :from => 'meeting[date(1i)]')
+        select('August', :from => 'meeting[date(2i)]')
+        select('13', :from => 'meeting[date(3i)]')
+        click_button "Create Meeting"
+
       end
       Then "I can see a page with the details of the meeting that I just created" do
         expect(page).to have_content("Description: there")
@@ -39,11 +53,13 @@ RSpec.feature "Meetings", type: :feature do
         expect(page).to have_content("Arnold")
         expect(page).to have_content("Created by: Arnold")
       end
-      And "I can see a list of all my meetings" do
+      And "I can see a list of only my upcoming meetings" do
         visit '/meetings'
         expect(page).to have_content("there")
         expect(page).to have_content("Paul")
         expect(page).to have_content("Arnold")
+        expect(page).to have_content("2016-08-13")
+        expect(page).to_not have_content("2016-01-13")
       end
     end
   end
