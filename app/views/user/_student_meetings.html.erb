@@ -11,11 +11,13 @@
 
   <tbody>
     <% @meetings.each do |meeting| %>
-      <tr>
-        <td><%= link_to meeting.title, meeting %></td>
-        <td><%= meeting.date %></td>
-        <td><%= meeting.address %></td>
-      </tr>
+      <% if meeting.date >= Date.today %>
+        <tr>
+          <td><%= link_to meeting.title, meeting %></td>
+          <td><%= meeting.date %></td>
+          <td><%= meeting.address %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
