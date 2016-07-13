@@ -15,7 +15,7 @@
 
   <tbody>
     <% @meetings.each do |meeting| %>
-      <% if meeting.users.include?(current_user) %>
+      <% if meeting.users.include?(current_user) &&  meeting.date > Date.today %>
         <tr>
           <td><%= link_to meeting.title, meeting %></td>
           <td><%= meeting.date %></td>
