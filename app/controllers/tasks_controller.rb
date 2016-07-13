@@ -23,10 +23,6 @@ class TasksController < ApplicationController
   def new
     if !current_user.nil? && current_user.has_role?(:teacher)
       @task = Task.new
-      all_students = User.with_role :student
-      @students_for_select = all_students.map do |student|
-        [student.name, student.id]
-      end
     else
       flash[:alert] = 'You are not authorized to view this page'
       redirect_to '/user/index'
@@ -36,12 +32,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    if !current_user.nil? && current_user.has_role?(:teacher)
-      all_students = User.with_role :student
-      @students_for_select = all_students.map do |student|
-        [student.name, student.id]
-      end
-    else
+    if current_user.nil? || !current_user.has_role?(:teacher)
       flash[:alert] = 'You are not authorized to view this page'
       redirect_to '/user/index'
     end

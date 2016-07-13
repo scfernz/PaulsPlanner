@@ -19,10 +19,12 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
+
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= select(:task, :user_id, @students_for_select) %>
+    <%= collection_select(:task, :user_id, User.with_role(:student), :id, :name) %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
