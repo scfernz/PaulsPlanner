@@ -35,6 +35,13 @@ RSpec.feature "Tasks", type: :feature do
         select "David", :from => "task[user_id]"
         click_button 'Create Task'
       end
+      And "I can see the task I have assigned and name of the person I have assigned it to" do
+        expect(page).to have_content "David"
+      end
+      And "I can view a list of all the tasks that I have assigned and names of students I have assigned them to" do
+        click_link 'Task List'
+        expect(page).to have_content "David"
+      end
       And "I can visit the task's page and see 'Edit' and 'Task List' links" do
         visit '/tasks'
         expect(page).to have_content 'testtask'
