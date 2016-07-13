@@ -15,6 +15,13 @@ class UserController < ApplicationController
     end
   end
 
+  # GET /user/1
+  # GET /user/1.json
+  def show
+    @user = User.find(params[:id])
+
+  end
+
   def approve_account
     approved_user = User.find(params[:approved_id])
     approved_user.remove_role :provisional
