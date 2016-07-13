@@ -3,16 +3,18 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Title</th>
       <th>Date</th>
-      <th>Location</th>
+      <th>Address</th>
     </tr>
   </thead>
 
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
-        <td><%= link_to meeting.date, meeting %></td>
-        <td><%= meeting.location %></td>
+        <td><%= link_to meeting.title, meeting %></td>
+        <td><%= meeting.date %></td>
+        <td><%= meeting.address %></td>
       </tr>
     <% end %>
   </tbody>

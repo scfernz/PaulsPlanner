@@ -66,8 +66,7 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
         click_link "test"
       end
       Then "I do not see links to 'Edit' or 'Task List'" do
-        expect{click_link 'Edit'}.to raise_error('Unable to find link "Edit"')
-        expect{click_link 'Task List'}.to raise_error('Unable to find link "Task List"')
+        expect(page).to_not have_content 'Task List'
       end
       And "I try to visit the task creation url" do
         visit '/tasks/new'
