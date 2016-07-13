@@ -11,13 +11,13 @@
 
   <tbody>
     <% @meetings.each do |meeting| %>
-      <% if meeting.date > Date.today %>
+      <% if meeting.date >= Date.today %>
         <tr>
           <td><%= link_to meeting.title, meeting %></td>
           <td><%= meeting.date %></td>
           <td><%= meeting.address %></td>
         </tr>
       <% end %>
-    <% end %>  
+    <% end %>
   </tbody>
 </table>
