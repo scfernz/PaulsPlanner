@@ -21,7 +21,7 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
         second_student.remove_role :provisional
         second_student.add_role :student
 
-        generate_task('test', 1, second_student.id)
+        generate_task('test', 2, second_student.id)
 
         visit '/'
         click_link "Login"
@@ -30,7 +30,7 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
         click_button "Log in"
       end
       And "I visit the url of a task for another student" do
-        visit '/tasks/1'
+        visit '/tasks/2'
       end
       Then "I am returned to my profile page with a security warning" do
         expect(page).to have_content 'You are not authorized'
@@ -60,17 +60,10 @@ RSpec.feature "StudentTaskInterfaces", type: :feature do
         fill_in "user[email]", with: "test@student.com"
         fill_in "user[password]", with: "123456"
         click_button "Log in"
-
-        task = Task.new
-        task.title = "My task"
-        task.user = first_student
-        # We need to set task.id = 1 so that we can use the URL /tasks/1/edit below
-        task.id = 1
-        task.save!
       end
       When "I visit a task's page" do
         visit '/'
-        click_link "My task"
+        click_link "test"
       end
       Then "I do not see links to 'Edit' or 'Task List'" do
         expect{click_link 'Edit'}.to raise_error('Unable to find link "Edit"')
