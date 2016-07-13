@@ -14,15 +14,14 @@ RSpec.feature "MeetingsPages", type: :feature do
         expect(page).to have_content 'student1@student.com'
       end
       And "have created a meeting " do
-        click_link('Meetings')
-        expect(page).to have_content("Listing Meetings")
         click_link("New Meeting")
         fill_in "meeting[description]", with: "there"
         click_button "Create Meeting"
         expect(page).to have_content("Meeting was successfully created")
       end
       Then 'view my meetings page' do
-        click_link('Meetings')
+        click_link('My Profile')
+        expect(page).to have_content 'San Diego'
       end
       Then 'I can log in as a teacher' do
         click_link('Logout')

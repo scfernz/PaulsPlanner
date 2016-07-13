@@ -12,8 +12,8 @@ RSpec.feature "StudentDashboardMeetings", type: :feature do
         expect(page).to have_content 'student3@student.com'
       end
       And "have created a meeting " do
-        click_link('Meetings')
-        expect(page).to have_content("Listing Meetings")
+        click_link('New Meeting')
+        fill_in "meeting[location]", with: "San Diego"
         click_link("New Meeting")
         fill_in "meeting[title]", with: "Coffee"
         fill_in "meeting[address]", with: "San Diego"
