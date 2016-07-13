@@ -15,6 +15,7 @@ RSpec.feature "MeetingsPages", type: :feature do
       end
       And "have created a meeting " do
         click_link("New Meeting")
+        fill_in "meeting[address]", with: "San Diego"
         fill_in "meeting[description]", with: "there"
         click_button "Create Meeting"
         expect(page).to have_content("Meeting was successfully created")
