@@ -18,7 +18,7 @@ module TestingMethods
   end
 
   def create_cohort_task_through_ui(title, description, cohort_name)
-    visit '/cohort_task/index'
+    visit '/cohort_task'
     fill_in 'title', with: title
     fill_in 'description', with: description
     select cohort_name, :from => 'cohort_id'
