@@ -4,24 +4,14 @@ RSpec.feature "StudentProfiles", type: :feature do
   context 'seeing a student profile page' do
     Steps 'seeing a student profile page' do
       Given 'that I am a student and I have tasks' do
-        generate_student('studentone@student.com')
-        generate_student('studenttwo@student.com')
-
-        student1_task = Task.new
-        student1_task.user_id = first_student.id
-        student1_task.title = "taskone"
-        student1_task.save!
-
-        student2_task = Task.new
-        student2_task.user_id = second_student.id
-        student2_task.title = "tasktwo"
-        student2_task.save!
+        student_one_id = generate_student('studentone@student.com')
+        student_two_id = generate_student('studenttwo@student.com')
+        teacher_id = generate_teacher('teacher@test.com')
+        generate_task('taskone', 1, student_one_id, teacher_id)
+        generate_task('tasktwo', 2, student_two_id, teacher_id)
       end
       And 'I have logged in' do
-        visit '/users/sign_in'
-        fill_in "user[email]", with: 'studentone@student.com'
-        fill_in "user[password]", with: "123456"
-        click_button "Log in"
+        login_student('studentone@student.com')
       end
       Then 'I can see my information' do
         expect(page).to have_content 'studentone@student.com'
@@ -36,29 +26,15 @@ RSpec.feature "StudentProfiles", type: :feature do
 
     Steps "Seeing my tasks in chronological order" do
       Given "that I am a student and have multiple tasks" do
-        first_student = User.new
-        first_student.email = 'studentone@student.com'
-        first_student.password = '123456'
-        first_student.name = 'Studentone'
-        first_student.password_confirmation = '123456'
-        first_student.save!
-        first_student.remove_role :provisional
-        first_student.add_role :student
-        student1_task = Task.new
-        student1_task.user_id = first_student.id
-        student1_task.title = "taskone"
-        student1_task.save!
-        student2_task = Task.new
-        student2_task.user_id = first_student.id
-        student2_task.title = "tasktwo"
-        student2_task.save!
-        expect(student1_task.created_at).to be < student2_task.created_at
+        student_one_id = generate_student('studentone@student.com')
+        teacher_id = generate_teacher('teacher@test.com')
+        generate_task('taskone', 1, student_one_id, teacher_id)
+        generate_task('tasktwo', 2, student_one_id, teacher_id)
+
+        expect(Task.find(1).created_at).to be < Task.find(2).created_at
       end
       And 'I have logged in' do
-        visit '/users/sign_in'
-        fill_in "user[email]", with: 'studentone@student.com'
-        fill_in "user[password]", with: "123456"
-        click_button "Log in"
+        login_student('studentone@student.com')
       end
       Then "my tasks are listed in chronological in the order of when they were created" do
         visit '/'

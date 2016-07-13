@@ -18,6 +18,13 @@ module TestingMethods
     click_button 'Create Task'
   end
 
+  def create_meeting_through_ui(description, teacher_name)
+    click_link("New Meeting")
+    fill_in "meeting[description]", with: description
+    select teacher_name, :from => 'teacher_id'
+    click_button "Create Meeting"
+  end
+
   def create_cohort_task_through_ui(title, description, cohort_name)
     visit '/cohort_task'
     fill_in 'title', with: title
@@ -57,6 +64,16 @@ module TestingMethods
     newteacher.remove_role :provisional
     newteacher.add_role :teacher
     newteacher.id
+  end
+
+  def create_teacher_through_ui(email)
+    visit "/"
+    click_link("Teachers")
+    fill_in 'user[name]', with: email
+    fill_in "user[email]", with: email
+    fill_in "user[password]", with: "123456"
+    fill_in "user[password_confirmation]", with: "123456"
+    click_button "Sign up"
   end
 
   def login_teacher(email)
