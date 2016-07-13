@@ -25,9 +25,6 @@ RSpec.feature "Meetings", type: :feature do
         fill_in "user[email]", with: "studentone@student.com"
         fill_in "user[password]", with: "123456"
         click_button "Log in"
-
-        click_link('Meetings')
-        expect(page).to have_content("Listing Meetings")
       end
       And "have created a meeting that includes a teacher" do
         click_link("New Meeting")
