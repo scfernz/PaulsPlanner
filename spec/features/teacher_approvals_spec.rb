@@ -4,22 +4,15 @@ RSpec.feature "TeacherApprovals", type: :feature do
   context "registering with teacher approval" do
     Steps "registration and approval" do
       When "I register with an email" do
-        visit "/"
-        click_link("Teachers")
-        fill_in "user[email]", with: "teacher@teacher.edu"
-        fill_in "user[password]", with: "123456"
-        fill_in "user[password_confirmation]", with: "123456"
-        click_button "Sign up"
+        create_teacher_through_ui('teacher@teacher.edu')
       end
       Then "I am considered a provisional user" do
         expect(page).to have_content "(provisional)"
       end
       And "A teacher admin can see all provisional accounts" do
         click_link "Logout"
-        click_link "Login"
-        fill_in "user[email]", with: "admin@admin.com"
-        fill_in "user[password]", with: "admin1"
-        click_button "Log in"
+        generate_teacher('teacher@test.com')
+        login_teacher('teacher@test.com')
         click_link('Provisional Accounts (1)')
         expect(page).to have_content "teacher@teacher.edu"
       end
@@ -31,21 +24,24 @@ RSpec.feature "TeacherApprovals", type: :feature do
 
     Steps "provisional accounts not visible to provisional or student accounts" do
       When "Multiple teacher provisional accounts are registered" do
-        visit "/users/sign_up"
-        fill_in "user[email]", with: "teacher@teacher.edu"
-        fill_in "user[password]", with: "123456"
-        fill_in "user[password_confirmation]", with: "123456"
-        click_button "Sign up"
+        create_teacher_through_ui('teacher@teacher.edu')
         click_link "Logout"
-        visit "/users/sign_up"
-        fill_in "user[email]", with: "other@teacher.edu"
-        fill_in "user[password]", with: "123456"
-        fill_in "user[password_confirmation]", with: "123456"
-        click_button "Sign up"
+        create_teacher_through_ui('teacher@test.com')
+        click_link "Logout"
+        generate_student('student@test.com')
       end
-      Then "all provisional account should not be visible" do
-        expect(page).to_not have_content "teacher@teacher.edu"
-        expect(page).to_not have_content "Approve"
+      Then "a provisional account should not have access to the list of other provisional accounts" do
+        login_teacher('teacher@test.com')
+        visit '/provisional/index'
+        expect(page).to have_content 'You are not authorized to access this page'
+        expect(page).to have_content '(provisional)'
+      end
+      Then "a student account should not have access to the list of other provisional accounts" do
+        click_link 'Logout'
+        login_student('student@test.com')
+        visit '/provisional/index'
+        expect(page).to have_content 'You are not authorized to access this page'
+        expect(page).to have_content '(student)'
       end
     end
   end
