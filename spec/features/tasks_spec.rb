@@ -5,38 +5,21 @@ RSpec.feature "Tasks", type: :feature do
   context "creating a task" do
     Steps "creating a task as a teacher" do
       When "I am an approved teacher and logged in" do
-        first_teacher = User.new
-        first_teacher.email = 'teacher1@admin.com'
-        first_teacher.password = 'admin1'
-        first_teacher.password_confirmation = 'admin1'
-        first_teacher.save!
-        first_teacher.remove_role :provisional
-        first_teacher.add_role :teacher
-        visit '/'
-        click_link "Login"
-        fill_in "user[email]", with: "teacher1@admin.com"
-        fill_in "user[password]", with: "admin1"
-        click_button "Log in"
+        generate_teacher('teacher@test.com')
+        login_teacher('teacher@test.com')
       end
       And "students exist in the database" do
-        first_student = User.new
-        first_student.email = 'test@student.com'
-        first_student.name = 'David'
-        first_student.password = '123456'
-        first_student.password_confirmation = '123456'
-        first_student.save!
-        first_student.remove_role :provisional
-        first_student.add_role :student
+        generate_student('student@test.com')
       end
       Then "I can create a task and assign it to a student" do
-        create_task_through_ui('testtask', 'do this', 'David')
+        create_task_through_ui('testtask', 'do this', 'student@test.com')
       end
       And "I can see the task I have assigned and name of the person I have assigned it to" do
-        expect(page).to have_content "David"
+        expect(page).to have_content "student@test.com"
       end
       And "I can view a list of all the tasks that I have assigned and names of students I have assigned them to" do
         click_link 'Task List'
-        expect(page).to have_content "David"
+        expect(page).to have_content "student@test.com"
       end
       And "I can visit the task's page and see 'Edit' and 'Task List' links" do
         visit '/tasks'
@@ -51,7 +34,7 @@ RSpec.feature "Tasks", type: :feature do
         expect(page).to_not have_content 'testtask'
       end
       And 'I cannot create a task without a title' do
-        create_task_through_ui('', 'do this', 'David')
+        create_task_through_ui('', 'do this', 'student@test.com')
         expect(page).to have_content "Title can't be blank"
       end
     end
@@ -60,24 +43,12 @@ RSpec.feature "Tasks", type: :feature do
   context "completing a task" do
     Steps "completing a task from profile page" do
       When "I am logged in as a student and I have a task" do
-        first_student = User.new
-        first_student.email = 'test@student.com'
-        first_student.password = '123456'
-        first_student.password_confirmation = '123456'
-        first_student.save!
-        first_student.remove_role :provisional
-        first_student.add_role :student
-
-        student1_task = Task.new
-        student1_task.user_id = first_student.id
-        student1_task.title = "taskone"
-        student1_task.save!
-
-        visit '/'
-        click_link "Login"
-        fill_in "user[email]", with: "test@student.com"
-        fill_in "user[password]", with: "123456"
-        click_button "Log in"
+        generate_student('test@student.com')
+        generate_teacher('teacher@test.com')
+        login_teacher('teacher@test.com')
+        create_task_through_ui('taskone', 'description', 'test@student.com')
+        click_link 'Logout'
+        login_student('test@student.com')
       end
       Then "I can complete that task by clicking on a button on my profile page" do
         click_button "Complete"
@@ -94,24 +65,12 @@ RSpec.feature "Tasks", type: :feature do
 
     Steps "completing a task from the task show page" do
       When "I am logged in as a student and I have a task" do
-        first_student = User.new
-        first_student.email = 'test@student.com'
-        first_student.password = '123456'
-        first_student.password_confirmation = '123456'
-        first_student.save!
-        first_student.remove_role :provisional
-        first_student.add_role :student
-
-        student1_task = Task.new
-        student1_task.user_id = first_student.id
-        student1_task.title = "taskone"
-        student1_task.save!
-
-        visit '/'
-        click_link "Login"
-        fill_in "user[email]", with: "test@student.com"
-        fill_in "user[password]", with: "123456"
-        click_button "Log in"
+        generate_student('test@student.com')
+        generate_teacher('teacher@test.com')
+        login_teacher('teacher@test.com')
+        create_task_through_ui('taskone', 'description', 'test@student.com')
+        click_link 'Logout'
+        login_student('test@student.com')
       end
       Then "I can complete that task by clicking on a button on the task page" do
         click_link "taskone"
