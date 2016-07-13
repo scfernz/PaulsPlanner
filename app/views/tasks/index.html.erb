@@ -8,7 +8,7 @@
       <th>Title</th>
       <th>Description</th>
       <th>Completed</th>
-      <th>User</th>
+      <th>Assigned To</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -19,7 +19,7 @@
         <td><%= link_to task.title, task %></td>
         <td><%= task.description %></td>
         <td><%= task.completed %></td>
-        <td><%= task.user.email %></td>
+        <td><%= task.user.name %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
