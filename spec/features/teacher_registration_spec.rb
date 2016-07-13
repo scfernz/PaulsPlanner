@@ -36,7 +36,6 @@ RSpec.feature "Users", type: :feature do
         fill_in "user[email]", with: "teacher@teacher.edu"
         fill_in "user[password]", with: "123456"
         click_button "Log in"
-        save_and_open_page
         expect(page).to have_content "Mr. Teacher's Profile"
       end
       And "I can edit my personal details on the Edit Page" do

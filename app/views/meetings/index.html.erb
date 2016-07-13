@@ -5,6 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Title</th>
       <th>Date</th>
       <th>Location</th>
       <th>Description</th>
@@ -17,6 +18,7 @@
     <% @meetings.each do |meeting| %>
       <% if meeting.users.include?(current_user) %>
         <tr>
+          <td><%= meeting.title %></td>
           <td><%= meeting.date %></td>
           <td><%= meeting.location %></td>
           <td><%= meeting.description %></td>

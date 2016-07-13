@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Date</th>
-      <th>Location</th>
+      <th>Address</th>
     </tr>
   </thead>
 
@@ -12,7 +12,7 @@
     <% @meetings.each do |meeting| %>
       <tr>
         <td><%= link_to meeting.date, meeting %></td>
-        <td><%= meeting.location %></td>
+        <td><%= meeting.address %></td>
       </tr>
     <% end %>
   </tbody>
