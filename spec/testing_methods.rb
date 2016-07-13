@@ -17,6 +17,14 @@ module TestingMethods
     click_button 'Create Task'
   end
 
+  def create_cohort_task_through_ui(title, description, cohort_name)
+    visit '/cohort_task/index'
+    fill_in 'title', with: title
+    fill_in 'description', with: description
+    select cohort_name, :from => 'cohort_id'
+    click_button 'Assign Tasks'
+  end
+
   def generate_student(email)
     new_student = User.new
     new_student.email = email
@@ -60,6 +68,12 @@ module TestingMethods
     new_cohort.name = name
     new_cohort.save!
     new_cohort.id
+  end
+
+  def add_member_to_cohort(user_id, cohort_id)
+    user_to_add = User.find(user_id)
+    user_to_add.cohort_id = cohort_id
+    user_to_add.save!
   end
 end
 
