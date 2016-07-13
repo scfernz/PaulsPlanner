@@ -22,6 +22,10 @@ RSpec.feature "CohortTasks", type: :feature do
         visit '/tasks'
         expect(page).to have_content 'testtask'
       end
+      And 'I can click a link to the cohort task creation page' do
+        click_link 'Assign a task to a cohort'
+        expect(page).to have_content 'New Task for Cohort'
+      end
     end
 
     Steps 'Assigning a task without a title' do

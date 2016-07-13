@@ -1,7 +1,8 @@
 module TestingMethods
-  def generate_task(title, task_id, student_id)
+  def generate_task(title, task_id, student_id, teacher_id)
     test_task = Task.new
     test_task.title = title
+    test_task.createdby_id = teacher_id
     # need to know id of task to test
     test_task.id = task_id
     test_task.user_id = student_id
@@ -10,7 +11,7 @@ module TestingMethods
 
   def create_task_through_ui(title, description, student_name)
     click_link 'Tasks'
-    click_link 'New Task'
+    click_link 'Assign a task to a student'
     fill_in "task[title]", with: title
     fill_in "task[description]", with: description
     select student_name, :from => "task[user_id]"
@@ -18,7 +19,7 @@ module TestingMethods
   end
 
   def create_cohort_task_through_ui(title, description, cohort_name)
-    visit '/cohort_task/index'
+    visit '/cohort_task'
     fill_in 'title', with: title
     fill_in 'description', with: description
     select cohort_name, :from => 'cohort_id'
@@ -28,6 +29,8 @@ module TestingMethods
   def generate_student(email)
     new_student = User.new
     new_student.email = email
+    # TODO: change all tests using generate_student method to actually need name
+    new_student.name = email
     new_student.password = '123456'
     new_student.password_confirmation = '123456'
     new_student.save!
@@ -47,6 +50,7 @@ module TestingMethods
   def generate_teacher(email)
     newteacher = User.new
     newteacher.email = email
+    newteacher.name = email
     newteacher.password = '123456'
     newteacher.password_confirmation = '123456'
     newteacher.save!
