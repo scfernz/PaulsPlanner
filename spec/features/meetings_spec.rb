@@ -16,6 +16,7 @@ RSpec.feature "Meetings", type: :feature do
         first_teacher.email = 'teacher@teacher.com'
         first_teacher.password = '123456'
         first_teacher.password_confirmation = '123456'
+        first_teacher.name = 'Paul'
         first_teacher.save!
         first_teacher.remove_role :provisional
         first_teacher.add_role :teacher
@@ -33,7 +34,7 @@ RSpec.feature "Meetings", type: :feature do
         click_link("New Meeting")
         fill_in "meeting[location]", with: "here"
         fill_in "meeting[description]", with: "there"
-        select('teacher@teacher.com', :from => 'teacher_id')
+        select('Paul', :from => 'teacher_id')
         click_button "Create Meeting"
       end
       Then "I can see a page with the details of the meeting that I just created" do
