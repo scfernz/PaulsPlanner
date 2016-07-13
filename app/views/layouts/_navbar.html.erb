@@ -18,6 +18,10 @@
                     <li><a href="/tasks">Tasks</a></li>
                     <li><a href="/meetings">Meetings</a></li>
                     <li><a href="/cohorts">Cohorts</a></li>
+                    <% provisional_accounts = User.with_role :provisional %>
+                    <% if provisional_accounts.length > 0 %>
+                    <li><a href="/provisional/index">Provisional Accounts (<%= provisional_accounts.length %>)</a></li>
+                    <% end %>
                     <%= render 'layouts/logout' %>
                 <% else current_user.nil? || current_user.has_role?(:student)  %>
                   <li class="dropdown">

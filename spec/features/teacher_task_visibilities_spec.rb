@@ -21,6 +21,7 @@ RSpec.feature "TeacherTaskVisibilities", type: :feature do
         fill_in "user[email]", with: "admin@admin.com"
         fill_in "user[password]", with: "admin1"
         click_button "Log in"
+        click_link('Provisional Accounts (1)')
         click_button "Approve"
       end
       Then "I can access the student tasks page" do

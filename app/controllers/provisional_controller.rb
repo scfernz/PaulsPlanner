@@ -1,0 +1,2 @@
+class ProvisionalController < ApplicationController
+end

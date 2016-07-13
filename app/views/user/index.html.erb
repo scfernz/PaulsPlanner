@@ -2,8 +2,6 @@
 <p><%= current_user.email %></p>
 <%= render 'user/profile_pic' %>
 <% if current_user.has_role?(:teacher) %>
-  <%= render 'user/profile_pic' %>
-  <%= render 'user/pending_teachers' %>
   <%= render 'user/teacher_meetings' %>
 <% end %>
 <% if current_user.has_role?(:student) %>
