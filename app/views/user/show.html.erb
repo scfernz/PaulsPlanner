@@ -1,8 +1,8 @@
 <h1><%= @user.name %>'s Profile (<%= @user.roles.first.name %>)</h1>
 <p><%= @user.email %></p>
-<%= render 'user/profile_pic' %>
+<%= image_tag(@user.image.url(:large)) %>
 <% if @user.has_role?(:student) %>
-<h1>Tasks</h1>
+  <h1>Tasks</h1>
   <table class="table table-striped">
 
     <tbody>
@@ -13,4 +13,6 @@
       <% end %>
     </tbody>
   </table>
+
+  <%= render 'user/student_meetings' %>
 <% end %>

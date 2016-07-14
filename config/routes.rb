@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :cohorts do
     patch 'add_member'
+    patch 'remove_from_cohort'
   end
   resources :tasks do
     post 'mark_complete'
@@ -25,8 +26,6 @@ Rails.application.routes.draw do
 
   root 'landing#index'
   patch 'user/update_picture'
-
-  patch 'user/remove_from_cohort'
 
   get 'provisional/index'
 
