@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :tasks do
     post 'mark_complete'
+    post 'mark_incomplete'
   end
 
   resources :meetings do
