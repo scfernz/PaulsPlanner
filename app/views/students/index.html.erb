@@ -12,11 +12,14 @@
   </thead>
 
   <tbody>
-    <!-- TODO: change so that it displays students -->
     <% User.with_role(:student).each do |user| %>
         <tr>
           <td><%= user.name %></td>
-          <!-- TODO: provide link to add student to cohort -->
+          <td>
+            <% if !user.cohort_id.nil? %>
+              <%= Cohort.find(user.cohort_id).name %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
   </tbody>
