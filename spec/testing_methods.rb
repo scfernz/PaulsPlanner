@@ -69,6 +69,7 @@ module TestingMethods
   def create_teacher_through_ui(email)
     visit "/"
     click_link("Teachers")
+    click_link("Sign up")
     fill_in 'user[name]', with: email
     fill_in "user[email]", with: email
     fill_in "user[password]", with: "123456"
