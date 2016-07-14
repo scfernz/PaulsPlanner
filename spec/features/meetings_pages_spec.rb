@@ -1,23 +1,20 @@
 require 'rails_helper'
+require 'testing_methods'
 
 RSpec.feature "MeetingsPages", type: :feature do
   context 'I can see the meetings I am associated with on the meetings page' do
     Steps 'I have a list of all the meetings i am a part of' do
       Given 'I have logged in as a student' do
-        visit '/users/sign_in'
-        fill_in "user[email]", with: 'student1@student.com'
-        fill_in "user[password]", with: "123456"
-        click_button "Log in"
+        generate_student('student@test.com')
+        login_student('student@test.com')
+        generate_teacher('teacher@test.com')
       end
       Then 'I can see my information' do
         visit '/'
-        expect(page).to have_content 'student1@student.com'
+        expect(page).to have_content 'student@test.com'
       end
       And "have created a meeting " do
-        click_link("New Meeting")
-        fill_in "meeting[address]", with: "San Diego"
-        fill_in "meeting[description]", with: "there"
-        click_button "Create Meeting"
+        create_meeting_through_ui('San Diego', 'teacher@test.com')
         expect(page).to have_content("Meeting was successfully created")
       end
       Then 'view my meetings page' do
@@ -26,14 +23,11 @@ RSpec.feature "MeetingsPages", type: :feature do
       end
       Then 'I can log in as a teacher' do
         click_link('Logout')
-        visit '/users/sign_in'
-        fill_in "user[email]", with: 'admin@admin.com'
-        fill_in "user[password]", with: "admin1"
-        click_button "Log in"
+        login_teacher('teacher@test.com')
       end
       And 'I can see my information' do
         visit '/'
-        expect(page).to have_content 'admin@admin.com'
+        expect(page).to have_content 'teacher@test.com'
       end
       Then 'I can go view my meetings page' do
         click_link('Meetings')
