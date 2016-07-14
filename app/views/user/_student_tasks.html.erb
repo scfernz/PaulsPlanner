@@ -5,14 +5,16 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= link_to task.title, task %></td>
-        <td>
+        <td class="task_status">
           <% if !task.completed %>
             <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
               <%= f.submit 'Turn In' %>
             <% end %>
+          <% else %>
+            &#10003;
           <% end %>
         </td>
+        <td class="task_name"><%= link_to task.title, task %></td>
       </tr>
     <% end %>
   </tbody>
