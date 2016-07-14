@@ -15,19 +15,19 @@ class UserController < ApplicationController
     end
   end
 
+  # GET /user/1
+  # GET /user/1.json
+  def show
+    @user = User.find(params[:id])
+    @tasks = Task.where(user: @user)
+    @meetings = Meeting.where(created_by: @user)
+  end
+
   def approve_account
     approved_user = User.find(params[:approved_id])
     approved_user.remove_role :provisional
     approved_user.add_role :teacher
     redirect_to '/'
-  end
-
-  def remove_from_cohort
-    user_to_remove = User.find(params[:user][:id])
-    user_to_remove.cohort_id = nil
-    user_to_remove.save!
-    flash[:notice] = 'Member removed from cohort.'
-    redirect_to :back
   end
 
   def update_picture

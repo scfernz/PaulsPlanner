@@ -26,6 +26,11 @@ RSpec.feature "CohortTasks", type: :feature do
         click_link 'Assign a task to a cohort'
         expect(page).to have_content 'New Task for Cohort'
       end
+      And 'I can see my name on the task page' do
+        visit '/tasks'
+        first(:link, 'testtask').click
+        expect(page).to have_content 'Assigned By: testteacher@teacher.com'
+      end
     end
 
     Steps 'Assigning a task without a title' do

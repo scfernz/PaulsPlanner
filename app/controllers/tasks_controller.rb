@@ -100,6 +100,7 @@ class TasksController < ApplicationController
         new_task.title = params[:title]
         new_task.description = params[:description]
         new_task.user = student
+        new_task.createdby_id = @current_user.id
         new_task.save
       end
       redirect_to '/tasks'
