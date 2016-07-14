@@ -31,6 +31,7 @@ RSpec.feature "Navbars", type: :feature do
         expect(page).to have_content 'Tasks'
         expect(page).to have_content 'Meetings'
         expect(page).to have_content 'Cohorts'
+        expect(page).to have_content 'Students'
         expect(page).to_not have_content 'New Meeting'
         expect(page).to have_content 'Logout'
       end
