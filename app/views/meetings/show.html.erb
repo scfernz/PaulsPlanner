@@ -1,3 +1,5 @@
+<div class="col-sm-6" id="googleMap" style="width:300px;height:300px;"></div>
+<div class="col-sm-6 pull-left">
 <p>
   <strong>Title:</strong>
   <%= @meeting.title %>
@@ -20,7 +22,7 @@
 
 <!-- TODO: change to display name not email -->
 <p>
-  <strong>Members:</strong>
+  <strong>Attendees:</strong>
   <% @meeting.users.each do |member| %>
   <p><%= member.name %></p>
   <% end %>
@@ -33,7 +35,6 @@
 </p>
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', meetings_path %>
-
+<%= link_to 'Cancel', meetings_path %>
+</div>
 <%= hidden_field :meeting, :id %>
-<div id="googleMap" style="width:300px;height:300px;"></div>
