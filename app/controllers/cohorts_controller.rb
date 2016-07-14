@@ -12,7 +12,9 @@ class CohortsController < ApplicationController
   # GET /cohorts/1
   # GET /cohorts/1.json
   def show
-    @members_for_select = User.all.map do |member|
+    members = (User.with_role :student)
+    # members = members.where(cohort_id.nil?)
+    @members_for_select = members.map do |member|
       [member.name, member.id]
     end
   end

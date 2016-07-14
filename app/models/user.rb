@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     size: { in: 0..10.megabytes }
   rolify
   after_create :assign_role
-  belongs_to :cohorts
+  belongs_to :cohort
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
