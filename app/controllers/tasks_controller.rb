@@ -75,6 +75,13 @@ class TasksController < ApplicationController
     redirect_to :back
   end
 
+  def mark_incomplete
+    @task = Task.find(params[:task_id])
+    @task.completed = false
+    @task.save
+    redirect_to :back
+  end
+
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
@@ -93,6 +100,7 @@ class TasksController < ApplicationController
         new_task.title = params[:title]
         new_task.description = params[:description]
         new_task.user = student
+        new_task.createdby_id = @current_user.id
         new_task.save
       end
       redirect_to '/tasks'

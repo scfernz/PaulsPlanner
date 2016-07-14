@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  validates :name, presence: true
   has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }, :default_url => 'default-profile.png'
   validates_attachment :image,
     content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] },
@@ -11,6 +12,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   has_and_belongs_to_many :meetings
+  has_many :tasks
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
