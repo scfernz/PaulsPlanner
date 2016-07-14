@@ -34,3 +34,12 @@ second_student.password_confirmation = '123456'
 second_student.save!
 second_student.remove_role :provisional
 second_student.add_role :student
+
+third_student = User.new
+third_student.email = 'student99@student.com'
+third_student.name = 'aaron'
+third_student.password = '123456'
+third_student.password_confirmation = '123456'
+third_student.save!
+third_student.remove_role :provisional
+third_student.add_role :student

@@ -59,6 +59,7 @@ module TestingMethods
   def generate_teacher(email)
     newteacher = User.new
     newteacher.email = email
+    # TODO: change all tests using generate_student method to actually need name
     newteacher.name = email
     newteacher.password = '123456'
     newteacher.password_confirmation = '123456'
