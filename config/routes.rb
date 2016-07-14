@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :cohorts do
     patch 'add_member'
+    patch 'remove_from_cohort'
   end
   resources :tasks do
     post 'mark_complete'
@@ -17,15 +18,18 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => 'users/registrations' }
 
-  get 'user/index'
+  get 'user/index' => 'user#index'
+
+  resources :user do
+  end
+
   post 'user/approve_account'
 
   root 'landing#index'
   patch 'user/update_picture'
 
-  patch 'user/remove_from_cohort'
-
   get 'provisional/index'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

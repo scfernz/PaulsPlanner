@@ -5,9 +5,9 @@
   <table>
     <% @cohort.users.each do |member| %>
       <tr>
-        <%= form_for(member, url: user_remove_from_cohort_path) do |f| %>
+        <%= form_for(member, url: cohort_remove_from_cohort_path(@cohort)) do |f| %>
         <%= f.hidden_field :id, :value => member.id  %>
-        <td><%= member.email %></td>
+        <td><%= link_to member.name, member  %></td>
         <td><%= f.submit "Remove" %></td>
         <% end %>
       </tr>

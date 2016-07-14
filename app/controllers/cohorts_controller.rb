@@ -13,7 +13,7 @@ class CohortsController < ApplicationController
   # GET /cohorts/1.json
   def show
     @members_for_select = User.all.map do |member|
-      [member.email, member.id]
+      [member.name, member.id]
     end
   end
 
@@ -31,6 +31,14 @@ class CohortsController < ApplicationController
     member_to_add.cohort_id = params[:cohort_id]
     member_to_add.save!
     flash[:success] = 'Member added.'
+    redirect_to :back
+  end
+
+  def remove_from_cohort
+    user_to_remove = User.find(params[:user][:id])
+    user_to_remove.cohort_id = nil
+    user_to_remove.save!
+    flash[:notice] = 'Member removed from cohort.'
     redirect_to :back
   end
 
