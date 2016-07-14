@@ -13,8 +13,8 @@ RSpec.feature "StudentsPages", type: :feature do
         click_button "Log in"
         cohort1 = generate_cohort('Cohort1')
         cohort2 = generate_cohort('Cohort2')
-        add_member_to_cohort(2, cohort1)
-        add_member_to_cohort(3, cohort2)
+        add_member_to_cohort(User.find_by_email('student1@student.com').id, cohort1)
+        add_member_to_cohort(User.find_by_email('student2@student.com').id, cohort2)
         # not adding third_student in seeds.rb to any cohort
       end
       Then "I can go to a students page" do
@@ -30,8 +30,15 @@ RSpec.feature "StudentsPages", type: :feature do
         expect(page).to have_content 'bane Cohort1'
         expect(page).to have_content 'batman Cohort2'
         # puts page.find("//table/tbody/tr[1]/td[1]").text
-        expect(page.find("//table/tbody/tr[3]/td[1]")).to have_content 'aaron'
-        expect(page.find("//table/tbody/tr[3]/td[2]")).to have_content ''
+        expect(page.find("//table/tbody/tr[1]/td[1]")).to have_content 'aaron'
+        # TODO: test that a cell should be empty when a student is not assigned to a cohort
+        # Current test passes but yields false positives
+        expect(page.find("//table/tbody/tr[1]/td[2]")).to have_content ''
+      end
+      And "I can see the students listed in alphabetical order" do
+        expect(page.find("//table/tbody/tr[1]/td[1]")).to have_content 'aaron'
+        expect(page.find("//table/tbody/tr[2]/td[1]")).to have_content 'bane'
+        expect(page.find("//table/tbody/tr[3]/td[1]")).to have_content 'batman'
       end
     end
   end

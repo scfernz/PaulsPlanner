@@ -12,12 +12,12 @@
   </thead>
 
   <tbody>
-    <% User.with_role(:student).each do |user| %>
+    <% @students.each do |user| %>
         <tr>
-          <td><%= user.name %></td>
+          <td><%= link_to user.name, user %></td>
           <td>
-            <% if !user.cohort_id.nil? %>
-              <%= Cohort.find(user.cohort_id).name %>
+            <% if !user.cohort.nil? %>
+              <%= user.cohort.name %>
             <% end %>
           </td>
         </tr>
