@@ -18,7 +18,7 @@ RSpec.feature "Meetings", type: :feature do
         select('January', :from => 'meeting[date(2i)]')
         select('13', :from => 'meeting[date(3i)]')
         click_button "Create Meeting"
-        click_link 'Cancel'
+        click_link("New Meeting")
         click_link("navbar_meeting")
         fill_in "meeting[description]", with: "there"
         fill_in "meeting[title]", with: "Second Meeting"
