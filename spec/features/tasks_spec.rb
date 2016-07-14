@@ -50,16 +50,16 @@ RSpec.feature "Tasks", type: :feature do
         click_link 'Logout'
         login_student('test@student.com')
       end
-      Then "I can complete that task by clicking on a button on my profile page" do
-        click_button "Complete"
+      Then "I can Turn In that task by clicking on a button on my profile page" do
+        click_button "Turn In"
       end
-      And "The complete button will have disappeared" do
-        expect{click_button "Complete"}.to raise_error('Unable to find button "Complete"')
+      And "The Turn In button will have disappeared" do
+        expect{click_button "Turn In"}.to raise_error('Unable to find button "Turn In"')
       end
-      And "The task page shows that the task has been completed and will also not have a 'Complete' button" do
+      And "The task page shows that the task has been Turn Ind and will also not have a 'Turn In' button" do
         click_link "taskone"
         expect(page).to have_content "true"
-        expect{click_button "Complete"}.to raise_error('Unable to find button "Complete"')
+        expect{click_button "Turn In"}.to raise_error('Unable to find button "Turn In"')
       end
     end
 
@@ -72,10 +72,16 @@ RSpec.feature "Tasks", type: :feature do
         click_link 'Logout'
         login_student('test@student.com')
       end
-      Then "I can complete that task by clicking on a button on the task page" do
+      Then "I can Turn In that task by clicking on a button on the task page" do
         click_link "taskone"
-        click_button "Complete"
+        click_button "Turn In"
         expect(page).to have_content "true"
+      end
+      And 'The Turn In button is replaced by a Take Back button' do
+        click_button 'Take Back'
+      end
+      When 'I user the Take Back button, the task is considered incomplete' do
+        expect(page).to have_content 'false'
       end
     end
 
