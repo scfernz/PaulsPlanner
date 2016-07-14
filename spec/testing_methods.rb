@@ -18,9 +18,11 @@ module TestingMethods
     click_button 'Create Task'
   end
 
-  def create_meeting_through_ui(description, teacher_name)
+  def create_meeting_through_ui(address, teacher_name)
     click_link("New Meeting")
-    fill_in "meeting[description]", with: description
+    fill_in "meeting[title]", with: address
+    fill_in "meeting[address]", with: address
+    fill_in "meeting[description]", with: address
     select teacher_name, :from => 'teacher_id'
     click_button "Create Meeting"
   end

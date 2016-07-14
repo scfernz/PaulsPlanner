@@ -15,24 +15,18 @@ RSpec.feature "Navbars", type: :feature do
         expect(page).to have_content("Welcome to Paul's Planner")
       end
       Then 'I can log in as a student and the links change' do
-        visit '/'
-        click_link("Login")
-        fill_in "user[email]", with: 'student1@student.com'
-        fill_in "user[password]", with: "123456"
-        click_button "Log in"
-        expect(page).to have_content 'student1@student.com'
+        generate_student('student@test.com')
+        login_student('student@test.com')
+        expect(page).to have_content 'student@test.com'
         expect(page).to have_content 'New Meeting'
         expect(page).to have_content 'Logout'
         expect(page).to_not have_content 'Cohorts'
         click_link('Logout')
       end
       Then 'I can log in as a teacher and the links change' do
-        visit '/'
-        click_link("Login")
-        fill_in "user[email]", with: 'admin@admin.com'
-        fill_in "user[password]", with: "admin1"
-        click_button "Log in"
-        expect(page).to have_content 'admin@admin.com'
+        generate_teacher('teacher@test.com')
+        login_teacher('teacher@test.com')
+        expect(page).to have_content 'teacher@test.com'
         expect(page).to have_content 'Profile'
         expect(page).to have_content 'Tasks'
         expect(page).to have_content 'Meetings'

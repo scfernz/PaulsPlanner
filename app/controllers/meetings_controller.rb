@@ -1,12 +1,14 @@
 class MeetingsController < ApplicationController
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource # add this line
 
   # GET /meetings
   # GET /meetings.json
   def index
     @user = current_user
     if current_user.nil?
-      redirect_to '/users/sign_in'
+      redirect_to '/'
     else
       if current_user.has_role?(:student)
         @tasks = Task.where(user: current_user)
