@@ -1,8 +1,9 @@
+<div class="col-sm-8 col-sm-offset-2">
 <p>
   <strong>Name:</strong>
   <%= @cohort.name %>
   <p><strong>Members</strong></p>
-  <table>
+  <table class="table table-striped">
     <% @cohort.users.each do |member| %>
       <tr>
         <%= form_for(member, url: cohort_remove_from_cohort_path(@cohort)) do |f| %>
@@ -18,14 +19,18 @@
 <% if @members_for_select.length > 0 %>
   <%= form_for(@cohort, url: cohort_add_member_path(@cohort)) do |f| %>
   <div class="field">
-    <select name="member_id">
-      <% @members_for_select.each do |member| %>
+    <p>
+      <select name="member_id">
+        <% @members_for_select.each do |member| %>
         <option value="<%= member[1] %>"><%= member[0] %></option>
-      <% end %>
-    </select>
+        <% end %>
+      </select>
+    </p>
   </div>
   <div class="actions">
-    <%= f.submit 'Add Member'%>
+    <p>
+      <%= f.submit 'Add Member', :class => "btn btn-success"%>
+    </p>
   </div>
   <% end %>
 <% else %>
@@ -33,4 +38,5 @@
 <% end %>
 
 <%= link_to 'Edit', edit_cohort_path(@cohort) %> |
-<%= link_to 'Cancel', cohorts_path %>
+<%= link_to 'Return to Cohorts', cohorts_path %>
+</div>
