@@ -1,5 +1,5 @@
 <div class="col-sm-8 col-sm-offset-2">
-<h1>My Meetings</h1>
+<h1>Today's Meetings</h1>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -10,6 +10,7 @@
 
   <tbody>
     <% @meetings.each do |meeting| %>
+    <!-- maybe we can get todays meetings by including ones with dates less than tomorrow (Date.today + 1) and greater than yesterday (Date.today -1) ? -->
     <% if meeting.users.include?(current_user) %>
       <tr>
         <td><%= link_to meeting.date, meeting %></td>

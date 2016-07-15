@@ -21,6 +21,9 @@ RSpec.feature "StudentProfiles", type: :feature do
       And 'I can see my tasks' do
         expect(page).to have_content 'taskone'
       end
+      And 'I can see my meetings' do
+        expect(page).to have_content 'Upcoming Meetings'
+      end
       And "I can't see other users' tasks" do
         expect(page).to_not have_content 'tasktwo'
       end
