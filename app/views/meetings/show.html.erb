@@ -1,5 +1,6 @@
-<div class="col-sm-6" id="googleMap" style="width:300px;height:300px;"></div>
-<div class="col-sm-6 pull-left">
+<div class="row">
+<div class="col-sm-4 col-sm-offset-4" id="googleMap"></div>
+<div class="col-sm-4 pull-left">
 <p>
   <strong>Title:</strong>
   <%= @meeting.title %>
@@ -38,5 +39,5 @@
 <%= link_to 'Cancel', meetings_path %>
 
 </div>
-
+</div>
 <%= hidden_field :meeting, :id %>
