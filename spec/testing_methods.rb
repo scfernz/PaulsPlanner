@@ -18,9 +18,11 @@ module TestingMethods
     click_button 'Create Task'
   end
 
-  def create_meeting_through_ui(description, teacher_name)
+  def create_meeting_through_ui(address, teacher_name)
     click_link("New Meeting")
-    fill_in "meeting[description]", with: description
+    fill_in "meeting[title]", with: address
+    fill_in "meeting[address]", with: address
+    fill_in "meeting[description]", with: address
     select teacher_name, :from => 'teacher_id'
     click_button "Create Meeting"
   end
@@ -57,6 +59,7 @@ module TestingMethods
   def generate_teacher(email)
     newteacher = User.new
     newteacher.email = email
+    # TODO: change all tests using generate_student method to actually need name
     newteacher.name = email
     newteacher.password = '123456'
     newteacher.password_confirmation = '123456'
@@ -69,6 +72,7 @@ module TestingMethods
   def create_teacher_through_ui(email)
     visit "/"
     click_link("Teachers")
+    click_link("Sign up")
     fill_in 'user[name]', with: email
     fill_in "user[email]", with: email
     fill_in "user[password]", with: "123456"

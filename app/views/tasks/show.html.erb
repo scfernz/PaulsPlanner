@@ -25,9 +25,15 @@
   <%= User.find(@task.createdby_id).name %>
 </p>
 
-<% if (current_user.has_role? :student)  && (!@task.completed) %>
-  <%= form_for @task, url: task_mark_complete_path(@task), html: { method: :post } do |f| %>
-    <%= f.submit 'Complete' %>
+<% if (current_user.has_role? :student) %>
+  <% if (!@task.completed) %>
+    <%= form_for @task, url: task_mark_complete_path(@task), html: { method: :post } do |f| %>
+      <%= f.submit 'Turn In' %>
+    <% end %>
+  <% else %>
+    <%= form_for @task, url: task_mark_incomplete_path(@task), html: { method: :post } do |f| %>
+      <%= f.submit 'Take Back' %>
+    <% end %>
   <% end %>
 <% end %>
 

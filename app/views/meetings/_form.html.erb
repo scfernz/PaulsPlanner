@@ -27,6 +27,7 @@
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
+
   <div class="field">
     <select name="teacher_id">
       <% @teachers_for_select.each do |teacher| %>
@@ -34,6 +35,7 @@
       <% end %>
     </select>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -21,10 +21,13 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  background-color: $highlight-color;
   h5, h1 {
     text-shadow: 0 0 0.4em #000;
     color: #FFF;
+  }
+  p {
+    color: $highlight-color;
+    text-shadow: 0 0 0.4em #000;
   }
   .btn {
     a {
@@ -38,9 +41,13 @@ body {
     &:hover {
       background-color: black;
       color: white;
+      a {
+        color: white;
+      }
     }
   }
-  #teacher_btn {
+  #teacher_btn, #student_btn {
+    margin-bottom: 10px;
     margin-left: 30px;
   }
 }

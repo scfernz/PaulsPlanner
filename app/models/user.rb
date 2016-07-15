@@ -30,4 +30,9 @@ class User < ActiveRecord::Base
       add_role(:student)
     end
   end
+
+  def downcase_name
+    self.name.downcase
+  end
+
 end
