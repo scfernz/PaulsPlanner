@@ -1,4 +1,6 @@
-<h1>Listing Meetings</h1>
+<div class="col-sm-8 col-sm-offset-2">
+
+<h1>Upcoming Meetings</h1>
 
 <table class="table table-striped">
   <thead>
@@ -25,8 +27,12 @@
               <% end %>
             </table>
           </td>
-          <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
-          <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% if current_user.has_role?(:student) %>
+            <td>
+                <%= link_to 'Edit Meeting', edit_meeting_path(meeting) %>
+            </td>
+            <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         </tr>
       <% end %>
     <% end %>
@@ -35,4 +41,7 @@
 
 <br>
 
-<%= link_to 'New Meeting', new_meeting_path %>
+
+<% if current_user.has_role?(:student) %>
+<%= link_to 'New Meeting', new_meeting_path, :class => "btn btn-primary" %>
+<% end %>

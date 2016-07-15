@@ -1,3 +1,4 @@
+<div class="col-sm-12 col-sm-offset-5">
 <p>
   <strong>Title:</strong>
   <%= @task.title %>
@@ -26,11 +27,11 @@
 <% if (current_user.has_role? :student) %>
   <% if (!@task.completed) %>
     <%= form_for @task, url: task_mark_complete_path(@task), html: { method: :post } do |f| %>
-      <%= f.submit 'Turn In' %>
+      <%= f.submit 'Turn In', :class => "btn btn-success" %>
     <% end %>
   <% else %>
     <%= form_for @task, url: task_mark_incomplete_path(@task), html: { method: :post } do |f| %>
-      <%= f.submit 'Take Back' %>
+      <%= f.submit 'Take Back', :class => "btn btn-danger" %>
     <% end %>
   <% end %>
 <% end %>
@@ -39,3 +40,4 @@
   <%= link_to 'Edit', edit_task_path(@task) %> |
   <%= link_to 'Task List', tasks_path %>
 <% end %>
+</div>

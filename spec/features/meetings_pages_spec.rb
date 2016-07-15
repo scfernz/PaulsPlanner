@@ -34,4 +34,25 @@ RSpec.feature "MeetingsPages", type: :feature do
       end
     end
   end
+
+  context "viewing meetings as a teacher" do
+    Steps "viewing meetings as a teacher" do
+      Given "that I am a teacher and a student has created a meeting with me" do
+
+        generate_teacher('teacher@test.com')
+        generate_student('student@test.com')
+        login_student('student@test.com')
+        create_meeting_through_ui('here', 'teacher@test.com')
+        click_link 'Logout'
+        login_teacher('teacher@test.com')
+        click_link 'Meetings'
+        expect(page).to have_content 'student@test.com'
+      end
+      Then "I cannot edit or destroy the meeting" do
+        expect(page).to have_content 'Edit Profile'
+        expect(page).not_to have_content 'Edit Meeting'
+      end
+
+    end
+  end
 end

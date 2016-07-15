@@ -12,31 +12,43 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
   </div>
   <div class="field">
-    <%= f.label :date %><br>
-    <%= f.datetime_select :date %>
+    <p>
+      <%= f.label :date %><br>
+      <%= f.datetime_select :date %>
+    </p>
   </div>
   <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address, value: "3803 Ray St, San Diego CA 92104" %>
+    <p>
+      <%= f.label :address %><br>
+      <%= f.text_field :address, value: "3803 Ray St, San Diego CA 92104" %>
+    </p>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <p>
+      <%= f.label :description %><br>
+      <%= f.text_field :description %>
+    </p>
   </div>
 
   <div class="field">
-    <%= label_tag :teacher_id %><br>
-    <select name="teacher_id">
-      <%= options_from_collection_for_select(User.with_role(:teacher), :id, :name) %>
-    </select>
+    <%= label_tag :teacher_id %>
+    <p>
+      <select name="teacher_id">
+        <%= options_from_collection_for_select(User.with_role(:teacher), :id, :name) %>
+      </select>
+    </p>
   </div>
 
 
   <div class="actions">
-    <%= f.submit %>
+    <p>
+      <%= f.submit 'Create Meeting', :class => "btn btn-success" %>
+    </p>
   </div>
 <% end %>
