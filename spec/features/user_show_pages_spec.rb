@@ -17,6 +17,7 @@ RSpec.feature "UserShowPages", type: :feature do
         expect(page).to have_content "bane's Profile"
         expect(page).to have_content "Meetings"
         expect(page).to have_content "Tasks"
+        
       end
     end
 
