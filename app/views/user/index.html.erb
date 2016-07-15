@@ -4,10 +4,14 @@
       <%= link_to 'Edit Profile', edit_user_registration_path %>
     </div>
   </p>
-</div></p>
+</div>
 
 <h1 class="text-center"><%= current_user.name %>'s Profile (<%= current_user.roles.first.name %>)</h1>
 <p class="text-center"><%= current_user.email %>
+  <% if current_user.has_role?(:student) && !current_user.cohort.nil? %>
+     | <%= current_user.cohort.name %>
+  <% end %>
+</p>
 
 
 
@@ -15,8 +19,10 @@
 
 <% if current_user.has_role?(:teacher) %>
 
-<p class="text-center"><%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary" %>
-<%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary" %></p>
+<p class="text-center">
+  <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary" %>
+  <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary" %>
+</p>
   <%= render 'user/teacher_meetings' %>
 
 <% end %>
