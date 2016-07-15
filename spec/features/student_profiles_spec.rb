@@ -9,6 +9,8 @@ RSpec.feature "StudentProfiles", type: :feature do
         teacher_id = generate_teacher('teacher@test.com')
         generate_task('taskone', 1, student_one_id, teacher_id)
         generate_task('tasktwo', 2, student_two_id, teacher_id)
+        cohort_id = generate_cohort('Cohort1')
+        add_member_to_cohort(student_one_id, cohort_id)
       end
       And 'I have logged in' do
         login_student('studentone@student.com')
@@ -21,6 +23,9 @@ RSpec.feature "StudentProfiles", type: :feature do
       end
       And "I can't see other users' tasks" do
         expect(page).to_not have_content 'tasktwo'
+      end
+      And "I can see which cohort I am in" do
+        expect(page).to have_content "Cohort1"
       end
     end
 
