@@ -17,12 +17,12 @@
 
 <p>
   <strong>Assigned To:</strong>
-  <%= @task.user.name %>
+  <%= link_to @task.user.name, @task.user %>
 </p>
 
 <p>
   <strong>Assigned By:</strong>
-  <%= User.find(@task.createdby_id).name %>
+  <%= link_to @user_createdby.name, @user_createdby %>
 </p>
 
 <% if (current_user.has_role? :student) %>

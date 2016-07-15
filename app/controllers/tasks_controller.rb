@@ -17,6 +17,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @user_createdby = User.find(@task.createdby_id)
   end
 
   # GET /tasks/new
