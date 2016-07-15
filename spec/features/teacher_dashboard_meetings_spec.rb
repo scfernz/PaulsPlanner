@@ -15,6 +15,7 @@ RSpec.feature "TeacherDashboardMeetings", type: :feature do
       end
       And "have created a meeting and logged out" do
         click_link("New Meeting")
+        fill_in "meeting[title]", with: "Meeting"
         fill_in "meeting[description]", with: "there"
         fill_in "meeting[address]", with: "123 street"
         click_button "Create Meeting"
