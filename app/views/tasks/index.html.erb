@@ -17,7 +17,7 @@
         <td><%= link_to task.title, task %></td>
         <td><%= task.description %></td>
         <td><%= task.completed %></td>
-        <td><%= task.user.name %></td>
+        <td><%= link_to task.user.name, task.user %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

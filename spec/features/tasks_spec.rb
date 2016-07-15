@@ -28,9 +28,14 @@ RSpec.feature "Tasks", type: :feature do
         expect{click_link 'Edit'}.not_to raise_error
         expect{click_link 'Task List'}.not_to raise_error
       end
-      And 'I can delete a task that I have assigned' do
-        click_link 'Delete'
+      And "I can click on a student's name and view their profile" do
         visit '/tasks'
+        click_link 'student@test.com'
+        expect(page).to have_content "student@test.com"
+      end
+      And 'I can delete a task that I have assigned' do
+        visit '/tasks'
+        click_link 'Delete'
         expect(page).to_not have_content 'testtask'
       end
       And 'I cannot create a task without a title' do

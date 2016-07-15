@@ -21,7 +21,7 @@
           <td>
             <table>
               <% meeting.users.each do |member| %>
-              <tr><td><%= member.name %></td></tr>
+              <tr><td><%= link_to member.name, member %></td></tr>
               <% end %>
             </table>
           </td>

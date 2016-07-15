@@ -24,14 +24,14 @@
 <p>
   <strong>Attendees:</strong>
   <% @meeting.users.each do |member| %>
-  <p><%= member.name %></p>
+  <p><%= link_to member.name, member %></p>
   <% end %>
 </p>
 
 
 <p>
   <strong>Created by:</strong>
-  <%= User.find(@meeting.created_by).name %>
+  <%= link_to @user_createdby.name, @user_createdby %>
 </p>
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
