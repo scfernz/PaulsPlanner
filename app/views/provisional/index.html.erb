@@ -1,8 +1,10 @@
+<div class="col-sm-6 col-sm-offset-5">
 <h2>Provisional Accounts</h2>
 <% provisional_accounts = User.with_role :provisional %>
 <% provisional_accounts.each do |account| %>
   <form action="/user/approve_account" method="post">
-    <input type="hidden" name="approved_id" value="<%= account.id %>"/>
-    <input type="submit" value="Approve"/> <%= account.email %>
+    <p><input type="hidden" name="approved_id" value="<%= account.id %>"/></p>
+    <p><input class="btn btn-primary" type="submit" value="Approve"/> <%= account.email %></p>
   </form>
 <% end %>
+</div>
