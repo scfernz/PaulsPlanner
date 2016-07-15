@@ -19,8 +19,18 @@ class UserController < ApplicationController
   # GET /user/1.json
   def show
     @user = User.find(params[:id])
-    @tasks = Task.where(user: @user)
-    @meetings = Meeting.where(created_by: @user)
+    if current_user.nil?
+      flash[:alert] = 'You need to sign in or sign up before continuing.'
+      redirect_to '/users/sign_in'
+    elsif @user == current_user
+      redirect_to '/user/index'
+    elsif current_user.has_role? :teacher
+      @tasks = Task.where(user: @user)
+      @meetings = Meeting.where(created_by: @user)
+    else
+      flash[:alert] = 'You are not authorized to view this page.'
+      redirect_to '/'
+    end
   end
 
   def approve_account
