@@ -4,10 +4,24 @@
 <% if @user.has_role?(:student) %>
   <h1>Tasks</h1>
   <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Title</th>
+      </tr>
+    </thead>
 
     <tbody>
       <% @user.tasks.each do |task| %>
         <tr>
+          <td class="task_status">
+            <% if !task.completed %>
+              <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
+              <% end %>
+            <% else %>
+              &#10003;
+            <% end %>
+          </td>
           <td><%= link_to task.title, task %></td>
         </tr>
       <% end %>

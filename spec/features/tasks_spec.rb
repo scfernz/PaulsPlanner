@@ -66,6 +66,14 @@ RSpec.feature "Tasks", type: :feature do
         expect(page).to have_content "true"
         expect{click_button "Turn In"}.to raise_error('Unable to find button "Turn In"')
       end
+      And "I can log in as a teacher and see the status of the task" do
+        click_link "Logout"
+        login_teacher('teacher@test.com')
+        click_link "Tasks"
+        click_link "test@student.com"
+        expect(page).to have_content 'Status'
+        expect(page).to have_content  '✓'
+      end
     end
 
     Steps "completing a task from the task show page" do
