@@ -23,7 +23,15 @@
           <td>
             <table>
               <% meeting.users.each do |member| %>
-              <tr><td><%= link_to member.name, member %></td></tr>
+              <tr>
+                <td>
+                  <% if current_user.has_role?(:teacher) %>
+                    <%= link_to member.name, member %>
+                  <% else %>
+                    <%= member.name %>
+                  <% end %>  
+                </td>
+              </tr>
               <% end %>
             </table>
           </td>

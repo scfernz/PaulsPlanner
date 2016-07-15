@@ -16,12 +16,20 @@
 
 <p>
   <strong>Assigned To:</strong>
-  <%= link_to @task.user.name, @task.user %>
+  <% if current_user.has_role?(:teacher) %>
+    <%= link_to @task.user.name, @task.user %>
+  <% else %>
+    <%= @task.user.name %>
+  <% end %>
 </p>
 
 <p>
   <strong>Assigned By:</strong>
-  <%= link_to @user_createdby.name, @user_createdby %>
+  <% if current_user.has_role?(:teacher) %>
+    <%= link_to @user_createdby.name, @user_createdby %>
+  <% else %>
+    <%= @user_createdby.name %>
+  <% end %>
 </p>
 
 <% if (current_user.has_role? :student) %>
