@@ -26,7 +26,7 @@
   <div class="field">
     <p>
       <%= f.label :address %><br>
-      <%= f.text_field :address %>
+      <%= f.text_field :address, value: "3803 Ray St, San Diego CA 92104" %>
     </p>
   </div>
   <div class="field">
@@ -37,18 +37,18 @@
   </div>
 
   <div class="field">
+    <%= label_tag :teacher_id %>
     <p>
       <select name="teacher_id">
-        <% @teachers_for_select.each do |teacher| %>
-        <option value="<%= teacher[1] %>"><%= teacher[0] %></option>
-        <% end %>
+        <%= options_from_collection_for_select(User.with_role(:teacher), :id, :name) %>
       </select>
     </p>
   </div>
 
+
   <div class="actions">
     <p>
-      <%= f.submit 'Create Meeting', :class => "btn btn-success" %>      
+      <%= f.submit 'Create Meeting', :class => "btn btn-success" %>
     </p>
   </div>
 <% end %>
