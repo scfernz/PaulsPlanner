@@ -37,7 +37,7 @@ RSpec.feature "Cohort", type: :feature do
       end
       Then 'I can also remove that student from the cohort' do
         click_button 'Remove'
-        expect(page).to_not have_content 'Members student3@student.com'
+        expect(page).to_not have_content 'Members student3@student.com Remove'
       end
       # if this is failing, make sure all seeded students belong to cohorts
       And 'If there are no students without cohorts, I see a message about it instead of the form' do
@@ -50,6 +50,8 @@ RSpec.feature "Cohort", type: :feature do
         select('bane', :from => 'member_id')
         click_button "Add Member"
         select('batman', :from => 'member_id')
+        click_button "Add Member"
+        select('aaron', :from => 'member_id')
         click_button "Add Member"
         expect(page).to_not have_content 'Add Member'
         expect(page).to have_content 'There are no students without cohorts at this time.'
