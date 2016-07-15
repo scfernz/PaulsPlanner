@@ -9,14 +9,15 @@ class Ability
     if user.has_role? :teacher
       can :manage, Task
       can :manage, Cohort
-      can :read, Meeting, id: user.meetings.pluck(:id)
+      can :manage, Meeting, id: user.meetings.pluck(:id)
+      cannot :edit, Meeting
+      cannot :destroy, Meeting
+      cannot :update, Meeting
 
     elsif user.has_role? :student
       can :manage, Task, user_id: user.id
       can :create, Meeting
-      can :read, Meeting, id: user.meetings.pluck(:id)
-      can :update, Meeting, id: user.meetings.pluck(:id)
-      can :destroy, Meeting, id: user.meetings.pluck(:id)
+      can :manage, Meeting, id: user.meetings.pluck(:id)
     end
 
     # Define abilities for the passed in user here. For example:
