@@ -1,10 +1,13 @@
-<h1>Listing Cohorts</h1>
+<div class="col-sm-8 col-sm-offset-2">
+  <h1>Listing Cohorts</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
-      <th colspan="3"></th>
+      <th>Show</th>
+      <th>Change Name</th>
+      <th>Remove Cohort</th>
     </tr>
   </thead>
 
@@ -13,8 +16,8 @@
       <tr>
         <td><%= cohort.name %></td>
         <td><%= link_to 'Show', cohort %></td>
-        <td><%= link_to 'Edit', edit_cohort_path(cohort) %></td>
-        <td><%= link_to 'Destroy', cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit Name', edit_cohort_path(cohort) %></td>
+        <td><%= link_to 'Remove', cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +25,5 @@
 
 <br>
 
-<%= link_to 'New Cohort', new_cohort_path %>
+<%= link_to 'New Cohort',  new_cohort_path, :class => "btn btn-primary" %>
+</div>

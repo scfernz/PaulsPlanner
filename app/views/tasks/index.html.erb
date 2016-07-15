@@ -1,5 +1,5 @@
+<div class="col-sm-8 col-sm-offset-2">
 <h1>Listing Tasks</h1>
-
 <table class="table table-striped">
   <thead>
     <tr>
@@ -27,5 +27,6 @@
 
 <br>
 
-<p><%= link_to 'Assign a task to a student', new_task_path %></p>
-<p><%= link_to 'Assign a task to a cohort', cohort_task_path %></p>
+<p><%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary" %>
+<%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary" %></p>
+</div>
