@@ -25,6 +25,7 @@ RSpec.feature "Tasks", type: :feature do
         visit '/tasks'
         expect(page).to have_content 'testtask'
         click_link 'testtask'
+        expect(page).to have_content 'Delete'
         expect{click_link 'Edit'}.not_to raise_error
         expect{click_link 'Task List'}.not_to raise_error
       end
@@ -35,6 +36,7 @@ RSpec.feature "Tasks", type: :feature do
       end
       And 'I can delete a task that I have assigned' do
         visit '/tasks'
+        click_link 'testtask'
         click_link 'Delete'
         expect(page).to_not have_content 'testtask'
       end
