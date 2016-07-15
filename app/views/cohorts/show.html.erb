@@ -15,17 +15,21 @@
   </table>
 </p>
 
-<%= form_for(@cohort, url: cohort_add_member_path(@cohort)) do |f| %>
-<div class="field">
-  <select name="member_id">
-    <% @members_for_select.each do |member| %>
-      <option value="<%= member[1] %>"><%= member[0] %></option>
-    <% end %>
-  </select>
-</div>
-<div class="actions">
-  <%= f.submit 'Add Member'%>
-</div>
+<% if @members_for_select.length > 0 %>
+  <%= form_for(@cohort, url: cohort_add_member_path(@cohort)) do |f| %>
+  <div class="field">
+    <select name="member_id">
+      <% @members_for_select.each do |member| %>
+        <option value="<%= member[1] %>"><%= member[0] %></option>
+      <% end %>
+    </select>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Add Member'%>
+  </div>
+  <% end %>
+<% else %>
+  <p>There are no students without cohorts at this time.</p>
 <% end %>
 
 <%= link_to 'Edit', edit_cohort_path(@cohort) %> |
