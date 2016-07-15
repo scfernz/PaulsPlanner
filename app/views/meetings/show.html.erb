@@ -34,7 +34,9 @@
   <%= link_to @user_createdby.name, @user_createdby %>
 </p>
 
-<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+<% if current_user.has_role?(:student) %>
+  <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+<% end %>
 <%= link_to 'Cancel', meetings_path %>
 
 </div>
