@@ -10,7 +10,8 @@ class UserController < ApplicationController
         @meetings = Meeting.where(created_by: current_user)
       else
         @tasks = Task.where(user: current_user)
-        @meetings = Meeting.all
+        today = DateTime.now
+        @meetingstoday = Meeting.where(:date => today.beginning_of_day..today.end_of_day)
       end
     end
   end

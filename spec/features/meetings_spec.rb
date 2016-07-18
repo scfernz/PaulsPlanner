@@ -39,8 +39,8 @@ RSpec.feature "Meetings", type: :feature do
       And "I can see a list of only my upcoming meetings" do
         visit '/'
         expect(page).to have_content("Second Meeting")
-        expect(page).to have_content("2016-08-13")
-        expect(page).to_not have_content("2016-01-13")
+        expect(page).to have_content("August 13 2016")
+        expect(page).to_not have_content("January 13 2016")
       end
     end
     Steps "creating a meeting without a title or address" do
