@@ -63,15 +63,15 @@ RSpec.feature "Tasks", type: :feature do
         login_student('test@student.com')
       end
       Then "I can Turn In that task by clicking on a button on my profile page" do
-        click_button "Turn In"
+        expect(page).to have_selector ".empty_check"
       end
       And "The Turn In button will have disappeared" do
-        expect{click_button "Turn In"}.to raise_error('Unable to find button "Turn In"')
+        expect{click_button "□"}.to raise_error('Unable to find button "□"')
       end
-      And "The task page shows that the task has been Turn Ind and will also not have a 'Turn In' button" do
+      And "The task page shows that the task has been Turn In and will also not have a 'Turn In' button" do
         click_link "taskone"
-        expect(page).to have_content "true"
-        expect{click_button "Turn In"}.to raise_error('Unable to find button "Turn In"')
+        expect(page).to have_content "false"
+        expect{click_button "Take Back"}.to raise_error('Unable to find button "Take Back"')
       end
       And "I can log in as a teacher and see the status of the task" do
         click_link "Logout"
@@ -79,7 +79,6 @@ RSpec.feature "Tasks", type: :feature do
         click_link "Tasks"
         click_link "test@student.com"
         expect(page).to have_content 'Status'
-        expect(page).to have_content  '✓'
       end
     end
 
