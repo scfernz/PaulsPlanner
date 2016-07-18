@@ -22,6 +22,7 @@
           <td class="task_status">
             <% if !task.completed %>
               <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
+                In Progress
               <% end %>
             <% else %>
               &#10003;
