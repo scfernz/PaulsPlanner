@@ -77,7 +77,7 @@ RSpec.feature "Meetings", type: :feature do
         fill_in "meeting[description]", with: "there"
         fill_in "meeting[address]", with: ""
         select('teacher@test.com', :from => 'teacher_id')
-        select('2016', :from => 'meeting[date(1i)]')
+        select('2017', :from => 'meeting[date(1i)]')
         select('January', :from => 'meeting[date(2i)]')
         select('13', :from => 'meeting[date(3i)]')
         click_button "Create Meeting"
@@ -98,6 +98,9 @@ RSpec.feature "Meetings", type: :feature do
         fill_in "meeting[title]", with: "First Meeting"
         fill_in "meeting[description]", with: "there"
         select('teacher@test.com', :from => 'teacher_id')
+        select('2017', :from => 'meeting[date(1i)]')
+        select('January', :from => 'meeting[date(2i)]')
+        select('13', :from => 'meeting[date(3i)]')
         click_button "Create Meeting"
       end
       Then "The meeting will be created with the default address" do
@@ -119,6 +122,28 @@ RSpec.feature "Meetings", type: :feature do
       Then 'I can see that the meeting is cancelled on my profile page' do
         visit '/'
         expect(page).to have_content 'Cancelled'
+      end
+    end
+  end
+
+  context "I cannot create a meeting before the current date" do
+    Steps "Schedule a meeting before today" do
+      Given "That I am a student and on the meeting page and there is a teacher" do
+        generate_student('student@test.com')
+        generate_teacher('teacher@test.com')
+        login_student('student@test.com')
+      end
+      And "have created a meeting before today" do
+        click_link("New Meeting")
+        fill_in "meeting[description]", with: "there"
+        fill_in "meeting[title]", with: "First Meeting"
+        fill_in "meeting[address]", with: "123 Main St"
+        select('teacher@test.com', :from => 'teacher_id')
+        select('2016', :from => 'meeting[date(1i)]')
+        select('July', :from => 'meeting[date(2i)]')
+        select('13', :from => 'meeting[date(3i)]')
+        click_button "Create Meeting"
+        expect(page).to have_content 'You cannot create a meeting in the past.'
       end
     end
   end

@@ -4,12 +4,17 @@ require 'testing_methods'
 RSpec.feature "Tasks", type: :feature do
   context "creating a task" do
     Steps "creating a task as a teacher" do
+      When "I am logged in as a student and do not have tasks" do
+        generate_student('student@test.com')
+        login_student('student@test.com')
+      end
+      Then "I have a message on my profile page indicating that I do not have tasks" do
+        expect(page).to have_content 'You have no tasks.'
+        click_link 'Logout'
+      end
       When "I am an approved teacher and logged in" do
         generate_teacher('teacher@test.com')
         login_teacher('teacher@test.com')
-      end
-      And "students exist in the database" do
-        generate_student('student@test.com')
       end
       Then "I can create a task and assign it to a student" do
         create_task_through_ui('testtask', 'do this', 'student@test.com')
