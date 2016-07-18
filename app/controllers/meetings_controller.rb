@@ -49,7 +49,7 @@ class MeetingsController < ApplicationController
         format.html { redirect_to @meeting, notice: 'Meeting was successfully created.' }
         format.json { render :show, status: :created, location: @meeting }
       elsif @meeting.date <= DateTime.now
-        format.html { redirect_to '/meetings/new', alert: 'You cannot create a meeting in the past' }
+        format.html { redirect_to '/meetings/new', alert: 'You cannot create a meeting in the past.' }
       else
         format.html { render :new }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }

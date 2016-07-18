@@ -103,7 +103,7 @@ RSpec.feature "Meetings", type: :feature do
         select('July', :from => 'meeting[date(2i)]')
         select('13', :from => 'meeting[date(3i)]')
         click_button "Create Meeting"
-        expect(page).to have_content 'You cannot create a meeting in the past'
+        expect(page).to have_content 'You cannot create a meeting in the past.'
       end
     end
   end
