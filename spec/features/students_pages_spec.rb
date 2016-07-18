@@ -19,7 +19,7 @@ RSpec.feature "StudentsPages", type: :feature do
       end
       Then "I can go to a students page" do
         click_link 'Students'
-        expect(page).to have_content 'Listing Students'
+        expect(page).to have_content 'Students'
       end
       And "see all the registered students" do
         expect(page).to have_content 'bane'
