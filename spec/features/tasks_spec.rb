@@ -101,4 +101,33 @@ RSpec.feature "Tasks", type: :feature do
     end
 
   end
+  context 'seeing a list of tasks' do
+    Steps 'seeing tasks sorted by cohort' do
+      Given 'I am signed in a a teacher'do
+        generate_teacher('teacher@test.com')
+        login_teacher('teacher@test.com')
+      end
+      And 'There are students in different cohorts' do
+        generate_student('student@test.com')
+        generate_student('student2@test.com')
+        generate_cohort('2016')
+        generate_cohort('2017')
+        add_member_to_cohort(User.find_by_email('student@test.com').id, Cohort.find_by_name('2016').id)
+        add_member_to_cohort(User.find_by_email('student2@test.com').id, Cohort.find_by_name('2017').id)
+      end
+      And 'Each of those students has a task' do
+        generate_task('task', 1, User.find_by_email('student@test.com').id, User.find_by_email('teacher@test.com').id)
+        generate_task('another task', 2, User.find_by_email('student2@test.com').id, User.find_by_email('teacher@test.com').id)
+      end
+      Then 'I see the tasks sorted by cohort in reverse alphabetical order' do
+        visit '/tasks'
+        expect(page.find("//table/tbody/tr[1]/td[1]")).to have_content 'another task'
+        expect(page.find("//table/tbody/tr[1]/td[4]")).to have_content 'student2@test.com'
+        expect(page.find("//table/tbody/tr[1]/td[5]")).to have_content '2017'
+        expect(page.find("//table/tbody/tr[2]/td[1]")).to have_content 'task'
+        expect(page.find("//table/tbody/tr[2]/td[4]")).to have_content 'student@test.com'
+        expect(page.find("//table/tbody/tr[2]/td[5]")).to have_content '2016'
+      end
+    end
+  end
 end
