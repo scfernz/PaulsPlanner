@@ -1,54 +1,70 @@
 <div class="row">
-<div class="col-sm-4 col-sm-offset-4" id="googleMap"></div>
-<div class="col-sm-4 pull-left">
-<p>
-  <strong>Title:</strong>
-  <%= @meeting.title %>
-</p>
+  <div class="col-sm-4 col-sm-offset-4" id="googleMap"></div>
+  <div class="col-sm-4 pull-left">
 
-<p>
-  <strong>Date:</strong>
-  <%= @meeting.date %>
-</p>
+    <p>
+      <strong>Title:</strong>
+      <%= @meeting.title %>
+    </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @meeting.address %>
-</p>
+    <p>
+      <strong>Date:</strong>
+      <%= @meeting.date %>
+      <% if @meeting.cancelled %>
+        |<strong class="red"> Cancelled</strong>
+      <% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @meeting.description %>
-</p>
+    </p>
 
-<p>
-  <strong>Attendees:</strong>
-  <% @meeting.users.each do |member| %>
-  <p>
-    <% if current_user.has_role?(:teacher) %>
-      <%= link_to member.name, member %>
-    <% else %>
-      <%= member.name %>
+    <p>
+      <strong>Address:</strong>
+      <%= @meeting.address %>
+    </p>
+
+
+    <p>
+      <strong>Description:</strong>
+      <%= @meeting.description %>
+    </p>
+
+    <p>
+      <strong>Attendees:</strong>
+      <% @meeting.users.each do |member| %>
+      <p>
+        <% if current_user.has_role?(:teacher) %>
+          <%= link_to member.name, member %>
+        <% else %>
+          <%= member.name %>
+        <% end %>
+      </p>
+      <% end %>
+    </p>
+
+
+    <p>
+      <strong>Created by:</strong>
+      <% if current_user.has_role?(:teacher) %>
+        <%= link_to @user_createdby.name, @user_createdby %>
+      <% else %>
+        <%= @user_createdby.name %>
+      <% end %>
+    </p>
+
+    <% if current_user.has_role?(:student) %>
+      <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
     <% end %>
-  </p>
-  <% end %>
-</p>
+    <%= link_to 'Return to Profile', '/' %>
 
+    <% if (!@meeting.cancelled) %>
+      <%= form_for @meeting, url: meeting_cancel_meeting_path(@meeting), html: { method: :post } do |f| %>
+        <%= f.submit 'Cancel Meeting', :class => "btn btn-danger" %>
+      <% end %>
+    <% else %>
+      <%= form_for @meeting, url: meeting_uncancel_meeting_path(@meeting), html: { method: :post } do |f| %>
+      <%= f.submit 'Undo Cancel', :class => "btn btn-success" %>
+      <% end %>
+    <% end %>
 
-<p>
-  <strong>Created by:</strong>
-  <% if current_user.has_role?(:teacher) %>
-    <%= link_to @user_createdby.name, @user_createdby %>
-  <% else %>
-    <%= @user_createdby.name %>
-  <% end %>
-</p>
-
-<% if current_user.has_role?(:student) %>
-  <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<% end %>
-<%= link_to 'Return to Profile', '/' %>
-
-</div>
+  </div>
 </div>
 <%= hidden_field :meeting, :id %>

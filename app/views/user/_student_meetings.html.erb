@@ -14,7 +14,13 @@
       <% if meeting.date >= Date.today %>
         <tr>
           <td><%= link_to meeting.title, meeting %></td>
-          <td><%= meeting.date %></td>
+          <td>
+            <%= meeting.date %>
+            <% if meeting.cancelled %>
+              |<strong class="red"> Cancelled</strong>
+            <% end %>
+
+          </td>
           <td><%= meeting.address %></td>
         </tr>
       <% end %>

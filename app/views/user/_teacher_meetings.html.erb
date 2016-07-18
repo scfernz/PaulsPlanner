@@ -12,7 +12,13 @@
     <% @meetings.each do |meeting| %>
     <% if meeting.users.include?(current_user) %>
       <tr>
-        <td><%= link_to meeting.date, meeting %></td>
+        <td>
+          <%= link_to meeting.date, meeting %>
+          <% if meeting.cancelled %>
+            |<strong class="red"> Cancelled</strong>
+          <% end %>
+
+        </td>
         <td><%= meeting.location %></td>
       </tr>
       <% end %>
