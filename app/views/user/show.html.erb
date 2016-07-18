@@ -1,38 +1,49 @@
-<h1><%= @user.name %>'s Profile (<%= @user.roles.first.name %>)</h1>
-<p>
-  <%= @user.email %>
-  <% if @user.has_role?(:student) && !@user.cohort.nil? %>
-     | <%= @user.cohort.name %>
-  <% end %>
-</p>
-<%= image_tag(@user.image.url(:large)) %>
-<% if @user.has_role?(:student) %>
-  <h1>Tasks</h1>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Status</th>
-        <th>Title</th>
-      </tr>
-    </thead>
+<!-- profile picture begin -->
+<div class="col-sm-2 col-sm-offset-2 img-responsive">
+  <%= image_tag(@user.image.url(:large), :class => "profile_pic") %>
+</div>
+<!-- profile picture end -->
 
-    <tbody>
-      <% @user.tasks.each do |task| %>
-        <tr>
-          <td class="task_status">
-            <% if !task.completed %>
-              <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
-                In Progress
-              <% end %>
-            <% else %>
-              &#10003;
-            <% end %>
-          </td>
-          <td><%= link_to task.title, task %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<!-- user information begins-->
+<div class="col-sm-6" id="bio">
+  <h3>
+    <%= @user.name %>'s Profile <small>(<%= @user.roles.first.name %>)</small>
+  </h3>
+  <p>
+    <%= @user.email %>
+    <% if @user.has_role?(:student) && !@user.cohort.nil? %>
+       | <%= @user.cohort.name %>
+    <% end %>
+  </p>
+</div>
+<!-- user information ends-->
+
+<% if @user.has_role?(:student) %>
+  <div class="col-sm-8 col-sm-offset-2">
+    <h3 class="top_margin">Tasks</h3>
+    <table class="table table-striped">
+      <tbody>
+        <% if @user.tasks.length == 0 %>
+          <tr><td></td><td><em>You have no tasks.</em></td></tr>
+        <% else %>
+          <% @user.tasks.each do |task| %>
+            <tr>
+              <td class="task_status">
+                <% if !task.completed %>
+                  <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
+                  In Progress
+                  <% end %>
+                <% else %>
+                  &#10003;
+                <% end %>
+              </td>
+              <td><%= link_to task.title, task %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
   <%= render 'user/student_meetings' %>
 <% end %>
