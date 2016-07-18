@@ -18,7 +18,12 @@
       <% if meeting.users.include?(current_user) &&  meeting.date >= Date.today %>
         <tr>
           <td><%= link_to meeting.title, meeting %></td>
-          <td><%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %></td>
+          <td>
+            <%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %>
+            <% if meeting.cancelled %>
+              |<strong class="red"> Cancelled</strong>
+            <% end %>
+          </td>
           <td><%= meeting.description %></td>
           <td>
             <table>
@@ -29,7 +34,7 @@
                     <%= link_to member.name, member %>
                   <% else %>
                     <%= member.name %>
-                  <% end %>  
+                  <% end %>
                 </td>
               </tr>
               <% end %>

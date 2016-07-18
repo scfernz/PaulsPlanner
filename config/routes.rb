@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   resources :meetings do
     get 'map_markers'
+    post 'cancel_meeting'
+    post 'uncancel_meeting'
   end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => 'users/registrations' }

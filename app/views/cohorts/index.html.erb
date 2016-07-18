@@ -5,19 +5,24 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Show</th>
-      <th>Change Name</th>
-      <th>Remove Cohort</th>
+      <th>Members</th>
     </tr>
   </thead>
 
   <tbody>
     <% @cohorts.each do |cohort| %>
       <tr>
-        <td><%= cohort.name %></td>
-        <td><%= link_to 'Show', cohort %></td>
-        <td><%= link_to 'Edit Name', edit_cohort_path(cohort) %></td>
-        <td><%= link_to 'Remove', cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "#{cohort.name}", cohort %></td>
+        <td>
+          <% all_students = cohort.users %>
+          <% all_students.each do |student| %>
+              <% if student != all_students.last %>
+                <%= link_to student.name, student %>,
+              <% else %>
+                <%= link_to student.name, student %>
+              <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

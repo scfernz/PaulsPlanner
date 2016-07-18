@@ -8,16 +8,19 @@ RSpec.feature "UserShowPages", type: :feature do
         generate_teacher('teacher@test.com')
         login_teacher('teacher@test.com')
       end
-      Then 'I can go to the cohort page and click on a link to a student profile' do
+      Then 'I can go to the cohort page' do
         generate_cohort('2016b')
         add_member_to_cohort(User.find_by_email('student1@student.com').id, Cohort.find_by_name('2016b').id)
         click_link 'Cohorts'
-        click_link 'Show'
+      end
+      And 'I can see a list of students in a cohort' do
+        expect(page).to have_content 'bane'
+      end
+      When "I click on the students name, it takes me to that student's profile" do
+        click_link '2016b'
         click_link 'bane'
-        expect(page).to have_content "bane's Profile"
         expect(page).to have_content "Meetings"
         expect(page).to have_content "Tasks"
-        
       end
     end
 
