@@ -7,24 +7,52 @@
       <th>Description</th>
       <th>Completed</th>
       <th>Assigned To</th>
-      <th colspan="2"></th>
+      <th>Cohort</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= link_to task.title, task %></td>
-        <td><%= task.description %></td>
-        <td><%= task.completed %></td>
-        <td>
-          <% if current_user.has_role?(:teacher) %>
-            <%= link_to task.user.name, task.user %>
-          <% else %>
-            <%= task.user.name %>
-          <% end %>
-        </td>
-      </tr>
+    <% @cohorts.each do |cohort| %>
+      <% cohort.users.each do |user| %>
+        <% user.tasks.each do |task| %>
+          <tr>
+            <td><%= link_to task.title, task %></td>
+            <td><%= task.description %></td>
+            <td><%= task.completed %></td>
+            <td>
+              <% if current_user.has_role?(:teacher) %>
+                <%= link_to task.user.name, task.user %>
+              <% else %>
+                <%= task.user.name %>
+              <% end %>
+            </td>
+            <td>
+              <% if current_user.has_role?(:teacher) %>
+                <%= link_to task.user.cohort.name, task.user.cohort %>
+              <% else %>
+                <%= task.user.cohort.name %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% @students_without_cohorts.each do |user| %>
+      <% user.tasks.each do |task| %>
+        <tr>
+          <td><%= link_to task.title, task %></td>
+          <td><%= task.description %></td>
+          <td><%= task.completed %></td>
+          <td>
+            <% if current_user.has_role?(:teacher) %>
+              <%= link_to task.user.name, task.user %>
+            <% else %>
+              <%= task.user.name %>
+            <% end %>
+          </td>
+          <td></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

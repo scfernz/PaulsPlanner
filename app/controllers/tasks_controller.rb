@@ -7,7 +7,8 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if !current_user.nil? && current_user.has_role?(:teacher)
-      @tasks = Task.all
+      @cohorts = Cohort.all.order(:name).reverse
+      @students_without_cohorts = User.with_role(:student).where(cohort: nil)
     else
       flash[:alert] = 'You are not authorized to view this page'
       redirect_to '/user/index'

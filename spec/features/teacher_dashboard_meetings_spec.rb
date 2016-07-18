@@ -32,9 +32,9 @@ RSpec.feature "TeacherDashboardMeetings", type: :feature do
         visit '/'
         expect(page).to have_content 'admin@admin.com'
       end
-      And 'I can see a list of all my meetings' do
+      And 'I can see a list of my meetings' do
         click_link('My Profile')
-        expect(page).to have_content  'Meetings'
+        expect(page).to have_content "Today's Meetings"
       end
       Then 'I can see my meetings' do
         visit '/'
