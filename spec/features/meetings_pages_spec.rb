@@ -31,6 +31,7 @@ RSpec.feature "MeetingsPages", type: :feature do
       end
       Then 'I can go view my meetings page' do
         click_link('Meetings')
+        expect(page).to have_content 'Upcoming Meetings'
       end
     end
   end

@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-sm-4 col-sm-offset-4" id="googleMap"></div>
   <div class="col-sm-4 pull-left">
-
     <p>
       <strong>Title:</strong>
       <%= @meeting.title %>
@@ -9,11 +8,10 @@
 
     <p>
       <strong>Date:</strong>
-      <%= @meeting.date %>
+      <%= @meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %>
       <% if @meeting.cancelled %>
         |<strong class="red"> Cancelled</strong>
       <% end %>
-
     </p>
 
     <p>
@@ -39,7 +37,6 @@
       </p>
       <% end %>
     </p>
-
 
     <p>
       <strong>Created by:</strong>
