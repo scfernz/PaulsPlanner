@@ -43,11 +43,18 @@ RSpec.feature "Meetings", type: :feature do
         expect(page).to_not have_content("January 13 2016")
       end
       When 'I am a teacher looking at meetings' do
+        click_link("New Meeting")
+        fill_in "meeting[description]", with: "there"
+        fill_in "meeting[title]", with: "Third Meeting"
+        fill_in "meeting[address]", with: "123 Main St"
+        select('teacher@test.com', :from => 'teacher_id')
+        click_button "Create Meeting"
         click_link 'Logout'
         login_teacher('teacher@test.com')
       end
       Then 'I can visit the show page of a meeting to cancel it' do
-        click_link('Second Meeting')
+        visit '/'
+        click_link('Third Meeting')
         click_button('Cancel Meeting')
         expect(page).to have_content("| Cancelled")
       end
@@ -91,9 +98,6 @@ RSpec.feature "Meetings", type: :feature do
         fill_in "meeting[title]", with: "First Meeting"
         fill_in "meeting[description]", with: "there"
         select('teacher@test.com', :from => 'teacher_id')
-        select('2016', :from => 'meeting[date(1i)]')
-        select('January', :from => 'meeting[date(2i)]')
-        select('13', :from => 'meeting[date(3i)]')
         click_button "Create Meeting"
       end
       Then "The meeting will be created with the default address" do
