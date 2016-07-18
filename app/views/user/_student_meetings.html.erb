@@ -1,10 +1,9 @@
 <div class="col-sm-8 col-sm-offset-2">
-<h1>Upcoming Meetings</h1>
+<h3>Upcoming Meetings</h3>
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Title</th>
-      <th>Description</th>
       <th>Date</th>
       <th>Address</th>
     </tr>
@@ -15,7 +14,6 @@
       <% if meeting.date >= Date.today %>
         <tr>
           <td><%= link_to meeting.title, meeting %></td>
-          <td><%= meeting.description %></td>
           <td>
             <%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %>
             <% if meeting.cancelled %>
