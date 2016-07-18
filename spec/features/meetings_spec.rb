@@ -20,7 +20,6 @@ RSpec.feature "Meetings", type: :feature do
         select('13', :from => 'meeting[date(3i)]')
         click_button "Create Meeting"
         click_link("New Meeting")
-        click_link("navbar_meeting")
         fill_in "meeting[description]", with: "there"
         fill_in "meeting[title]", with: "Second Meeting"
         fill_in "meeting[address]", with: "123 Main St"
@@ -38,10 +37,8 @@ RSpec.feature "Meetings", type: :feature do
         expect(page).to have_content("123 Main St")
       end
       And "I can see a list of only my upcoming meetings" do
-        visit '/meetings'
-        expect(page).to have_content("there")
-        expect(page).to have_content("teacher@test.com")
-        expect(page).to have_content("student@test.com")
+        visit '/'
+        expect(page).to have_content("Second Meeting")
         expect(page).to have_content("August 13 2016")
         expect(page).to_not have_content("January 13 2016")
       end

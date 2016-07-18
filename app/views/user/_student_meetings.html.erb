@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Description</th>
       <th>Date</th>
       <th>Address</th>
     </tr>
@@ -14,6 +15,7 @@
       <% if meeting.date >= Date.today %>
         <tr>
           <td><%= link_to meeting.title, meeting %></td>
+          <td><%= meeting.description %></td>
           <td><%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %></td>
           <td><%= meeting.address %></td>
         </tr>

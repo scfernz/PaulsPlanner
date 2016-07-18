@@ -21,18 +21,27 @@
   <%= @meeting.description %>
 </p>
 
-<!-- TODO: change to display name not email -->
 <p>
   <strong>Attendees:</strong>
   <% @meeting.users.each do |member| %>
-  <p><%= link_to member.name, member %></p>
+  <p>
+    <% if current_user.has_role?(:teacher) %>
+      <%= link_to member.name, member %>
+    <% else %>
+      <%= member.name %>
+    <% end %>
+  </p>
   <% end %>
 </p>
 
 
 <p>
   <strong>Created by:</strong>
-  <%= link_to @user_createdby.name, @user_createdby %>
+  <% if current_user.has_role?(:teacher) %>
+    <%= link_to @user_createdby.name, @user_createdby %>
+  <% else %>
+    <%= @user_createdby.name %>
+  <% end %>
 </p>
 
 <% if current_user.has_role?(:student) %>
