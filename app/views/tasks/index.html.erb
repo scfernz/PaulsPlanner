@@ -19,8 +19,20 @@
             <td><%= link_to task.title, task %></td>
             <td><%= task.description %></td>
             <td><%= task.completed %></td>
-            <td><%= link_to task.user.name, task.user %></td>
-            <td><%= link_to task.user.cohort.name, task.user.cohort %></td>
+            <td>
+              <% if current_user.has_role?(:teacher) %>
+                <%= link_to task.user.name, task.user %>
+              <% else %>
+                <%= task.user.name %>
+              <% end %>
+            </td>
+            <td>
+              <% if current_user.has_role?(:teacher) %>
+                <%= link_to task.user.cohort.name, task.user.cohort %>
+              <% else %>
+                <%= task.user.cohort.name %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       <% end %>
@@ -31,7 +43,13 @@
           <td><%= link_to task.title, task %></td>
           <td><%= task.description %></td>
           <td><%= task.completed %></td>
-          <td><%= link_to task.user.name, task.user %></td>
+          <td>
+            <% if current_user.has_role?(:teacher) %>
+              <%= link_to task.user.name, task.user %>
+            <% else %>
+              <%= task.user.name %>
+            <% end %>
+          </td>
           <td></td>
         </tr>
       <% end %>
