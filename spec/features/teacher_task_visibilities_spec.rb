@@ -25,7 +25,7 @@ RSpec.feature "TeacherTaskVisibilities", type: :feature do
         click_link "Logout"
         login_teacher('teacher@teacher.edu')
         visit '/tasks'
-        expect(page).to have_content "Listing Tasks"
+        expect(page).to have_content "Tasks"
       end
     end
 

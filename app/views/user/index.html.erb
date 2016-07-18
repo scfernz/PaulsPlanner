@@ -1,32 +1,38 @@
-<div class="text-right">
-  <p>
-    <div class="btn btn-default">
-      <%= link_to 'Edit Profile', edit_user_registration_path %>
-    </div>
+<!-- profile picture begin -->
+<div class="col-sm-2 col-sm-offset-2 img-responsive">
+  <%= image_tag(current_user.image.url(:large), :class => "profile_pic") %>
+</div>
+<!-- profile picture end -->
+
+<!-- user information begins-->
+<div class="col-sm-6" id="bio">
+  <h3><%= current_user.name %>'s Profile <small>(<%= current_user.roles.first.name %>)</small></h3>
+  <p><%= current_user.email %>
+    <% if current_user.has_role?(:student) && !current_user.cohort.nil? %>
+    | Cohort: <%= current_user.cohort.name %>
+    <% end %>
   </p>
 </div>
+<!-- user information ends-->
 
-<h1 class="text-center"><%= current_user.name %>'s Profile (<%= current_user.roles.first.name %>)</h1>
-<p class="text-center"><%= current_user.email %>
-  <% if current_user.has_role?(:student) && !current_user.cohort.nil? %>
-     | <%= current_user.cohort.name %>
-  <% end %>
-</p>
-
-
-
-<%= render 'user/profile_pic' %>
+<!-- button bar begins -->
+<div class="col-sm-6">
+  <p>
+    <% if current_user.has_role?(:teacher) %>
+      <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary" %>
+      <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary" %>
+    <% end %>
+    <%= link_to 'Edit Profile', edit_user_registration_path, :class => "btn btn-primary" %>
+  </p>
+</div>
+<!-- button bar ends -->
 
 <% if current_user.has_role?(:teacher) %>
-
-<p class="text-center">
-  <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary" %>
-  <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary" %>
-</p>
   <%= render 'user/teacher_meetings' %>
-
 <% end %>
+
+
 <% if current_user.has_role?(:student) %>
-<%= render 'user/student_tasks' %>
-<%= render 'user/student_meetings' %>
+  <%= render 'user/student_tasks' %>
+  <%= render 'user/student_meetings' %>
 <% end %>
