@@ -42,6 +42,29 @@ RSpec.feature "Meetings", type: :feature do
         expect(page).to have_content("August 13 2016")
         expect(page).to_not have_content("January 13 2016")
       end
+      When 'I am a teacher looking at meetings' do
+        click_link("New Meeting")
+        fill_in "meeting[description]", with: "there"
+        fill_in "meeting[title]", with: "Third Meeting"
+        fill_in "meeting[address]", with: "123 Main St"
+        select('teacher@test.com', :from => 'teacher_id')
+        click_button "Create Meeting"
+        click_link 'Logout'
+        login_teacher('teacher@test.com')
+      end
+      Then 'I can visit the show page of a meeting to cancel it' do
+        visit '/'
+        click_link('Third Meeting')
+        click_button('Cancel Meeting')
+        expect(page).to have_content("| Cancelled")
+      end
+      And 'I can see that the meeting is cancelled on my profile page and the meeting index' do
+        visit '/'
+        expect(page).to have_content("| Cancelled")
+        visit '/meetings'
+        expect(page).to have_content("| Cancelled")
+
+      end
     end
     Steps "creating a meeting without a title or address" do
       Given "That I am a student and on the meeting page and there is a teacher" do
@@ -75,13 +98,27 @@ RSpec.feature "Meetings", type: :feature do
         fill_in "meeting[title]", with: "First Meeting"
         fill_in "meeting[description]", with: "there"
         select('teacher@test.com', :from => 'teacher_id')
-        select('2016', :from => 'meeting[date(1i)]')
-        select('January', :from => 'meeting[date(2i)]')
-        select('13', :from => 'meeting[date(3i)]')
         click_button "Create Meeting"
       end
       Then "The meeting will be created with the default address" do
         expect(page).to have_content "Address: 3803 Ray St, San Diego CA 92104"
+      end
+      When "I can cancel the meeting" do
+        click_button 'Cancel Meeting'
+      end
+      Then "I can see that the meeting is cancelled" do
+        expect(page).to have_content 'Cancelled'
+      end
+      And "I can undo the cancel the meeting" do
+        click_button 'Undo Cancel'
+        expect(page).to_not have_content 'Cancelled'
+      end
+      When 'I cancel a meeting' do
+        click_button 'Cancel Meeting'
+      end
+      Then 'I can see that the meeting is cancelled on my profile page' do
+        visit '/'
+        expect(page).to have_content 'Cancelled'
       end
     end
   end

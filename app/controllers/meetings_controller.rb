@@ -88,6 +88,20 @@ class MeetingsController < ApplicationController
     render json: meeting_markers.to_json
   end
 
+  def cancel_meeting
+    @meeting = Meeting.find(params[:meeting_id])
+    @meeting.cancelled = true
+    @meeting.save!
+    redirect_to :back
+  end
+
+  def uncancel_meeting
+    @meeting = Meeting.find(params[:meeting_id])
+    @meeting.cancelled = false
+    @meeting.save!
+    redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_meeting

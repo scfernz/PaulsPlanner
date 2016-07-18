@@ -12,6 +12,8 @@ class Ability
       can :index, Meeting
       can :show, Meeting, id: user.meetings.pluck(:id)
       can :map_markers, Meeting, id: user.meetings.pluck(:id)
+      can :cancel_meeting, Meeting, id: user.meetings.pluck(:id)
+      can :uncancel_meeting, Meeting, id: user.meetings.pluck(:id)
 
     elsif user.has_role? :student
       can :manage, Task, user_id: user.id
