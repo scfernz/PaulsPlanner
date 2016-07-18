@@ -12,10 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <p>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </p>
   </div>
   <div class="actions">
-    <%= f.submit create: "Create Cohort", update: "Update Cohort", :class => "btn btn-success" %>
+    <p>
+      <%= f.submit create: "Create Cohort", update: "Update Cohort", :class => "btn btn-success" %>
+    </p>
   </div>
 <% end %>
