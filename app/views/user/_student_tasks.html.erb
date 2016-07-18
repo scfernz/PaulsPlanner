@@ -3,15 +3,9 @@
 <div class="col-sm-8 col-sm-offset-2 top_margin">
 <h3>Tasks</h3>
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Status</th>
-      <th>Title</th>
-    </tr>
-  </thead>
   <tbody>
     <% if @tasks.length == 0 %>
-      <tr><td></td><td><em>You have no tasks.</em></td></tr>
+      <tr><td colspan="2"><em>You have no tasks.</em></td></tr>
     <% else %>
       <% @tasks.each do |task| %>
         <tr>

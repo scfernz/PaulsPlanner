@@ -12,7 +12,7 @@
   <p>
     <%= @user.email %>
     <% if @user.has_role?(:student) && !@user.cohort.nil? %>
-       | <%= @user.cohort.name %>
+       | Cohort: <%= link_to @user.cohort.name, @user.cohort %>
     <% end %>
   </p>
 </div>
