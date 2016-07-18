@@ -18,7 +18,6 @@
 </div>
 <!-- user information ends-->
 
-
 <% if @user.has_role?(:student) %>
   <div class="col-sm-8 col-sm-offset-2">
     <h3 class="top_margin">Tasks</h3>
@@ -32,6 +31,7 @@
               <td class="task_status">
                 <% if !task.completed %>
                   <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
+                  In Progress
                   <% end %>
                 <% else %>
                   &#10003;

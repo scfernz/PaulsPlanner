@@ -1,7 +1,14 @@
 
+
 <div class="col-sm-8 col-sm-offset-2 top_margin">
 <h3>Tasks</h3>
 <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Title</th>
+    </tr>
+  </thead>
   <tbody>
     <% if @tasks.length == 0 %>
       <tr><td></td><td><em>You have no tasks.</em></td></tr>
@@ -11,10 +18,10 @@
           <td class="task_status">
             <% if !task.completed %>
               <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
-                <%= f.submit 'Turn In' %>
+                <%= f.submit '☐', :class => 'empty_check' %>
               <% end %>
             <% else %>
-              &#10003;
+              <div class="checked">☑</div>
             <% end %>
           </td>
           <td class="task_name"><%= link_to task.title, task %></td>
