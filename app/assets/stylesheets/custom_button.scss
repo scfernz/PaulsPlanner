@@ -1,0 +1,47 @@
+.btn {
+   padding: 8px 16px;
+   border: 0 none;
+   font-weight: 700;
+   letter-spacing: 1px;
+   text-transform: uppercase;
+   font-weight: 300;
+   transition-duration: 0.2s;
+   border-radius:0
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+   outline: 0 none;
+}
+
+.btn-primary {
+   background: #1A5C73 ;
+   color: #ffffff ;
+}
+
+.btn-default {
+   background: #FFF ;
+   color: #ffffff ;
+}
+
+.btn-success {
+ background: #79ceb8 ;
+ color: #FFF;
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
+   background: lighten(#79ceb8 , 10%);
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+   background: lighten(#1A5C73 , 10%);
+}
+
+
+.btn-primary:active, .btn-primary.active {
+   background: #007299 ;
+   box-shadow: none;
+}
+
+.btn.sharp {
+ border-radius:0;
+}

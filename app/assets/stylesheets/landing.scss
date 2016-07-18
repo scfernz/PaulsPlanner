@@ -2,17 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $primary-color: rgba(248, 248, 248, 1);
-$highlight-color: lighten(#9DC3C1, 20%);
+$highlight-color: darken(#9DC3C1, 50%);
 $dark-color: #6E7783;
 
-$main-font: 'Libre Baskerville', serif;
+$main-font: 'Raleway', sans-serif;
 
 body {
   background-color: $primary-color;
   font-family: $main-font;
 }
-
+.container-fluid {
+  width:100%;
+}
 .jumbotron {
+  margin-left: -20px;
+  width:110%;
   margin-top: -20px;
   padding-left: 15px;
   height: 500px;
@@ -25,9 +29,10 @@ body {
     text-shadow: 0 0 0.4em #000;
     color: #FFF;
   }
+
   p {
     color: $highlight-color;
-    text-shadow: 0 0 0.4em #000;
+    text-shadow: 0 0 0.4em #FFF;
   }
   .btn {
     a {
@@ -49,6 +54,10 @@ body {
   #teacher_btn, #student_btn {
     margin-bottom: 10px;
     margin-left: 30px;
+    color: black;
+    &:hover {
+      color: white;
+    }
   }
 }
 
