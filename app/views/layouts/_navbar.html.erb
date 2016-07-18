@@ -7,6 +7,7 @@
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right">
                 <% if current_user.nil? %>
+                <li><a href="/landing/about">About</a></li>
                 <%= render 'layouts/logout' %>
                 <% elsif current_user.nil? || current_user.has_role?(:teacher)  %>
                   <li class="dropdown">
@@ -19,6 +20,7 @@
                     <li><a href="/meetings">Meetings</a></li>
                     <li><a href="/students/index">Students</a></li>
                     <li><a href="/cohorts">Cohorts</a></li>
+                    <li><a href="/landing/about">About</a></li>
                     <% provisional_accounts = User.with_role :provisional %>
                     <% if provisional_accounts.length > 0 %>
                     <li><a id="provisional" href="/provisional/index"><span class="red">Provisional Accounts (<%= provisional_accounts.length %>)</span></a></li>
@@ -32,6 +34,7 @@
                     <li><a href="/users/edit">Edit Profile Settings</a></li>
                   </ul>
                   <li><a href="/meetings/new" id= "navbar_meeting">New Meeting</a></li>
+                  <li><a href="/landing/about">About</a></li>
                   <%= render 'layouts/logout' %>
                 <% end %>
             </ul>
