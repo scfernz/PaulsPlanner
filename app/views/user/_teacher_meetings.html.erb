@@ -3,18 +3,19 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Title</th>
       <th>Date</th>
-      <th>Location</th>
+      <th>Address</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @meetings.each do |meeting| %>
-    <!-- maybe we can get todays meetings by including ones with dates less than tomorrow (Date.today + 1) and greater than yesterday (Date.today -1) ? -->
+    <% @meetingstoday.each do |meeting| %>
     <% if meeting.users.include?(current_user) %>
       <tr>
-        <td><%= link_to meeting.date, meeting %></td>
-        <td><%= meeting.location %></td>
+        <td><%= link_to meeting.title, meeting %></td>
+        <td><%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %></td>
+        <td><%= meeting.address %></td>
       </tr>
       <% end %>
     <% end %>
