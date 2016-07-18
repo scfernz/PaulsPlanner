@@ -19,7 +19,7 @@
         <tr>
           <td><%= link_to meeting.title, meeting %></td>
           <td>
-            <td><%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %></td>
+            <%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %>
             <% if meeting.cancelled %>
               |<strong class="red"> Cancelled</strong>
             <% end %>
