@@ -29,6 +29,7 @@ class MeetingsController < ApplicationController
   # GET /meetings/new
   def new
     @meeting = Meeting.new
+
   end
 
   # GET /meetings/1/edit
@@ -44,9 +45,11 @@ class MeetingsController < ApplicationController
     @meeting.users << User.find(params[:teacher_id])
 
     respond_to do |format|
-      if @meeting.save
+      if @meeting.save && @meeting.date > DateTime.now
         format.html { redirect_to @meeting, notice: 'Meeting was successfully created.' }
         format.json { render :show, status: :created, location: @meeting }
+      elsif @meeting.date <= DateTime.now
+        format.html { redirect_to '/meetings/new', alert: 'You cannot create a meeting in the past.' }
       else
         format.html { render :new }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
