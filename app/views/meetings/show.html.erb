@@ -49,8 +49,13 @@
 
     <% if current_user.has_role?(:student) %>
       <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+      <%= link_to 'Return to Profile', '/' %>
     <% end %>
-    <%= link_to 'Return to Profile', '/' %>
+
+    <% if current_user.has_role?(:teacher) %>
+      <%= link_to 'Meeting List', meetings_path %>
+    <% end %>
+
 
     <% if (!@meeting.cancelled) %>
       <%= form_for @meeting, url: meeting_cancel_meeting_path(@meeting), html: { method: :post } do |f| %>
