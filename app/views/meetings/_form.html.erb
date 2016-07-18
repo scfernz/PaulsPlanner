@@ -20,7 +20,7 @@
   <div class="field">
     <p>
       <%= f.label :date %><br>
-      <%= f.datetime_select :date %>
+      <%= f.datetime_select :date, start_year: Date.today.year, default: 1.hour.from_now %>
     </p>
   </div>
   <div class="field">
@@ -48,7 +48,7 @@
 
   <div class="actions">
     <p>
-      <%= f.submit create: 'Create Meeting', update: 'Update Meeting', :class => "btn btn-success" %>      
+      <%= f.submit create: 'Create Meeting', update: 'Update Meeting', :class => "btn btn-success" %>
     </p>
   </div>
 <% end %>
