@@ -78,7 +78,7 @@ RSpec.feature "Tasks", type: :feature do
         login_teacher('teacher@test.com')
         click_link "Tasks"
         click_link "test@student.com"
-        expect(page).to have_content 'Status'
+        expect(page).to have_content 'In Progress'
       end
     end
 
