@@ -71,7 +71,7 @@ RSpec.feature "Tasks", type: :feature do
       And "The task page shows that the task has been Turn In and will also not have a 'Turn In' button" do
         click_link "taskone"
         expect(page).to have_content "false"
-        expect{click_button "Take Back"}.to raise_error('Unable to find button "Take Back"')
+        expect{click_button "Mark Incomplete"}.to raise_error('Unable to find button "Mark Incomplete"')
       end
       And "I can log in as a teacher and see the status of the task" do
         click_link "Logout"
@@ -96,10 +96,10 @@ RSpec.feature "Tasks", type: :feature do
         click_button "Turn In"
         expect(page).to have_content "true"
       end
-      And 'The Turn In button is replaced by a Take Back button' do
-        click_button 'Take Back'
+      And 'The Turn In button is replaced by a Mark Incomplete button' do
+        click_button 'Mark Incomplete'
       end
-      When 'I user the Take Back button, the task is considered incomplete' do
+      When 'I user the Mark Incomplete button, the task is considered incomplete' do
         expect(page).to have_content 'false'
       end
     end

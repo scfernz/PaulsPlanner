@@ -1,14 +1,15 @@
 <div class="jumbotron">
   <div class="container">
     <div class="row">
-      <h1 class="display-3">Welcome to Paul's Planner</h1>
+      <h1 class="display-3 heading">Welcome to Paul's Planner</h1>
       <p>A task and meeting manager</p>
+      <br><br>
     </row>
     <div class="row">
-      <div class="btn btn-default col-sm-2" id="student_btn">
+      <div class="btn btn-default" id="student_btn">
         <i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i> <%= link_to "Students", user_facebook_omniauth_authorize_path %>
       </div>
-      <div class="btn btn-default col-sm-2" id="teacher_btn">
+      <div class="btn btn-default" id="teacher_btn">
         <i class="fa fa-book fa-2x" aria-hidden="true"></i> <a href="users/sign_in">Teachers</a>
       </div>
       <div class="col-sm-10">

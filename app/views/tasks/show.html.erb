@@ -35,15 +35,19 @@
 <% if (current_user.has_role? :student) %>
   <% if (!@task.completed) %>
     <%= form_for @task, url: task_mark_complete_path(@task), html: { method: :post } do |f| %>
+    <p>
       <%= f.submit 'Turn In', :class => "btn btn-success" %>
+    </p>
     <% end %>
   <% else %>
     <%= form_for @task, url: task_mark_incomplete_path(@task), html: { method: :post } do |f| %>
-      <%= f.submit 'Take Back', :class => "btn btn-danger" %>
+    <p>
+      <%= f.submit 'Mark Incomplete', :class => "btn btn-danger" %>
+    </p>
     <% end %>
   <% end %>
 <% end %>
-
+<p><a href="/">Back to profile</a></p>
 <% if current_user.has_role? :teacher %>
   <%= link_to 'Edit', edit_task_path(@task) %> |
   <%= link_to 'Task List', tasks_path %> |
