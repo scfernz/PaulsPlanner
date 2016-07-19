@@ -9,6 +9,10 @@
    border-radius:0
 }
 
+.btn:hover {
+  transform: scale(1.05);
+}
+
 .btn:focus, .btn:active:focus, .btn.active:focus {
    outline: 0 none;
 }
@@ -40,8 +44,4 @@
 .btn-primary:active, .btn-primary.active {
    background: #007299 ;
    box-shadow: none;
-}
-
-.btn.sharp {
- border-radius:0;
 }
