@@ -37,8 +37,13 @@
   <p><em>There are no students without cohorts at this time.</em></p>
 <% end %>
 
-<%= link_to 'Edit Name', edit_cohort_path(@cohort) %> |
-<%= link_to 'Cohort List', cohorts_path %> |
-<%= link_to 'Delete', @cohort, method: :delete, data: { confirm: 'Are you sure?' } %>
+<p>
+  <%= link_to 'Edit', edit_cohort_path(@cohort) %> |
+  <%= link_to 'Delete', @cohort, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Cohort List', cohorts_path %>
+</p>
+<p>
+  <a href="/">Return to Profile</a>
+</p>
 
 </div>
