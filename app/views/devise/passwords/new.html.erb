@@ -1,24 +1,29 @@
-<div class="col-sm-12 col-sm-offset-5">
+<div class="col-sm-4">
+</div>
+<div class="col-sm-4">
+  <div class="panel panel-default reg_panel">
+    <h2>Forgot your password?</h2>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= devise_error_messages! %>
 
-<h2>Forgot your password?</h2>
+      <div class="field">
+        <p>
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true %>
+        </p>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+      <div class="actions">
+        <p>
+        <%= f.submit "Send reset instructions", :class => "btn btn-primary" %>
+        </p>
+      </div>
+    <% end %>
 
-  <div class="field">
     <p>
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+      <a href="/users/sign_in">Cancel</a>
     </p>
   </div>
-
-  <div class="actions">
-    <p>
-    <%= f.submit "Send me reset password instructions" %>
-    </p>
-  </div>
-<% end %>
-
-<a href="/users/sign_in">Cancel</a>
-
+</div>
+<div class="col-sm-4">
 </div>

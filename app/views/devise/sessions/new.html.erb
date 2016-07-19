@@ -2,7 +2,7 @@
 </div>
 <div class="col-sm-4">
 
-  <div class="text-center panel panel-default">
+  <div class="panel panel-default reg_panel">
     <h2>Teacher Login</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -37,11 +37,15 @@
     </div>
     <% end %>
   </div>
-  <div class="text-center panel panel-default">
+
+
+  <div class="panel panel-default reg_panel">
     <h2>Student Login</h2>
     <%- if devise_mapping.omniauthable? %>
       <%- resource_class.omniauth_providers.each do |provider| %>
-        <%= link_to "<i class='fa fa-facebook-official fa-1.5x' aria-hidden='true'></i> Student Login".html_safe, omniauth_authorize_path(resource_name, provider), :class => "btn btn-primary" %>
+        <p>
+          <%= link_to "<i class='fa fa-facebook-official fa-1.5x' aria-hidden='true'></i> Student Login".html_safe, omniauth_authorize_path(resource_name, provider), :class => "btn btn-primary" %>
+        </p>
       <% end -%>
     <% end -%>
   </div>
