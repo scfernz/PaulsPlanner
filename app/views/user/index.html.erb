@@ -9,23 +9,27 @@
   <!-- user information begins-->
   <div class="col-sm-6" id="bio">
     <div class="row">
-  <h3><%= current_user.name %>'s Profile <small>(<%= current_user.roles.first.name %>)</small></h3>
-  <p><%= current_user.email %>
-    <% if current_user.has_role?(:student) && !current_user.cohort.nil? %>
+    <h3>
+      <%= current_user.name %>'s Profile <small>(<%= current_user.roles.first.name %>)</small>
+    </h3>
+    <p>
+      <%= current_user.email %>
+      <% if current_user.has_role?(:student) && !current_user.cohort.nil? %>
     | Cohort: <%= current_user.cohort.name %>
-    <% end %>
-  </p>
-</div>
-  <!-- user information ends-->
-  <!-- button bar begins -->
-  <div class="row">
+      <% end %>
+    </p>
+    </div>
     <p>
       <% if current_user.has_role?(:teacher) %>
-        <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary btn-margin" %>
-        <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary btn-margin" %>
+      <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary btn-margin" %>
+      <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary btn-margin" %>
       <% end %>
       <%= link_to 'Edit Profile', edit_user_registration_path, :class => "btn btn-default btn-light btn-margin" %>
     </p>
+  </div>
+  <!-- user information ends-->
+  <!-- button bar begins -->
+  <div class="row">
   </div>
   <!-- button bar ends -->
   <div class="col-sm-2"></div>

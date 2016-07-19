@@ -1,56 +1,64 @@
-<!-- profile picture begin -->
-<div class="col-sm-2 col-sm-offset-2 img-responsive">
-  <%= image_tag(@user.image.url(:large), :class => "profile_pic") %>
-</div>
-<!-- profile picture end -->
+<div class="row">
+  <div class="col-sm-2"></div>
+  <!-- profile picture begin -->
+  <div class="col-sm-2">
+    <%= image_tag(@user.image.url(:large), :class => "profile_pic pull-right img-responsive") %>
+  </div>
+  <!-- profile picture end -->
 
-<!-- user information begins-->
-<div class="col-sm-6" id="bio">
-  <h3>
-    <%= @user.name %>'s Profile <small>(<%= @user.roles.first.name %>)</small>
-  </h3>
-  <p>
-    <%= @user.email %>
-    <% if @user.has_role?(:student) && !@user.cohort.nil? %>
-       | Cohort: <%= link_to @user.cohort.name, @user.cohort %>
-    <% end %>
-  </p>
+  <!-- user information begins-->
+  <div class="col-sm-6" id="bio">
+    <div class="row">
+      <h3>
+        <%= @user.name %>'s Profile <small>(<%= @user.roles.first.name %>)</small>
+      </h3>
+      <p>
+        <%= @user.email %>
+        <% if @user.has_role?(:student) && !@user.cohort.nil? %>
+           | Cohort: <%= link_to @user.cohort.name, @user.cohort %>
+        <% end %>
+      </p>
+    </div>
+  </div>
 </div>
 <!-- user information ends-->
-
-<% if @user.has_role?(:student) %>
-  <div class="col-sm-8 col-sm-offset-2">
-    <h3 class="top_margin">Tasks</h3>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Status</th>
-          <th>Title</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% if @user.tasks.length == 0 %>
-          <tr><td colspan="2"><em><%= @user.name %> has no tasks.</em></td></tr>
-        <% else %>
-          <% @user.tasks.each do |task| %>
+<div class="row">
+  <% if @user.has_role?(:student) %>
+    <div class="row top_margin">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2"><img class="icon img-responsive pull-right" src="/assets/task_icon_01.png"></div>
+      <div class="padding-left col-sm-6">
+        <h3>Tasks</h3>
+        <table class="table table-striped">
+          <thead>
             <tr>
-              <td class="task_status">
-                <% if !task.completed %>
-                  <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
-                  In Progress
-                  <% end %>
-                <% else %>
-                  &#10003;
-                <% end %>
-              </td>
-              <td><%= link_to task.title, task %></td>
+              <th>Status</th>
+              <th>Title</th>
             </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-
-  <%= render 'user/student_meetings' %>
-<% end %>
+          </thead>
+          <tbody>
+            <% if @user.tasks.length == 0 %>
+              <tr><td colspan="2"><em><%= @user.name %> has no tasks.</em></td></tr>
+            <% else %>
+              <% @user.tasks.each do |task| %>
+                <tr>
+                  <td class="task_status">
+                    <% if !task.completed %>
+                      <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
+                      In Progress
+                      <% end %>
+                    <% else %>
+                      &#10003;
+                    <% end %>
+                  </td>
+                  <td><%= link_to task.title, task %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%= render 'user/student_meetings' %>
+  <% end %>
+</div>
