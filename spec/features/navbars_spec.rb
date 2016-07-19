@@ -10,7 +10,7 @@ RSpec.feature "Navbars", type: :feature do
         click_link("Paul's Planner")
         expect(page).to have_content("Welcome to Paul's Planner")
         click_link("Login")
-        expect(page).to have_content("Log in")
+        expect(page).to have_content("Login")
         click_link("Paul's Planner")
         expect(page).to have_content("Welcome to Paul's Planner")
       end

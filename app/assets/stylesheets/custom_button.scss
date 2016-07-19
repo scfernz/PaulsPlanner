@@ -25,8 +25,17 @@
 }
 
 .btn-default {
-   background: #FFF ;
+   background: #FFF;
    color: #000;
+}
+
+.btn-light{
+  background-color: #f1f0f0;
+  color: #333333;
+}
+
+.btn-margin {
+  margin: 2px;
 }
 
 .btn-success {
@@ -40,10 +49,4 @@
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
    background: lighten(#1A5C73 , 10%);
-}
-
-
-.btn-primary:active, .btn-primary.active {
-   background: #007299 ;
-   box-shadow: none;
 }

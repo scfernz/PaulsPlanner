@@ -17,10 +17,10 @@
   <!-- button bar begins -->
   <p>
     <% if current_user.has_role?(:teacher) %>
-    <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary" %>
-    <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary" %>
+      <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary btn-margin" %>
+      <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary btn-margin" %>
     <% end %>
-    <%= link_to 'Edit Profile', edit_user_registration_path, :class => "btn btn-primary" %>
+    <%= link_to 'Edit Profile', edit_user_registration_path, :class => "btn btn-default btn-light btn-margin" %>
   </p>
   <!-- button bar ends -->
   <div class="col-sm-4">
