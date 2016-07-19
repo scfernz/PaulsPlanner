@@ -24,7 +24,7 @@
     <table class="table table-striped">
       <tbody>
         <% if @user.tasks.length == 0 %>
-          <tr><td></td><td><em>You have no tasks.</em></td></tr>
+          <tr><td colspan="2"><em>You have no tasks.</em></td></tr>
         <% else %>
           <% @user.tasks.each do |task| %>
             <tr>
