@@ -61,7 +61,7 @@ RSpec.feature "UserShowPages", type: :feature do
         visit "user/#{someone_id}"
       end
       Then 'I am redirected_to the log in page' do
-        expect(page).to have_content 'Log in Email Password'
+        expect(page).to have_content 'Login Email Password'
       end
     end
 
