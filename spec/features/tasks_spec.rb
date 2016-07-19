@@ -16,6 +16,11 @@ RSpec.feature "Tasks", type: :feature do
         generate_teacher('teacher@test.com')
         login_teacher('teacher@test.com')
       end
+      Then "I can view a student's profile and see that they have no tasks" do
+        visit '/students/index'
+        click_link 'student@test.com'
+        expect(page).to have_content 'student@test.com has no tasks.'
+      end
       Then "I can create a task and assign it to a student" do
         create_task_through_ui('testtask', 'do this', 'student@test.com')
       end

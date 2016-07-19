@@ -11,7 +11,13 @@
 
   <tbody>
     <% if @meetings.length == 0 %>
-      <tr><td colspan="2"><em>You have no upcoming meetings.</em></td></tr>
+      <tr><td colspan="2"><em>
+        <% if @user == current_user %>
+          You have no upcoming meetings.
+        <% else %>
+          <%= @user.name %> has no upcoming meetings.
+        <% end %>
+      </em></td></tr>
     <% else %>
       <% @meetings.each do |meeting| %>
         <% if meeting.date >= Date.today %>
