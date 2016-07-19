@@ -6,7 +6,7 @@
 
   <div class="field">
     <p>
-    <%= label_tag :title %><br>
+    <%= label_tag :title %>*<br>
     <%= text_field_tag :title %>
     </p>
   </div>
@@ -19,7 +19,7 @@
 
   <div class="field">
     <p>
-    <%= label_tag :cohort_id %><br>
+    <%= label_tag :cohort_id %>*<br>
     <select name="cohort_id">
       <%= options_from_collection_for_select(Cohort.all, :id, :name) %>
     </select>

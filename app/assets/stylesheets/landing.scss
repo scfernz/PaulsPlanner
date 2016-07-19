@@ -16,7 +16,7 @@ body {
 }
 .jumbotron {
   margin-left: -20px;
-  width:110%;
+  width:115%;
   margin-top: -20px;
   padding-left: 15px;
   height: 500px;
@@ -79,3 +79,12 @@ hr.scissors:after {
   color: #8c8b8b;
   font-size: 18px;
 }
+
+// @media (max-width: 500px) {
+  // .jumbotron {
+  //   .btn {
+  //     margin: 0 auto;
+  //     flex-wrap: wrap;
+  //   }
+  // }
+// }

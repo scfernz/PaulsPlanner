@@ -1,3 +1,4 @@
+
 <div class="col-sm-4">
 </div>
 <div class="col-sm-4">
@@ -9,21 +10,21 @@
 
       <div class="field">
         <p>
-          <%= f.label :name, required: true %><br />
+          <%= f.label :name, required: true %>*<br />
           <%= f.text_field :name, autofocus: true %>
         </p>
       </div>
 
       <div class="field">
         <p>
-          <%= f.label :email %><br />
+          <%= f.label :email %>*<br />
           <%= f.email_field :email, autofocus: true %>
         </p>
       </div>
 
       <div class="field">
         <p>
-          <%= f.label :password %>
+          <%= f.label :password %>*
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
@@ -33,7 +34,7 @@
 
       <div class="field">
         <p>
-          <%= f.label :password_confirmation %><br />
+          <%= f.label :password_confirmation %>*<br />
           <%= f.password_field :password_confirmation, autocomplete: "off" %>
         </p>
       </div>
