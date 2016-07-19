@@ -9,7 +9,7 @@
         <%= form_for(member, url: cohort_remove_from_cohort_path(@cohort)) do |f| %>
         <%= f.hidden_field :id, :value => member.id  %>
         <td><%= link_to member.name, member  %></td>
-        <td><%= f.submit "Remove", :class => "btn-xs btn-danger" %></td>
+        <td><%= f.submit "Remove", :class => "btn btn-danger" %></td>
         <% end %>
       </tr>
     <% end %>
