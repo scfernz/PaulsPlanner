@@ -22,6 +22,13 @@
   <div class="col-sm-8 col-sm-offset-2">
     <h3 class="top_margin">Tasks</h3>
     <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+
       <tbody>
         <% if @user.tasks.length == 0 %>
           <tr><td colspan="2"><em>You have no tasks.</em></td></tr>
