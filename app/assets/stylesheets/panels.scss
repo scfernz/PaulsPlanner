@@ -4,7 +4,7 @@
   border-width: 1px;
   border-color: #bfbebe;
   border-radius: 20px;
-  background-color: lighten(#AABBCC, 10%);
+  background-color: lighten(#AABBCC, 15%);
   box-shadow: 2px 2px 5px grey;
 }
 
@@ -23,4 +23,31 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.icon {
+  height: 75px;
+  width: 75px;
+  text-align: center;
+  margin-right: 10px;
+  margin-top: 20px;
+  // opacity: 0.75;
+}
+
+@media (max-width: 500px){
+  .icon {
+    height: 50px;
+    width: 50px;
+  }
+  .btn-margin {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+}
+
+.padding-left {
+  padding-left: 20px;
 }
