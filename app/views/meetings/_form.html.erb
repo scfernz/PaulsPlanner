@@ -13,7 +13,7 @@
 
   <div class="field">
     <p>
-      <%= f.label :title %><br>
+      <%= f.label :title %>*<br>
       <%= f.text_field :title %>
     </p>
   </div>
@@ -37,7 +37,7 @@
   </div>
 
   <div class="field">
-    <%= label_tag :teacher_id %>
+    <%= label_tag :teacher_id %>*
     <p>
       <select name="teacher_id">
         <%= options_from_collection_for_select(User.with_role(:teacher), :id, :name) %>

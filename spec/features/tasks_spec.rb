@@ -16,6 +16,11 @@ RSpec.feature "Tasks", type: :feature do
         generate_teacher('teacher@test.com')
         login_teacher('teacher@test.com')
       end
+      Then "I can view a student's profile and see that they have no tasks" do
+        visit '/students/index'
+        click_link 'student@test.com'
+        expect(page).to have_content 'student@test.com has no tasks.'
+      end
       Then "I can create a task and assign it to a student" do
         create_task_through_ui('testtask', 'do this', 'student@test.com')
       end
@@ -70,7 +75,7 @@ RSpec.feature "Tasks", type: :feature do
       end
       And "The task page shows that the task has been Turn In and will also not have a 'Turn In' button" do
         click_link "taskone"
-        expect(page).to have_content "false"
+        expect(page).to have_content "No"
         expect{click_button "Mark Incomplete"}.to raise_error('Unable to find button "Mark Incomplete"')
       end
       And "I can log in as a teacher and see the status of the task" do
@@ -94,13 +99,13 @@ RSpec.feature "Tasks", type: :feature do
       Then "I can Turn In that task by clicking on a button on the task page" do
         click_link "taskone"
         click_button "Mark Complete"
-        expect(page).to have_content "true"
+        expect(page).to have_content "Yes"
       end
       And 'The Turn In button is replaced by a Mark Incomplete button' do
         click_button 'Mark Incomplete'
       end
       When 'I user the Mark Incomplete button, the task is considered incomplete' do
-        expect(page).to have_content 'false'
+        expect(page).to have_content 'No'
       end
     end
 
