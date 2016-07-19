@@ -11,7 +11,13 @@ class UserController < ApplicationController
       else
         @tasks = Task.where(user: current_user)
         today = DateTime.now
-        @meetingstoday = Meeting.where(:date => today.beginning_of_day..today.end_of_day)
+        @meetingstoday = []
+        all_meetings = Meeting.all
+        all_meetings.each do |meeting|
+          if meeting.date.strftime('%Y-%m-%d') == Date.today.strftime
+            @meetingstoday << meeting
+          end
+        end
       end
     end
   end
