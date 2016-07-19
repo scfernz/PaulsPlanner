@@ -30,6 +30,15 @@ RSpec.feature "StudentProfiles", type: :feature do
       And "I can see which cohort I am in" do
         expect(page).to have_content "Cohort1"
       end
+      And "when I view that student's profile as a teacher" do
+        click_link 'Logout'
+        login_teacher('teacher@test.com')
+        visit '/students/index'
+        click_link 'studentone@student.com'
+      end
+      Then "I see that they do not have any meetings" do
+        expect(page).to have_content 'studentone@student.com has no upcoming meetings.'
+      end
     end
 
     Steps "Seeing my tasks in chronological order" do

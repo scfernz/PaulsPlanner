@@ -6,7 +6,9 @@
    text-transform: uppercase;
    font-weight: 300;
    transition-duration: 0.2s;
-   border-radius:0
+   border-radius:0;
+   margin-top: 5px;
+   margin-right: 5px;
 }
 
 .btn:hover {
@@ -23,8 +25,17 @@
 }
 
 .btn-default {
-   background: #FFF ;
-   color: #ffffff ;
+   background: #FFF;
+   color: #000;
+}
+
+.btn-light{
+  background-color: #f1f0f0;
+  color: #333333;
+}
+
+.btn-margin {
+  margin: 2px;
 }
 
 .btn-success {
@@ -38,10 +49,4 @@
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
    background: lighten(#1A5C73 , 10%);
-}
-
-
-.btn-primary:active, .btn-primary.active {
-   background: #007299 ;
-   box-shadow: none;
 }

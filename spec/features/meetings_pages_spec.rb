@@ -13,6 +13,9 @@ RSpec.feature "MeetingsPages", type: :feature do
         visit '/'
         expect(page).to have_content 'student@test.com'
       end
+      And 'I can see that I have no meetings' do
+        expect(page).to have_content 'You have no upcoming meetings'
+      end
       And "have created a meeting " do
         create_meeting_through_ui('San Diego', 'teacher@test.com')
         expect(page).to have_content("Meeting was successfully created")
