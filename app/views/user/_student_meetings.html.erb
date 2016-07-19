@@ -1,40 +1,43 @@
-<div class="col-sm-8 col-sm-offset-2">
-<h3>Upcoming Meetings</h3>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Address</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @meetings.length == 0 %>
-      <tr><td colspan="2"><em>
-        <% if @user == current_user %>
-          You have no upcoming meetings.
-        <% else %>
-          <%= @user.name %> has no upcoming meetings.
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2"><img class="icon img-responsive pull-right" src="/assets/calendar_01.png"></div>
+  <div class="col-sm-6 padding-left">
+  <h3>Upcoming Meetings</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @meetings.length == 0 %>
+        <tr><td colspan="2"><em>
+          <% if @user == current_user %>
+            You have no upcoming meetings.
+          <% else %>
+            <%= @user.name %> has no upcoming meetings.
+          <% end %>
+        </em></td></tr>
+      <% else %>
+        <% @meetings.each do |meeting| %>
+          <% if meeting.date >= Date.today %>
+            <tr>
+              <td><%= link_to meeting.title, meeting %></td>
+              <td>
+                <%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %>
+                <% if meeting.cancelled %>
+                  |<strong class="red"> Cancelled</strong>
+                <% end %>
+              </td>
+              <td><%= meeting.address %></td>
+            </tr>
+          <% end %>
         <% end %>
-      </em></td></tr>
-    <% else %>
-      <% @meetings.each do |meeting| %>
-        <% if meeting.date >= Date.today %>
-          <tr>
-            <td><%= link_to meeting.title, meeting %></td>
-            <td>
-              <%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %>
-              <% if meeting.cancelled %>
-                |<strong class="red"> Cancelled</strong>
-              <% end %>
-            </td>
-            <td><%= meeting.address %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    <% end %>
-  </tbody>
+      </tbody>
 
-</table>
-</div>
+  </table>
+  </div>
+  <div class="col-sm-2"></div>
+</div> <!-- End row -->

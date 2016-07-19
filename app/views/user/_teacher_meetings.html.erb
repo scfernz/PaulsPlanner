@@ -1,33 +1,38 @@
-<div class="col-sm-8 col-sm-offset-2 top_margin">
-<h3>Today's Meetings</h3>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Address</th>
-    </tr>
-  </thead>
+<div class="row top_margin">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2"><img class="icon img-responsive pull-right" src="/assets/task_icon_01.png"></div>
+  <div class="padding-left col-sm-6">
+    <h3>Today's Meetings</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Address</th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% if @meetingstoday.length == 0 %>
-      <tr><td colspan="2"><em>You have no meetings today.</em></td></tr>
-    <% else %>
-      <% @meetingstoday.each do |meeting| %>
-        <% if meeting.users.include?(current_user) %>
-          <tr>
-            <td><%= link_to meeting.title, meeting %></td>
-            <td>
-              <%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %>
-              <% if meeting.cancelled %>
-                |<strong class="red"> Cancelled</strong>
-              <% end %>
-            </td>
-            <td><%= meeting.address %></td>
-          </tr>
+      <tbody>
+        <% if @meetingstoday.length == 0 %>
+          <tr><td colspan="2"><em>You have no meetings today.</em></td></tr>
+        <% else %>
+          <% @meetingstoday.each do |meeting| %>
+            <% if meeting.users.include?(current_user) %>
+              <tr>
+                <td><%= link_to meeting.title, meeting %></td>
+                <td>
+                  <%= meeting.date.strftime('%A, %B %d %Y, %I:%M %p') %>
+                  <% if meeting.cancelled %>
+                    |<strong class="red"> Cancelled</strong>
+                  <% end %>
+                </td>
+                <td><%= meeting.address %></td>
+              </tr>
+            <% end %>
+          <% end %>
         <% end %>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
 </div>
+<div class="col-sm-2"></div>
