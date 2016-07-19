@@ -44,7 +44,7 @@ RSpec.feature "Users", type: :feature do
         expect(page).to have_content "Edit User"
         fill_in "user[name]", with: "Mr. Super Happy"
         fill_in "user[current_password]", with: "123456"
-        click_button "Update"
+        click_button "Apply Changes"
       end
       Then "I see my updated profile page" do
         expect(page).to have_content "Mr. Super Happy's Profile"

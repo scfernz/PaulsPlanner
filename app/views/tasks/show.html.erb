@@ -36,7 +36,7 @@
   <% if (!@task.completed) %>
     <%= form_for @task, url: task_mark_complete_path(@task), html: { method: :post } do |f| %>
     <p>
-      <%= f.submit 'Turn In', :class => "btn btn-success" %>
+      <%= f.submit 'Mark Complete', :class => "btn btn-success" %>
     </p>
     <% end %>
   <% else %>
