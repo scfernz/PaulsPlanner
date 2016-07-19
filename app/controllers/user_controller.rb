@@ -8,6 +8,8 @@ class UserController < ApplicationController
       if current_user.has_role?(:student)
         @tasks = Task.where(user: current_user).order(:created_at)
         @meetings = Meeting.where(created_by: current_user)
+      elsif current_user.has_role?(:provisional)
+        flash[:error] = "This teacher account must be approved by an admin."
       else
         @tasks = Task.where(user: current_user)
         today = DateTime.now
