@@ -93,7 +93,7 @@ RSpec.feature "Tasks", type: :feature do
       end
       Then "I can Turn In that task by clicking on a button on the task page" do
         click_link "taskone"
-        click_button "Turn In"
+        click_button "Mark Complete"
         expect(page).to have_content "true"
       end
       And 'The Turn In button is replaced by a Mark Incomplete button' do
