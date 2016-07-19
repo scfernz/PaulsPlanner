@@ -10,17 +10,19 @@
 
 #bio {
   margin-bottom: 10px;
-  border-bottom: solid thin #C7C5BD;
+  // border-bottom: solid thin #C7C5BD;
 }
 
 .profile_pic {
+  margin-right: 20px;
   border-radius: 20px;
-  width: 150px;
+  width: 100%;
+  max-width: 150px;
   float: left;
 }
 
 .top_margin {
-  margin-top: 40px;
+  margin-top: 50px;
 }
 
 .empty_check {

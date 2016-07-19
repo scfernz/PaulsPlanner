@@ -1,3 +1,4 @@
+<div class="row">
 <!-- profile picture begin -->
 <div class="col-sm-2 col-sm-offset-2 img-responsive">
   <%= image_tag(current_user.image.url(:large), :class => "profile_pic") %>
@@ -12,27 +13,29 @@
     | Cohort: <%= current_user.cohort.name %>
     <% end %>
   </p>
-</div>
-<!-- user information ends-->
-
-<!-- button bar begins -->
-<div class="col-sm-6">
+  <!-- user information ends-->
+  <!-- button bar begins -->
   <p>
     <% if current_user.has_role?(:teacher) %>
-      <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary" %>
-      <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary" %>
+    <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary" %>
+    <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary" %>
     <% end %>
     <%= link_to 'Edit Profile', edit_user_registration_path, :class => "btn btn-primary" %>
   </p>
+  <!-- button bar ends -->
+  <div class="col-sm-4">
+  </div>
 </div>
-<!-- button bar ends -->
+</div>
+<div class="row">
 
-<% if current_user.has_role?(:teacher) %>
-  <%= render 'user/teacher_meetings' %>
-<% end %>
+  <% if current_user.has_role?(:teacher) %>
+    <%= render 'user/teacher_meetings' %>
+  <% end %>
 
 
-<% if current_user.has_role?(:student) %>
-  <%= render 'user/student_tasks' %>
-  <%= render 'user/student_meetings' %>
-<% end %>
+  <% if current_user.has_role?(:student) %>
+    <%= render 'user/student_tasks' %>
+    <%= render 'user/student_meetings' %>
+  <% end %>
+</div>
