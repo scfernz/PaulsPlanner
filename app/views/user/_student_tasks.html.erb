@@ -1,32 +1,37 @@
-<div class="col-sm-8 col-sm-offset-2 top_margin">
-<h3>Tasks</h3>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Status</th>
-      <th>Title</th>
-    </tr>
-  </thead>
+<div class="row top_margin">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2"><img class="icon img-responsive pull-right" src="/assets/task_icon_01.png"></div>
+  <div class="padding-left col-sm-6">
+  <h3>Tasks</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Title</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% if @tasks.length == 0 %>
-    <tr><td colspan="2"><em>You have no tasks.</em></td></tr>
-    <% else %>
-      <% @tasks.each do |task| %>
-        <tr>
-          <td class="task_status">
-            <% if !task.completed %>
-              <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
-                <%= f.submit '☐', :class => 'empty_check' %>
+    <tbody>
+      <% if @tasks.length == 0 %>
+      <tr><td colspan="2"><em>You have no tasks.</em></td></tr>
+      <% else %>
+        <% @tasks.each do |task| %>
+          <tr>
+            <td class="task_status">
+              <% if !task.completed %>
+                <%= form_for task, url: task_mark_complete_path(task), html: { method: :post } do |f| %>
+                  <%= f.submit '☐', :class => 'empty_check' %>
+                <% end %>
+              <% else %>
+                <div class="checked">☑</div>
               <% end %>
-            <% else %>
-              <div class="checked">☑</div>
-            <% end %>
-          </td>
-          <td class="task_name"><%= link_to task.title, task %></td>
-        </tr>
+            </td>
+            <td class="task_name"><%= link_to task.title, task %></td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  </div>
+  <div class="col-sm-2"></div>
 </div>

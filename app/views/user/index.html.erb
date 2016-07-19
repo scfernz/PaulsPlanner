@@ -1,32 +1,36 @@
 <div class="row">
-<!-- profile picture begin -->
-<div class="col-sm-2 col-sm-offset-2 img-responsive">
-  <%= image_tag(current_user.image.url(:large), :class => "profile_pic") %>
-</div>
-<!-- profile picture end -->
+  <div class="col-sm-2"></div>
+  <!-- profile picture begin -->
+  <div class="col-sm-2">
+    <%= image_tag(current_user.image.url(:large), :class => "profile_pic pull-right img-responsive") %>
+  </div>
+  <!-- profile picture end -->
 
-<!-- user information begins-->
-<div class="col-sm-6" id="bio">
+  <!-- user information begins-->
+  <div class="col-sm-6" id="bio">
+    <div class="row">
   <h3><%= current_user.name %>'s Profile <small>(<%= current_user.roles.first.name %>)</small></h3>
   <p><%= current_user.email %>
     <% if current_user.has_role?(:student) && !current_user.cohort.nil? %>
     | Cohort: <%= current_user.cohort.name %>
     <% end %>
   </p>
+</div>
   <!-- user information ends-->
   <!-- button bar begins -->
-  <p>
-    <% if current_user.has_role?(:teacher) %>
-      <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary btn-margin" %>
-      <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary btn-margin" %>
-    <% end %>
-    <%= link_to 'Edit Profile', edit_user_registration_path, :class => "btn btn-default btn-light btn-margin" %>
-  </p>
-  <!-- button bar ends -->
-  <div class="col-sm-4">
+  <div class="row">
+    <p>
+      <% if current_user.has_role?(:teacher) %>
+        <%= link_to 'Assign a task to a student', new_task_path, :class => "btn btn-primary btn-margin" %>
+        <%= link_to 'Assign a task to a cohort', cohort_task_path, :class => "btn btn-primary btn-margin" %>
+      <% end %>
+      <%= link_to 'Edit Profile', edit_user_registration_path, :class => "btn btn-default btn-light btn-margin" %>
+    </p>
   </div>
-</div>
-</div>
+  <!-- button bar ends -->
+  <div class="col-sm-2"></div>
+  </div>
+  </div>
 <div class="row">
 
   <% if current_user.has_role?(:teacher) %>
