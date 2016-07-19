@@ -2,7 +2,7 @@
 </div>
 <div class="col-sm-4">
 
-  <div class="panel panel-default reg_panel">
+  <div class="panel panel-default text-center">
     <h2>Teacher Login</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -39,7 +39,7 @@
   </div>
 
 
-  <div class="panel panel-default reg_panel">
+  <div class="panel panel-default text-center">
     <h2>Student Login</h2>
     <%- if devise_mapping.omniauthable? %>
       <%- resource_class.omniauth_providers.each do |provider| %>
