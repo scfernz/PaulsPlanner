@@ -6,7 +6,7 @@
    text-transform: uppercase;
    font-weight: 300;
    transition-duration: 0.2s;
-   border-radius:0
+   border-radius:0;
 }
 
 .btn:hover {
@@ -23,8 +23,17 @@
 }
 
 .btn-default {
-   background: #FFF ;
-   color: #ffffff ;
+   background: #ffffff;
+   color: #ffffff;
+}
+
+.btn-light{
+  background-color: #f1f0f0;
+  color: #333333;
+}
+
+.btn-margin {
+  margin: 2px;
 }
 
 .btn-success {
