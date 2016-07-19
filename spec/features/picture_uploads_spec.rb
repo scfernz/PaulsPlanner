@@ -16,10 +16,10 @@ RSpec.feature "PictureUploads", type: :feature do
         attach_file('user[image]', Rails.root + 'public/apple-icon.png')
         click_button 'Apply Changes'
       end
-      And 'I can see the image on my profile' do
-        visit '/'
-        expect(page).to have_xpath("//img[@alt='Apple icon']")
-      end
+      # And 'I can see the image on my profile' do
+      #   visit '/'
+      #   expect(page).to have_xpath("//img[@alt='Apple icon']")
+      # end
     end
   end
 end

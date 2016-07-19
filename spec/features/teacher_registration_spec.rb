@@ -42,13 +42,13 @@ RSpec.feature "Users", type: :feature do
       And "I can edit my personal details on the Edit Page" do
         click_link "Edit Profile"
         expect(page).to have_content "Edit User"
-        fill_in "user[name]", with: "Mr. Super Happy"
+        fill_in "user[name]", with: "Mr. Happy"
         fill_in "user[current_password]", with: "123456"
-        click_button "Apply Changes"
+        click_button "change_button"
+        expect(page).to have_content "Mr. Happy"
+        #pending
       end
-      Then "I see my updated profile page" do
-        expect(page).to have_content "Mr. Super Happy's Profile"
-      end
+
     end
   end
 end
