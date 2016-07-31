@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $primary-color: rgba(248, 248, 248, 1);
-$highlight-color: darken(#9DC3C1, 50%);
 $dark-color: #6E7783;
 
 $main-font: 'Raleway', sans-serif;
@@ -31,10 +30,14 @@ body {
   }
 
   p {
-    color: $highlight-color;
-    text-shadow: 0 0 0.4em #FFF;
+    line-height: 1.6;
+    color: darken(#8EADBA, 25%);
+    text-shadow: 0 0 0.05em #555;
   }
   .btn {
+    -webkit-box-shadow: 3px 3px 9px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    3px 3px 9px rgba(50, 50, 50, 0.75);
+    box-shadow:         3px 3px 9px rgba(50, 50, 50, 0.75);
     a {
       font-size: 2em;
       text-decoration: none;
